@@ -6,7 +6,6 @@ import com.batch5.Create_Task_Application.ProjectModule.entity.Project;
 import com.batch5.Create_Task_Application.ProjectModule.repository.ProjectRepository;
 import com.batch5.Create_Task_Application.UserModule.entity.User;
 import com.batch5.Create_Task_Application.UserModule.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

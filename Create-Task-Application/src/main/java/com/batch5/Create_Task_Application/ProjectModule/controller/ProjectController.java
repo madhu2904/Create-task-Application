@@ -4,20 +4,20 @@ import com.batch5.Create_Task_Application.ProjectModule.dto.ProjectRequestDto;
 import com.batch5.Create_Task_Application.ProjectModule.dto.ProjectResponseDto;
 import com.batch5.Create_Task_Application.ProjectModule.service.ProjectService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/projects")
-@RequiredArgsConstructor
 public class ProjectController {
 
-    private final ProjectService projectService;
+    @Autowired
+    private ProjectService projectService;
 
     // POST /api/projects  →  create a new project
-    @PostMapping
+    @PostMapping("/createProject")
     public ResponseEntity<ProjectResponseDto> createProject(
             @Valid @RequestBody ProjectRequestDto requestDto) {
 
