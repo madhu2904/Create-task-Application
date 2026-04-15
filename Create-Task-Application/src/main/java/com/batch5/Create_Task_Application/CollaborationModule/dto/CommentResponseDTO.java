@@ -1,22 +1,22 @@
 package com.batch5.Create_Task_Application.CollaborationModule.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CommentRequestDTO {
+public class CommentResponseDTO {
 
-    @NotBlank(message = "Comment text cannot be blank")
+    private Integer commentId;
     private String text;
-
-    @NotNull(message = "User ID is required")
+    private LocalDateTime createdAt;
+    private Integer taskId;
     private Long userId;
 
 }
