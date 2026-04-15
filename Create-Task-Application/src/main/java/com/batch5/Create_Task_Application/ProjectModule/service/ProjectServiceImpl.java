@@ -7,14 +7,16 @@ import com.batch5.Create_Task_Application.ProjectModule.repository.ProjectReposi
 import com.batch5.Create_Task_Application.UserModule.entity.User;
 import com.batch5.Create_Task_Application.UserModule.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class ProjectServiceImpl implements ProjectService {
 
-    private final ProjectRepository projectRepository;
-    private final UserRepository userRepository;
+    @Autowired
+    private ProjectRepository projectRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public ProjectResponseDto createProject(ProjectRequestDto requestDto) {
