@@ -1,0 +1,15 @@
+package com.batch5.Create_Task_Application.CollaborationModule.repository;
+
+import com.batch5.Create_Task_Application.CollaborationModule.entity.Comment;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface CommentRepository extends JpaRepository<Comment, Integer> {
+
+    // Get all comments for a given task ID
+    List<Comment> findByTask_TaskId(Integer taskId);
+
+}
