@@ -7,14 +7,14 @@ import jakarta.persistence.*;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String TaskID;
+    private String taskID;
 
-    private String TaskName;
-    private String Description;
-    private String DueDate;
-    private String Priority;
-    private String Status;
-    private String ProjectID;
-    private String UserID;
+    private String taskName;
+    private String description;
+    private String dueDate;
+    private String priority;
+    private String status;
+    private String projectID;
+    private String userID;
 
 }
