@@ -13,15 +13,18 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="user_id")
     private Long userId;
 
-    @Column(nullable = false, unique = true)
+    @Column(name="username",nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
     private String password;
 
     private String email;
+
+    @Column(name="fullname")
     private String fullName;
 
     @ManyToMany
