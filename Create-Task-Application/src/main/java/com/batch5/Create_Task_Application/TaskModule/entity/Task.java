@@ -1,9 +1,15 @@
 package com.batch5.Create_Task_Application.TaskModule.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "task")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +31,20 @@ public class Task {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "project_id")
-    private String projectID;
+    //foreign key mapping
+    //Project table bi-directional
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project projectID;
 
-    @Column(name = "user_id")
-    private String userID;
+    //User table uni-directional
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userID;
+
+    @ManyToMany
+    @JoinTable(name = "task_category", joinColumns = @JoinColumn(name="task_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
 
 }
