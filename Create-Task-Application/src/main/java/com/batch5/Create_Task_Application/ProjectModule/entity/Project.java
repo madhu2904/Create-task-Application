@@ -1,5 +1,7 @@
 package com.batch5.Create_Task_Application.ProjectModule.entity;
 
+import com.batch5.Create_Task_Application.TaskModule.entity.Task;
+import com.batch5.Create_Task_Application.UserModule.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,6 +38,6 @@ public class Project {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "projectId", cascade = CascadeType.ALL)
     private List<Task> tasks;
 }
