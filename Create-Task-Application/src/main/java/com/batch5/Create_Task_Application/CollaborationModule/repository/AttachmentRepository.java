@@ -12,4 +12,5 @@ public interface AttachmentRepository extends JpaRepository<Attachment, Integer>
 
     // Alternative: find by Task ID directly
     List<Attachment> findByTask_TaskId(Integer taskId);
+
 }

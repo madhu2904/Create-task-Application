@@ -1,6 +1,7 @@
 package com.batch5.Create_Task_Application.CollaborationModule.entity;
 
 
+import com.batch5.Create_Task_Application.TaskModule.entity.Task;
 import com.batch5.Create_Task_Application.UserModule.entity.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -8,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "comment")
@@ -32,9 +34,8 @@ public class Comment {
 
     // Foreign Key: Many Comments -> One Task
     @NotNull(message = "Task is required")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "task_id", nullable = false)
-    private Integer taskId;
+    @OneToMany(mappedBy = "task_id")
+    private List<Task> tasks;
 
     // Foreign Key: Many Comments -> One User
     @NotNull(message = "User is required")
