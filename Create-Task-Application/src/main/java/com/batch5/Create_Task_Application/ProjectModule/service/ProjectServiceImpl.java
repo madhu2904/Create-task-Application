@@ -9,23 +9,25 @@ import com.batch5.Create_Task_Application.UserModule.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     private ProjectRepository projectRepository;
+
     @Autowired
     private UserRepository userRepository;
 
     @Override
     public ProjectResponseDto createProject(ProjectRequestDto requestDto) {
 
-        // 1. Fetch the owning User — throw if not found
         User user = userRepository.findById(requestDto.getUserId())
                 .orElseThrow(() -> new RuntimeException(
                         "User not found with id: " + requestDto.getUserId()));
 
-        // 2. Build the Project entity
         Project project = new Project();
         project.setProjectName(requestDto.getProjectName());
         project.setDescription(requestDto.getDescription());
@@ -33,23 +35,90 @@ public class ProjectServiceImpl implements ProjectService {
         project.setEndDate(requestDto.getEndDate());
         project.setUser(user);
 
-        // 3. Persist
-        Project saved = projectRepository.save(project);
+        Project savedProject = projectRepository.save(project);
 
-        // 4. Map to response DTO
-        return mapToResponseDto(saved);
+        return mapToResponseDto(savedProject);
     }
 
-    // ── helper
+    @Override
+    public ProjectResponseDto getProjectById(Integer projectId) {
+
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new RuntimeException(
+                        "Project not found with id: " + projectId));
+
+        return mapToResponseDto(project);
+    }
+
+    @Override
+    public List<ProjectResponseDto> getAllProjects() {
+
+        List<Project> projects = projectRepository.findAll();
+
+        return projects.stream()
+                .map(this::mapToResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProjectResponseDto> getProjectsByUser(Integer userId) {
+
+        // Check whether user exists
+        userRepository.findById(Long.valueOf(userId))
+                .orElseThrow(() -> new RuntimeException(
+                        "User not found with id: " + userId));
+
+        List<Project> projects = projectRepository.findByUserUserId(userId);
+
+        return projects.stream()
+                .map(this::mapToResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ProjectResponseDto updateProject(Integer projectId, ProjectRequestDto requestDto) {
+
+        Project existingProject = projectRepository.findById(projectId)
+                .orElseThrow(() -> new RuntimeException(
+                        "Project not found with id: " + projectId));
+
+        User user = userRepository.findById(requestDto.getUserId())
+                .orElseThrow(() -> new RuntimeException(
+                        "User not found with id: " + requestDto.getUserId()));
+
+        existingProject.setProjectName(requestDto.getProjectName());
+        existingProject.setDescription(requestDto.getDescription());
+        existingProject.setStartDate(requestDto.getStartDate());
+        existingProject.setEndDate(requestDto.getEndDate());
+        existingProject.setUser(user);
+
+        Project updatedProject = projectRepository.save(existingProject);
+
+        return mapToResponseDto(updatedProject);
+    }
+
+    @Override
+    public void deleteProject(Integer projectId) {
+
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new RuntimeException(
+                        "Project not found with id: " + projectId));
+
+        projectRepository.delete(project);
+    }
+
     private ProjectResponseDto mapToResponseDto(Project project) {
+
         ProjectResponseDto dto = new ProjectResponseDto();
+
         dto.setProjectId(project.getProjectId());
         dto.setProjectName(project.getProjectName());
         dto.setDescription(project.getDescription());
         dto.setStartDate(project.getStartDate());
         dto.setEndDate(project.getEndDate());
         dto.setUserId(project.getUser().getUserId());
-        dto.setOwnerName(project.getUser().getFullName()); // adjust getter if named differently
+        dto.setOwnerName(project.getUser().getFullName());
+
         return dto;
     }
 }
