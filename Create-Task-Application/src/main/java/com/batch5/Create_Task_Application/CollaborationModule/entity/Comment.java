@@ -34,8 +34,9 @@ public class Comment {
 
     // Foreign Key: Many Comments -> One Task
     @NotNull(message = "Task is required")
-    @OneToMany(mappedBy = "task_id")
-    private List<Task> tasks;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id", nullable = false)
+    private Task task;
 
     // Foreign Key: Many Comments -> One User
     @NotNull(message = "User is required")

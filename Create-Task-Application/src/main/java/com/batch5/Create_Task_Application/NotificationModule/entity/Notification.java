@@ -1,9 +1,14 @@
 package com.batch5.Create_Task_Application.NotificationModule.entity;
 
+import com.batch5.Create_Task_Application.UserModule.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+import java.util.List;
 //import org.apache.catalina.User;
 
 @Entity
@@ -19,8 +24,9 @@ public class Notification
     private int notificationId;
 
     private String text;
-    @Column(name="user_id")
-    private int userId;
+    @CreationTimestamp
+    @Column(name="date_time")
+    private LocalDateTime dateTime;
 
     @ManyToOne
     @JoinColumn(name="user_id")
