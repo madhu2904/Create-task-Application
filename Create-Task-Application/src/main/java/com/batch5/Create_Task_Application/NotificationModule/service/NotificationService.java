@@ -1,34 +1,22 @@
 package com.batch5.Create_Task_Application.NotificationModule.service;
 
-import com.batch5.Create_Task_Application.NotificationModule.dto.NotificationDto;
-import com.batch5.Create_Task_Application.NotificationModule.entity.Notification;
-import com.batch5.Create_Task_Application.NotificationModule.repository.NotificationRepository;
-import com.batch5.Create_Task_Application.UserModule.entity.User;
-import com.batch5.Create_Task_Application.UserModule.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.batch5.Create_Task_Application.NotificationModule.dto.GetNotificationsResponseDto;
+import com.batch5.Create_Task_Application.NotificationModule.dto.NotificationRequestDto;
+import com.batch5.Create_Task_Application.NotificationModule.dto.NotificationResponseDto;
 
-@Service
-public class NotificationService {
+import java.util.List;
 
-    @Autowired
-    private NotificationRepository notificationRepository;
+public interface NotificationService {
 
-    @Autowired
-    private UserRepository userRepository;
+    NotificationResponseDto addNotification(NotificationRequestDto dto);
 
-    public Notification addNotification(NotificationDto dto) {
+    NotificationResponseDto getNotificationById(int id);
 
+    List<GetNotificationsResponseDto> getNotificationsByUserId(long userId);
 
-        User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    void deleteNotificationById(int notificationId);
 
+    List<GetNotificationsResponseDto> getUnreadNotificationsByUserId(long userId);
 
-        Notification notification = new Notification();
-        notification.setText(dto.getText());
-        notification.setUser(user);
-
-
-        return notificationRepository.save(notification);
-    }
+    void markNotificationAsRead(int notificationId);
 }
