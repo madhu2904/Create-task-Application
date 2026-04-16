@@ -1,8 +1,13 @@
 package com.batch5.Create_Task_Application.TaskModule.entity;
 
+import com.batch5.Create_Task_Application.CollaborationModule.entity.Comment;
+import com.batch5.Create_Task_Application.ProjectModule.entity.Project;
+import com.batch5.Create_Task_Application.UserModule.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,7 +19,7 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
-    private String taskID;
+    private int taskId;
 
     @Column(name = "task_name")
     private String taskName;
@@ -23,7 +28,7 @@ public class Task {
     private String description;
 
     @Column(name = "due_date")
-    private String dueDate;
+    private LocalDateTime dueDate;
 
     @Column(name = "priority")
     private String priority;
@@ -35,16 +40,19 @@ public class Task {
     //Project table bi-directional
     @ManyToOne
     @JoinColumn(name = "project_id")
-    private Project projectID;
+    private Project projectId;
 
     //User table uni-directional
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User userID;
+    private User userId;
 
     @ManyToMany
     @JoinTable(name = "task_category", joinColumns = @JoinColumn(name="task_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories;
+
+    @OneToMany(mappedBy = "task")
+    private List<Comment> comments;
 
 }
