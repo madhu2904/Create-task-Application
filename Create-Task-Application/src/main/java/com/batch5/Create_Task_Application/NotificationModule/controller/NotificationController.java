@@ -1,24 +1,34 @@
 package com.batch5.Create_Task_Application.NotificationModule.controller;
 
-import com.batch5.Create_Task_Application.NotificationModule.dto.NotificationDto;
+import com.batch5.Create_Task_Application.NotificationModule.dto.NotificationRequestDto;
+import com.batch5.Create_Task_Application.NotificationModule.dto.NotificationResponseDto;
 import com.batch5.Create_Task_Application.NotificationModule.entity.Notification;
 import com.batch5.Create_Task_Application.NotificationModule.service.NotificationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/notifications")
+@RequestMapping("/api/v1/notifications")
 public class NotificationController {
 
     @Autowired
     private NotificationService notificationService;
 
     @PostMapping
-    public Notification addNotification(@Valid @RequestBody NotificationDto dto) {
-        return notificationService.addNotification(dto);
+    public ResponseEntity addNotification(@Valid @RequestBody NotificationRequestDto dto) {
+        NotificationResponseDto response = notificationService.addNotification(dto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+    @GetMapping("/{notificationId}")
+    public ResponseEntity getNotification(@PathVariable int notificationId)
+    {
+        NotificationResponseDto response =notificationService.getNotification(notificationId);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 }
