@@ -1,7 +1,6 @@
 package com.batch5.Create_Task_Application.CollaborationModule.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,12 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CommentRequestDTO {
+public class AttachmentRequestDTO {
 
-    @NotBlank(message = "Comment text cannot be blank")
-    private String text;
+    @NotBlank(message = "File name cannot be empty")
+    private String fileName;
 
-    @NotNull(message = "User ID is required")
-    private Long userId;
+    @NotBlank(message = "File path cannot be empty")
+    private String filePath;
 
 }
