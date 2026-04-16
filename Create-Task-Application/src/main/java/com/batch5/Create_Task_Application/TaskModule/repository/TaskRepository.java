@@ -14,7 +14,12 @@ public interface TaskRepository extends JpaRepository<Task,Integer> {
 
     List<Task> findByUserId(Long userId);
 
+    //i have used List<Task> before, but list will take alternate values
+    //but the Optional<Task>, it will check whether the task is present
+    // or not and works orElseThrow
     Optional<Task> findByTaskId(Integer taskId);
+
+    List<Task> findAll();
 
     List<Task> findByStatus(String status);
 
