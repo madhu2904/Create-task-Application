@@ -1,4 +1,4 @@
-package com.batch5.Create_Task_Application.CommonModule.Exceptions;
+package com.batch5.Create_Task_Application.TaskModule.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
