@@ -1,6 +1,7 @@
 package com.batch5.Create_Task_Application.UserModule.controller;
 import com.batch5.Create_Task_Application.UserModule.entity.User;
 import com.batch5.Create_Task_Application.UserModule.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public class UserController {
 
     // Create User
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User createUser(@Valid @RequestBody User user) {
         return userService.createUser(user);
     }
 
@@ -27,13 +28,13 @@ public class UserController {
 
     // Get User By ID
     @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id) {
+    public User getUser(@PathVariable Long id ) {
         return userService.getUserById(id);
     }
 
     // Update User
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
+    public User updateUser(@PathVariable Long id, @Valid @RequestBody User user) {
         return userService.updateUser(id, user);
     }
 

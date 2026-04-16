@@ -37,4 +37,7 @@ public class Notification
     @JoinColumn(name="user_id",nullable=false)
     private User user;
 
+    @Column(name = "is_read")
+    private boolean isRead = false;
+
 }
