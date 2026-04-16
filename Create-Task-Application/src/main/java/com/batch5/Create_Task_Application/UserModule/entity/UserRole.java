@@ -16,7 +16,7 @@ public class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="user_RoleID")
-    private Long userRoleId;
+    private Integer userRoleId;
 
     @NotBlank(message = "Role name is required")
     @Column(name = "role_name", nullable = false)

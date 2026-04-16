@@ -28,13 +28,13 @@ public class UserRoleController {
 
     //  GET ROLE BY ID
     @GetMapping("/{roleId}")
-    public UserRole getRoleById(@PathVariable Long roleId) {
+    public UserRole getRoleById(@PathVariable Integer roleId) {
         return roleService.getRoleById(roleId);
     }
 
     //  DELETE ROLE
     @DeleteMapping("/{roleId}")
-    public String deleteRole(@PathVariable Long roleId) {
+    public String deleteRole(@PathVariable Integer roleId) {
         roleService.deleteRole(roleId);
         return "Role deleted successfully";
     }

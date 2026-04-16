@@ -35,14 +35,14 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     //  GET ROLE BY ID
     @Override
-    public UserRole getRoleById(Long roleId) {
+    public UserRole getRoleById(Integer roleId) {
         return roleRepository.findById(roleId)
                 .orElseThrow(() -> new RoleNotFoundException("Role not found with id: " + roleId));
     }
 
     //  DELETE ROLE
     @Override
-    public void deleteRole(Long roleId) {
+    public void deleteRole(Integer roleId) {
         UserRole role = roleRepository.findById(roleId)
                 .orElseThrow(() -> new RoleNotFoundException("Role not found with id: " + roleId));
 

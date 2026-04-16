@@ -7,7 +7,7 @@ import com.batch5.Create_Task_Application.ProjectModule.exceptions.ProjectNotFou
 import com.batch5.Create_Task_Application.ProjectModule.exceptions.ProjectSearchException;
 import com.batch5.Create_Task_Application.ProjectModule.repository.ProjectRepository;
 import com.batch5.Create_Task_Application.UserModule.entity.User;
-import com.batch5.Create_Task_Application.ProjectModule.exceptions.UserNotFoundException;
+import com.batch5.Create_Task_Application.UserModule.exceptions.UserNotFoundException;
 import com.batch5.Create_Task_Application.UserModule.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
