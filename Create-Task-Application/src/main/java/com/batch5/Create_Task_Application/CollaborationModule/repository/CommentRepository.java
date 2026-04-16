@@ -10,11 +10,11 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
     // Get all comments for a given task ID
-    List<Comment> findByTask_TaskId(Integer taskId);
+    List<Comment> findByTaskTaskId(Integer taskId);
 
     // Get all comments by a specific user ID
-    List<Comment> findByUser_UserId(Integer userId);
+    List<Comment> findByUserUserId(Long userId);
 
     // Get comments for a task ordered by latest first
-    List<Comment> findByTask_TaskIdOrderByCreatedAtDesc(Integer taskId);
+    List<Comment> findByTaskTaskIdOrderByCreatedAtDesc(Integer taskId);
 }

@@ -1,5 +1,6 @@
 package com.batch5.Create_Task_Application.UserModule.entity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.List;
@@ -16,15 +17,19 @@ public class User {
     @Column(name="user_id")
     private Long userId;
 
-    @Column(name="username",nullable = false, unique = true)
+    @NotBlank(message = "Username is required")
+    @Column(name="username", nullable = false, unique = true)
     private String username;
 
+    @NotBlank(message = "Password is required")
     @Column(nullable = false)
     private String password;
 
+    @NotBlank(message = "Email is required")
     private String email;
 
-    @Column(name="fullname")
+    @NotBlank(message = "Full name is required")
+    @Column(name="fullname" ,nullable=false)
     private String fullName;
 
     @ManyToMany
