@@ -53,7 +53,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentResponseDTO> getTaskComments(Integer taskId) {
-        List<Comment> comments = commentRepository.findByTaskTaskIdOrderByCreatedAtDesc(taskId);
+        List<Comment> comments = commentRepository.findCommentsByTaskIdOrderByDate(taskId);
         return comments.stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
