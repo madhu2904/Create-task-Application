@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a9495e21-e6bc-49c8-9fca-dd1fbc924b03" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/controller/UserRoleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/dto/UserRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/dto/UserResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/dto/UserRoleRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/dto/UserRoleResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/exceptions/AppException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/exceptions/ErrorResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/exceptions/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/exceptions/InvalidUserDataException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/exceptions/RoleNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/exceptions/UserAlreadyExistsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/exceptions/UserModuleException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/exceptions/UserNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/service/UserRoleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/service/UserRoleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/entity/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/entity/UserRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/service/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Exception" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Spring Boot.CreateTaskApplication.executor": "Run",
+    "git-widget-placeholder": "dev__ilakiyaa"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="CreateTaskApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
+      <module name="Create-Task-Application" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.batch5.Create_Task_Application.CreateTaskApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.batch5.Create_Task_Application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.CreateTaskApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+</project>
