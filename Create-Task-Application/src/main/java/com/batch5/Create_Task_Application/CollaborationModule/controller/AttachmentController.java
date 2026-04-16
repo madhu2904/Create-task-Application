@@ -19,12 +19,10 @@ public class AttachmentController {
     private AttachmentService attachmentService;
 
     @PostMapping("/tasks/{taskId}/attachments")
-    public ResponseEntity<AttachmentResponseDTO> uploadAttachment(
-            @PathVariable Integer taskId,
+    public ResponseEntity<AttachmentResponseDTO> uploadAttachment(@PathVariable Integer taskId,
             @Valid @RequestBody AttachmentRequestDTO dto) {
-        
         AttachmentResponseDTO uploadedAttachment = attachmentService.uploadAttachment(taskId, dto);
-        return new ResponseEntity<>(uploadedAttachment, HttpStatus.CREATED);
+        return new ResponseEntity<>(uploadedAttachment,HttpStatus.CREATED);
     }
 
     @GetMapping("/tasks/{taskId}/attachments")
@@ -38,4 +36,5 @@ public class AttachmentController {
         attachmentService.deleteAttachment(attachmentId);
         return ResponseEntity.noContent().build();
     }
+
 }

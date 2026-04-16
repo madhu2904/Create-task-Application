@@ -10,11 +10,7 @@ public interface AttachmentService {
     AttachmentResponseDTO uploadAttachment(Integer taskId, AttachmentRequestDTO dto);
 
     List<AttachmentResponseDTO> getTaskAttachments(Integer taskId);
-    
+
     void deleteAttachment(Integer attachmentId);
+
 }
-
-
-    
-
-    
