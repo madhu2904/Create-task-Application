@@ -1,5 +1,6 @@
 package com.batch5.Create_Task_Application.TaskModule.entity;
 
+import com.batch5.Create_Task_Application.UserModule.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
