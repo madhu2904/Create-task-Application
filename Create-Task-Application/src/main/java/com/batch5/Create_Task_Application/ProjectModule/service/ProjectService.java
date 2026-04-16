@@ -18,4 +18,8 @@ public interface ProjectService {
     ProjectResponseDto updateProject(Integer projectId, ProjectRequestDto requestDto);
 
     void deleteProject(Integer projectId);
+
+    List<ProjectResponseDto> getActiveProjects();
+
+    List<ProjectResponseDto> searchProjectsByName(String keyword);
 }

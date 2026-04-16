@@ -107,6 +107,40 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.delete(project);
     }
 
+    @Override
+    public List<ProjectResponseDto> searchProjectsByName(String keyword) {
+
+        if (keyword == null || keyword.trim().isEmpty()) {
+            throw new RuntimeException("Search keyword must not be empty");
+        }
+
+        List<Project> projects = projectRepository
+                .findByProjectNameContainingIgnoreCase(keyword.trim());
+
+        if (projects.isEmpty()) {
+            throw new RuntimeException(
+                    "No projects found matching keyword: " + keyword);
+        }
+
+        return projects.stream()
+                .map(this::mapToResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProjectResponseDto> getActiveProjects() {
+
+        List<Project> projects = projectRepository.findActiveProjects();
+
+        if (projects.isEmpty()) {
+            throw new RuntimeException("No active projects found");
+        }
+
+        return projects.stream()
+                .map(this::mapToResponseDto)
+                .collect(Collectors.toList());
+    }
+
     private ProjectResponseDto mapToResponseDto(Project project) {
 
         ProjectResponseDto dto = new ProjectResponseDto();

@@ -71,4 +71,21 @@ public class ProjectController {
         projectService.deleteProject(projectId);
         return ResponseEntity.ok("Project deleted successfully");
     }
+
+    // GET /api/projects/search?keyword=xyz
+    @GetMapping("/search")
+    public ResponseEntity<List<ProjectResponseDto>> searchProjectsByName(
+            @RequestParam String keyword) {
+
+        List<ProjectResponseDto> response = projectService.searchProjectsByName(keyword);
+        return ResponseEntity.ok(response);
+    }
+
+    // GET /api/projects/active
+    @GetMapping("/active")
+    public ResponseEntity<List<ProjectResponseDto>> getActiveProjects() {
+
+        List<ProjectResponseDto> response = projectService.getActiveProjects();
+        return ResponseEntity.ok(response);
+    }
 }
