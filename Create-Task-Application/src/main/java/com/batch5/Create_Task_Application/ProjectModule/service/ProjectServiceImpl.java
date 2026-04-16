@@ -3,8 +3,11 @@ package com.batch5.Create_Task_Application.ProjectModule.service;
 import com.batch5.Create_Task_Application.ProjectModule.dto.ProjectRequestDto;
 import com.batch5.Create_Task_Application.ProjectModule.dto.ProjectResponseDto;
 import com.batch5.Create_Task_Application.ProjectModule.entity.Project;
+import com.batch5.Create_Task_Application.ProjectModule.exceptions.ProjectNotFoundException;
+import com.batch5.Create_Task_Application.ProjectModule.exceptions.ProjectSearchException;
 import com.batch5.Create_Task_Application.ProjectModule.repository.ProjectRepository;
 import com.batch5.Create_Task_Application.UserModule.entity.User;
+import com.batch5.Create_Task_Application.ProjectModule.exceptions.UserNotFoundException;
 import com.batch5.Create_Task_Application.UserModule.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +28,7 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectResponseDto createProject(ProjectRequestDto requestDto) {
 
         User user = userRepository.findById(requestDto.getUserId())
-                .orElseThrow(() -> new RuntimeException(
-                        "User not found with id: " + requestDto.getUserId()));
+                .orElseThrow(() -> new UserNotFoundException(requestDto.getUserId()));
 
         Project project = new Project();
         project.setProjectName(requestDto.getProjectName());
@@ -36,7 +38,6 @@ public class ProjectServiceImpl implements ProjectService {
         project.setUser(user);
 
         Project savedProject = projectRepository.save(project);
-
         return mapToResponseDto(savedProject);
     }
 
@@ -44,8 +45,7 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectResponseDto getProjectById(Integer projectId) {
 
         Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new RuntimeException(
-                        "Project not found with id: " + projectId));
+                .orElseThrow(() -> new ProjectNotFoundException(projectId));
 
         return mapToResponseDto(project);
     }
@@ -53,9 +53,8 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<ProjectResponseDto> getAllProjects() {
 
-        List<Project> projects = projectRepository.findAll();
-
-        return projects.stream()
+        return projectRepository.findAll()
+                .stream()
                 .map(this::mapToResponseDto)
                 .collect(Collectors.toList());
     }
@@ -63,14 +62,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<ProjectResponseDto> getProjectsByUser(Integer userId) {
 
-        // Check whether user exists
-        userRepository.findById(Long.valueOf(userId))
-                .orElseThrow(() -> new RuntimeException(
-                        "User not found with id: " + userId));
+        userRepository.findById(userId.longValue())
+                .orElseThrow(() -> new UserNotFoundException(userId.longValue()));
 
-        List<Project> projects = projectRepository.findByUserUserId(userId);
-
-        return projects.stream()
+        return projectRepository.findByUserUserId(userId)
+                .stream()
                 .map(this::mapToResponseDto)
                 .collect(Collectors.toList());
     }
@@ -79,12 +75,10 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectResponseDto updateProject(Integer projectId, ProjectRequestDto requestDto) {
 
         Project existingProject = projectRepository.findById(projectId)
-                .orElseThrow(() -> new RuntimeException(
-                        "Project not found with id: " + projectId));
+                .orElseThrow(() -> new ProjectNotFoundException(projectId));
 
         User user = userRepository.findById(requestDto.getUserId())
-                .orElseThrow(() -> new RuntimeException(
-                        "User not found with id: " + requestDto.getUserId()));
+                .orElseThrow(() -> new UserNotFoundException(requestDto.getUserId()));
 
         existingProject.setProjectName(requestDto.getProjectName());
         existingProject.setDescription(requestDto.getDescription());
@@ -92,17 +86,14 @@ public class ProjectServiceImpl implements ProjectService {
         existingProject.setEndDate(requestDto.getEndDate());
         existingProject.setUser(user);
 
-        Project updatedProject = projectRepository.save(existingProject);
-
-        return mapToResponseDto(updatedProject);
+        return mapToResponseDto(projectRepository.save(existingProject));
     }
 
     @Override
     public void deleteProject(Integer projectId) {
 
         Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new RuntimeException(
-                        "Project not found with id: " + projectId));
+                .orElseThrow(() -> new ProjectNotFoundException(projectId));
 
         projectRepository.delete(project);
     }
@@ -111,15 +102,14 @@ public class ProjectServiceImpl implements ProjectService {
     public List<ProjectResponseDto> searchProjectsByName(String keyword) {
 
         if (keyword == null || keyword.trim().isEmpty()) {
-            throw new RuntimeException("Search keyword must not be empty");
+            throw new IllegalArgumentException("Search keyword must not be empty");
         }
 
         List<Project> projects = projectRepository
                 .findByProjectNameContainingIgnoreCase(keyword.trim());
 
         if (projects.isEmpty()) {
-            throw new RuntimeException(
-                    "No projects found matching keyword: " + keyword);
+            throw new ProjectSearchException(keyword);
         }
 
         return projects.stream()
@@ -133,7 +123,7 @@ public class ProjectServiceImpl implements ProjectService {
         List<Project> projects = projectRepository.findActiveProjects();
 
         if (projects.isEmpty()) {
-            throw new RuntimeException("No active projects found");
+            throw new ProjectNotFoundException("No active projects found");
         }
 
         return projects.stream()
@@ -144,7 +134,6 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectResponseDto mapToResponseDto(Project project) {
 
         ProjectResponseDto dto = new ProjectResponseDto();
-
         dto.setProjectId(project.getProjectId());
         dto.setProjectName(project.getProjectName());
         dto.setDescription(project.getDescription());
@@ -152,7 +141,6 @@ public class ProjectServiceImpl implements ProjectService {
         dto.setEndDate(project.getEndDate());
         dto.setUserId(project.getUser().getUserId());
         dto.setOwnerName(project.getUser().getFullName());
-
         return dto;
     }
 }
