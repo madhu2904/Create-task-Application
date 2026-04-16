@@ -10,7 +10,7 @@ public interface UserRoleService {
 
     List<UserRole> getAllRoles();
 
-    UserRole getRoleById(Long roleId);
+    UserRole getRoleById(Integer roleId);
 
-    void deleteRole(Long roleId);
+    void deleteRole(Integer roleId);
 }

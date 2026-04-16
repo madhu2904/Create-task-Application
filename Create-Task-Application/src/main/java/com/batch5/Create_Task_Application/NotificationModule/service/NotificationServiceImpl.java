@@ -5,9 +5,9 @@ import com.batch5.Create_Task_Application.NotificationModule.dto.NotificationReq
 import com.batch5.Create_Task_Application.NotificationModule.dto.NotificationResponseDto;
 import com.batch5.Create_Task_Application.NotificationModule.entity.Notification;
 import com.batch5.Create_Task_Application.NotificationModule.exceptions.NotificationNotFoundException;
-import com.batch5.Create_Task_Application.NotificationModule.exceptions.UserNotFoundException;
 import com.batch5.Create_Task_Application.NotificationModule.repository.NotificationRepository;
 import com.batch5.Create_Task_Application.UserModule.entity.User;
+import com.batch5.Create_Task_Application.UserModule.exceptions.UserNotFoundException;
 import com.batch5.Create_Task_Application.UserModule.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
