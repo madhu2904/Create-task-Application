@@ -14,10 +14,11 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="user_id")
     private Long userId;
 
     @NotBlank(message = "Username is required")
-    @Column(nullable = false, unique = true)
+    @Column(name="username", nullable = false, unique = true)
     private String username;
 
     @NotBlank(message = "Password is required")
@@ -28,7 +29,7 @@ public class User {
     private String email;
 
     @NotBlank(message = "Full name is required")
-    @Column(name="fullname")
+    @Column(name="fullname" ,nullable=false)
     private String fullName;
 
     @ManyToMany
