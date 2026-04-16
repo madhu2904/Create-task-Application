@@ -2,11 +2,14 @@ package com.batch5.Create_Task_Application.NotificationModule.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.http.HttpStatus;
 
-@Data
+import java.time.LocalDateTime;
+import java.util.Map;
+
 @AllArgsConstructor
-public class ErrorResponse {
+@Data
+public class ValidationErrorResponse {
     private String message;
-    private long timestamp;
+    private Map<String, String> errors;
+    private LocalDateTime timestamp;
 }
