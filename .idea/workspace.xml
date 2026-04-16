@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="55494691-8085-4044-872d-91a36c44eacc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/NotificationModule/entity/Notification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/NotificationModule/repository/NotificationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/ProjectModule/entity/Project.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/ProjectModule/repository/ProjectRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/entity/UserRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/repository/UserRoleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/service/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/entity/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/entity/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/repository/AttachmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/repository/AttachmentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/repository/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/repository/CommentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/TaskModule/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/TaskModule/entity/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/TaskModule/entity/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/TaskModule/entity/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/UserModule/entity/User.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="3CLySBDbahRspdkmcXKuMAQpvyn" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.CreateTaskApplication.executor": "Run",
+    "git-widget-placeholder": "Merging main",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Create-Task-Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Create-Task-Application" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="55494691-8085-4044-872d-91a36c44eacc" name="Changes" comment="" />
+      <created>1776179143211</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1776179143211</updated>
+    </task>
+    <task id="LOCAL-00001">
+      <option name="closed" value="true" />
+      <created>1776227105450</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1776227105450</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/TaskModule/entity/Task.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
