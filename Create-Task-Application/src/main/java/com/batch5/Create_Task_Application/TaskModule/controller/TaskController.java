@@ -1,5 +1,6 @@
 package com.batch5.Create_Task_Application.TaskModule.controller;
 
+import com.batch5.Create_Task_Application.TaskModule.dto.TaskDTO;
 import com.batch5.Create_Task_Application.TaskModule.entity.Task;
 import com.batch5.Create_Task_Application.TaskModule.service.TaskServiceImple;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,15 @@ public class TaskController {
     @GetMapping()
     public List<Task> getAll(){
         return taskService.getAllTask();
+    }
+
+    @DeleteMapping("/{taskId}")
+    public void deleteTasks(@PathVariable Integer taskId){
+        taskService.deleteTask(taskId);
+        System.out.println("The task is deleted");
+    }
+    @PutMapping("/{taskId}")
+    public Task updateTasks(@PathVariable Integer taskId,@RequestBody TaskDTO dto){
+        return taskService.updateTask(taskId, dto);
     }
 }
