@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/projects")
+@RequestMapping("/api/v1/projects")
 public class ProjectController {
 
     @Autowired
     private ProjectService projectService;
 
-    // POST /api/projects/createProject
-    @PostMapping("/createProject")
+    // POST /api/v1/projects
+    @PostMapping
     public ResponseEntity<ApiResponse<ProjectResponseDto>> createProject(
             @Valid @RequestBody ProjectRequestDto requestDto) {
 
@@ -31,7 +31,7 @@ public class ProjectController {
                 .body(new ApiResponse<>(201, "Project created successfully", response));
     }
 
-    // GET /api/projects/{projectId}
+    // GET /api/v1/projects/{projectId}
     @GetMapping("/{projectId}")
     public ResponseEntity<ApiResponse<ProjectResponseDto>> getProjectById(
             @PathVariable Integer projectId) {
@@ -42,7 +42,7 @@ public class ProjectController {
                 new ApiResponse<>(200, "Project fetched successfully", response));
     }
 
-    // GET /api/projects
+    // GET /api/v1/projects
     @GetMapping
     public ResponseEntity<ApiResponse<List<ProjectResponseDto>>> getAllProjects() {
 
@@ -52,7 +52,7 @@ public class ProjectController {
                 new ApiResponse<>(200, "All projects fetched successfully", response));
     }
 
-    // GET /api/projects/user/{userId}
+    // GET /api/v1/projects/user/{userId}
     @GetMapping("/user/{userId}")
     public ResponseEntity<ApiResponse<List<ProjectResponseDto>>> getProjectsByUser(
             @PathVariable Long userId) {
@@ -63,7 +63,7 @@ public class ProjectController {
                 new ApiResponse<>(200, "Projects fetched for user successfully", response));
     }
 
-    // PUT /api/projects/{projectId}
+    // PUT /api/v1/projects/{projectId}
     @PutMapping("/{projectId}")
     public ResponseEntity<ApiResponse<ProjectResponseDto>> updateProject(
             @PathVariable Integer projectId,
@@ -75,7 +75,7 @@ public class ProjectController {
                 new ApiResponse<>(200, "Project updated successfully", response));
     }
 
-    // DELETE /api/projects/{projectId}
+    // DELETE /api/v1/projects/{projectId}
     @DeleteMapping("/{projectId}")
     public ResponseEntity<ApiResponse<String>> deleteProject(
             @PathVariable Integer projectId) {
