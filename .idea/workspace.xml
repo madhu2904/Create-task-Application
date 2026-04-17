@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="21406554-0ae8-41df-9233-30896e4a0660" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/controller/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/controller/.gitkeep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/controller/AttachmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/controller/AttachmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/controller/CommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/dto/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/dto/.gitkeep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/dto/AttachmentRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/dto/AttachmentRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/dto/AttachmentResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/dto/AttachmentResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/dto/CollaborationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/dto/CollaborationDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/dto/CommentRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/dto/CommentRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/dto/CommentResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/dto/CommentResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/entity/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/entity/.gitkeep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/entity/Attachment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/entity/Attachment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/entity/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/entity/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/exceptions/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/exceptions/.gitkeep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/exceptions/AttachmentNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/exceptions/AttachmentNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/exceptions/AttachmentStorageException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/exceptions/AttachmentStorageException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/exceptions/CommentNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/exceptions/CommentNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/exceptions/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/exceptions/ErrorResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/exceptions/ResourceNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/exceptions/ResourceNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/repository/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/repository/.gitkeep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/repository/AttachmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/repository/AttachmentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/repository/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/repository/CommentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/service/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/service/.gitkeep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/service/AttachmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/service/AttachmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/service/AttachmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/service/AttachmentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/service/CommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CollaborationModule/service/CommentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/service/CommentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/AttachmentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/AttachmentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/CommentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/CommentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/dto/CommentRequestDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/dto/CommentRequestDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/entity/Attachment$AttachmentBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/entity/Attachment$AttachmentBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/entity/Attachment.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/entity/Attachment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/service/AttachmentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/service/AttachmentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/service/AttachmentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/service/AttachmentServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/service/CommentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/service/CommentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/service/CommentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/service/CommentServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CreateTaskApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CreateTaskApplication.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Exception" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="3CTV3JKZJbEjvZBVXTk4154pldf" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.CreateTaskApplication.executor": "Run",
+    "git-widget-placeholder": "dev__navya",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="21406554-0ae8-41df-9233-30896e4a0660" name="Changes" comment="" />
+      <created>1776409354103</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1776409354103</updated>
+    </task>
+    <servers />
+  </component>
+</project>

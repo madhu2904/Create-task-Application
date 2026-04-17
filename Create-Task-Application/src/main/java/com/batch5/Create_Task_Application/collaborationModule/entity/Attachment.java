@@ -19,7 +19,7 @@ public class Attachment {
     private Integer attachmentId;
 
     @NotBlank(message = "File name cannot be empty")
-    @Column(name = "file_name", nullable = false)
+    @Column(name = "file_name", nullable = false, unique = true)
     private String fileName;
 
     @NotBlank(message = "File path cannot be empty")
