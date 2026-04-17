@@ -3,6 +3,7 @@ package com.batch5.Create_Task_Application.CommonModule;
 import com.batch5.Create_Task_Application.CollaborationModule.dto.ErrorDetails;
 import com.batch5.Create_Task_Application.CollaborationModule.exceptions.*;
 import com.batch5.Create_Task_Application.NotificationModule.exceptions.*;
+import com.batch5.Create_Task_Application.ProjectModule.dto.ApiResponse;
 import com.batch5.Create_Task_Application.ProjectModule.exceptions.*;
 import com.batch5.Create_Task_Application.TaskModule.exceptions.*;
 import com.batch5.Create_Task_Application.UserModule.exceptions.*;
@@ -16,17 +17,35 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler
-{
-    //  Not Found Exceptions of all modules
+public class GlobalExceptionHandler {
+
+    // ─────────────────────────────────────────────
+    // PROJECT MODULE — uses ApiResponse structure
+    // ─────────────────────────────────────────────
+
+    @ExceptionHandler(ProjectNotFoundException.class)
+    public ResponseEntity<ApiResponse<Object>> handleProjectNotFound(ProjectNotFoundException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ApiResponse<>(404, ex.getMessage(), null));
+    }
+
+    @ExceptionHandler(ProjectSearchException.class)
+    public ResponseEntity<ApiResponse<Object>> handleProjectSearch(ProjectSearchException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ApiResponse<>(404, ex.getMessage(), null));
+    }
+
+    // ─────────────────────────────────────────────
+    // OTHER MODULES — use original ErrorResponse
+    // ─────────────────────────────────────────────
+
     @ExceptionHandler({
             UserNotFoundException.class,
-            ProjectNotFoundException.class,
             TaskNotFoundException.class,
             NotificationNotFoundException.class,
             ResourceNotFoundException.class,
@@ -39,7 +58,6 @@ public class GlobalExceptionHandler
         return build(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
-    // Bad request exceptions of all modules
     @ExceptionHandler({
             InvalidUserDataException.class,
             InvalidTaskException.class,
@@ -52,7 +70,6 @@ public class GlobalExceptionHandler
         return build(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
-    // conflicts ans pre-existing data exceptions
     @ExceptionHandler({
             UserAlreadyExistsException.class,
             DataConflictException.class,
@@ -63,13 +80,6 @@ public class GlobalExceptionHandler
         return build(HttpStatus.CONFLICT, ex.getMessage());
     }
 
-    // project search exception
-    @ExceptionHandler(ProjectSearchException.class)
-    public ResponseEntity<ErrorResponse> handleProjectSearch(ProjectSearchException ex) {
-        return build(HttpStatus.NOT_FOUND, ex.getMessage());
-    }
-
-    // data validation exceptions
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException ex) {
 
@@ -81,37 +91,19 @@ public class GlobalExceptionHandler
         return build(HttpStatus.BAD_REQUEST, errors);
     }
 
-    // type mismatch exceptions
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ErrorResponse> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
         String message = "Invalid value '" + ex.getValue() + "' for parameter '" + ex.getName() + "'";
         return build(HttpStatus.BAD_REQUEST, message);
     }
 
-    // validation of request
-//    @ExceptionHandler(org.springframework.web.bind.MethodArgumentNotValidException.class)
-//    public ResponseEntity<ErrorResponse> handleValidationMap(MethodArgumentNotValidException ex) {
-//
-//        Map<String, String> errors = new HashMap<>();
-//        ex.getBindingResult().getFieldErrors().forEach(error ->
-//                errors.put(error.getField(), error.getDefaultMessage())
-//        );
-//
-//        return build(HttpStatus.BAD_REQUEST, errors.toString());
-//    }
-
-    // generic exception
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGlobal(Exception ex) {
         return build(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
-    // common error response builder
     private ResponseEntity<ErrorResponse> build(HttpStatus status, String message) {
-        ErrorResponse error = new ErrorResponse(
-                message,
-                LocalDateTime.now()
-        );
+        ErrorResponse error = new ErrorResponse(message, LocalDateTime.now());
         return new ResponseEntity<>(error, status);
     }
 }

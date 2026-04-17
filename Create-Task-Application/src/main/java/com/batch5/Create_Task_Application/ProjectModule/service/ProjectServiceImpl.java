@@ -62,8 +62,8 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<ProjectResponseDto> getProjectsByUser(Long userId) {
 
-        userRepository.findById(userId.longValue())
-                .orElseThrow(() -> new UserNotFoundException(userId.longValue()));
+        userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
 
         return projectRepository.findByUserUserId(userId)
                 .stream()
