@@ -40,12 +40,12 @@ public class Task {
     //Project table bi-directional
     @ManyToOne
     @JoinColumn(name = "project_id")
-    private Project projectId;
+    private Project project;
 
     //User table uni-directional
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User user;
 
     @ManyToMany
     @JoinTable(name = "task_category", joinColumns = @JoinColumn(name="task_id"),

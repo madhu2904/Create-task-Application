@@ -13,7 +13,7 @@ public interface ProjectService {
 
     List<ProjectResponseDto> getAllProjects();
 
-    List<ProjectResponseDto> getProjectsByUser(Integer userId);
+    List<ProjectResponseDto> getProjectsByUser(Long userId);
 
     ProjectResponseDto updateProject(Integer projectId, ProjectRequestDto requestDto);
 
