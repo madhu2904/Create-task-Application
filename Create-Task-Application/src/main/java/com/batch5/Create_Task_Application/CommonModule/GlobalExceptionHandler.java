@@ -1,6 +1,5 @@
 package com.batch5.Create_Task_Application.CommonModule;
 
-import com.batch5.Create_Task_Application.CollaborationModule.dto.ErrorDetails;
 import com.batch5.Create_Task_Application.CollaborationModule.exceptions.*;
 import com.batch5.Create_Task_Application.NotificationModule.exceptions.*;
 import com.batch5.Create_Task_Application.ProjectModule.exceptions.*;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
