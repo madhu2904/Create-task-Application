@@ -15,9 +15,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "project")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Project {
 
     @Id
@@ -50,4 +47,73 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Task> tasks;
+
+    public Project() {
+    }
+
+    public Project(Integer projectId, String projectName, String description, LocalDate startDate, LocalDate endDate, User user, List<Task> tasks) {
+        this.projectId = projectId;
+        this.projectName = projectName;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.user = user;
+        this.tasks = tasks;
+    }
+
+    public Integer getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
 }
