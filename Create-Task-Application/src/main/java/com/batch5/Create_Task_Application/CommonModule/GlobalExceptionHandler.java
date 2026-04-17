@@ -9,6 +9,7 @@ import com.batch5.Create_Task_Application.UserModule.exceptions.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -18,25 +19,36 @@ import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler
-{
-    //  Not Found Exceptions of all modules
+public class GlobalExceptionHandler {
+
+    //Not Found (404)
     @ExceptionHandler({
             UserNotFoundException.class,
-            ProjectNotFoundException.class,
             TaskNotFoundException.class,
             NotificationNotFoundException.class,
             ResourceNotFoundException.class,
             AttachmentNotFoundException.class,
             CommentNotFoundException.class,
             CategoryNotFoundException.class,
-            NoDataFoundException.class
+            NoDataFoundException.class,
+            ProjectNotFoundException.class,
+            ProjectSearchException.class
     })
     public ResponseEntity<ErrorResponse> handleNotFound(RuntimeException ex) {
         return build(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
-    // Bad request exceptions of all modules
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponse> handleJsonParseError(HttpMessageNotReadableException ex) {
+
+        return build(
+                HttpStatus.BAD_REQUEST,
+                "Malformed JSON request. Please check your input."
+        );
+    }
+
+
+    // Bad Request (400)
     @ExceptionHandler({
             InvalidUserDataException.class,
             InvalidTaskException.class,
@@ -49,7 +61,7 @@ public class GlobalExceptionHandler
         return build(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
-    // conflicts ans pre-existing data exceptions
+    // Conflict (409)
     @ExceptionHandler({
             UserAlreadyExistsException.class,
             DataConflictException.class,
@@ -60,13 +72,8 @@ public class GlobalExceptionHandler
         return build(HttpStatus.CONFLICT, ex.getMessage());
     }
 
-    // project search exception
-    @ExceptionHandler(ProjectSearchException.class)
-    public ResponseEntity<ErrorResponse> handleProjectSearch(ProjectSearchException ex) {
-        return build(HttpStatus.NOT_FOUND, ex.getMessage());
-    }
 
-    // data validation exceptions
+    // Validation (400)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException ex) {
 
@@ -78,37 +85,31 @@ public class GlobalExceptionHandler
         return build(HttpStatus.BAD_REQUEST, errors);
     }
 
-    // type mismatch exceptions
+    // Type Mismatch (400)
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ErrorResponse> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
-        String message = "Invalid value '" + ex.getValue() + "' for parameter '" + ex.getName() + "'";
+
+        String message = "Invalid value '" + ex.getValue() +
+                "' for parameter '" + ex.getName() + "'";
+
         return build(HttpStatus.BAD_REQUEST, message);
     }
 
-    // validation of request
-//    @ExceptionHandler(org.springframework.web.bind.MethodArgumentNotValidException.class)
-//    public ResponseEntity<ErrorResponse> handleValidationMap(MethodArgumentNotValidException ex) {
-//
-//        Map<String, String> errors = new HashMap<>();
-//        ex.getBindingResult().getFieldErrors().forEach(error ->
-//                errors.put(error.getField(), error.getDefaultMessage())
-//        );
-//
-//        return build(HttpStatus.BAD_REQUEST, errors.toString());
-//    }
+    // Global Error (500)
 
-    // generic exception
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGlobal(Exception ex) {
         return build(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
-    // common error response builder
+    // Builder Method
     private ResponseEntity<ErrorResponse> build(HttpStatus status, String message) {
+
         ErrorResponse error = new ErrorResponse(
-                message,
-                LocalDateTime.now()
+                status.value(),
+                message
         );
+
         return new ResponseEntity<>(error, status);
     }
 }

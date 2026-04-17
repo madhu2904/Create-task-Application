@@ -1,8 +1,10 @@
 package com.batch5.Create_Task_Application.UserModule.service;
 
 import com.batch5.Create_Task_Application.UserModule.entity.User;
+import com.batch5.Create_Task_Application.UserModule.entity.UserRole;
 import com.batch5.Create_Task_Application.UserModule.exceptions.*;
 import com.batch5.Create_Task_Application.UserModule.repository.UserRepository;
+import com.batch5.Create_Task_Application.UserModule.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +15,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    // ✅ CREATE USER
+    private UserRoleRepository userRoleRepository;
+    //  CREATE USER
     @Override
     public User createUser(User user) {
 
-        // 🔴 Invalid Data Check
+        //  Invalid Data Check
         if (user.getUsername() == null || user.getUsername().isBlank()) {
             throw new InvalidUserDataException("Username cannot be empty");
         }
@@ -27,7 +29,7 @@ public class UserServiceImpl implements UserService {
             throw new InvalidUserDataException("Email cannot be empty");
         }
 
-        // 🔴 Duplicate User Check
+        // Duplicate User Check
         if (userRepository.existsByUsername(user.getUsername())) {
             throw new UserAlreadyExistsException("Username already exists: " + user.getUsername());
         }
@@ -35,27 +37,27 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    // ✅ GET ALL USERS
+    //  GET ALL USERS
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    // ✅ GET USER BY ID
+    //  GET USER BY ID
     @Override
     public User getUserById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
     }
 
-    // ✅ UPDATE USER
+    //  UPDATE USER
     @Override
     public User updateUser(Long id, User user) {
 
         User existing = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
 
-        // 🔴 Validation
+        //  Validation
         if (user.getUsername() == null || user.getUsername().isBlank()) {
             throw new InvalidUserDataException("Username cannot be empty");
         }
@@ -72,7 +74,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(existing);
     }
 
-    // ✅ DELETE USER
+    //  DELETE USER
     @Override
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
@@ -80,4 +82,57 @@ public class UserServiceImpl implements UserService {
         }
         userRepository.deleteById(id);
     }
+    @Override
+    public UserRole createRole(UserRole role) {
+        if (userRoleRepository.existsByRoleName(role.getRoleName())) {
+            throw new InvalidUserDataException("Role already exists: " + role.getRoleName());
+        }
+        return userRoleRepository.save(role);
+    }
+
+    @Override
+    public List<UserRole> getAllRoles() {
+        return userRoleRepository.findAll();
+    }
+
+    @Override
+    public void assignRoleToUser(Long userId, Integer roleId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+
+        UserRole role = userRoleRepository.findById(roleId)
+                .orElseThrow(() -> new RoleNotFoundException(roleId));
+
+        if (user.getRoles().contains(role)) {
+            throw new InvalidUserDataException("Role already assigned to this user");
+        }
+
+        user.getRoles().add(role);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void removeRoleFromUser(Long userId, Integer roleId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+
+        UserRole role = userRoleRepository.findById(roleId)
+                .orElseThrow(() -> new RoleNotFoundException(roleId));
+
+        if (!user.getRoles().contains(role)) {
+            throw new InvalidUserDataException("Role not assigned to this user");
+        }
+
+        user.getRoles().remove(role);
+        userRepository.save(user);
+    }
+
+    @Override
+    public List<UserRole> getRolesOfUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+        return user.getRoles();
+    }
+
+
 }

@@ -13,9 +13,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name="notification")
 public class Notification
 {
@@ -23,6 +20,14 @@ public class Notification
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="notification_id")
     private int notificationId;
+
+    public Notification(int notificationId, boolean isRead, User user, LocalDateTime dateTime, String text) {
+        this.notificationId = notificationId;
+        this.isRead = isRead;
+        this.user = user;
+        this.dateTime = dateTime;
+        this.text = text;
+    }
 
     @NotBlank
     @Column(nullable=false)
@@ -40,4 +45,46 @@ public class Notification
     @Column(name = "is_read")
     private boolean isRead = false;
 
+    public int getNotificationId() {
+        return notificationId;
+    }
+
+    public void setNotificationId(int notificationId) {
+        this.notificationId = notificationId;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Notification() {
+    }
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void setRead(boolean read) {
+        isRead = read;
+    }
 }
