@@ -8,6 +8,7 @@ public class NotificationRequestDto {
     @NotBlank(message = "text can't be empty")
     private String text;
 
+
     @NotNull(message = "user id is required")
     private Long userId;
 
