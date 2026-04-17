@@ -1,6 +1,5 @@
 package com.batch5.Create_Task_Application.CommonModule;
 
-import com.batch5.Create_Task_Application.CollaborationModule.dto.ErrorDetails;
 import com.batch5.Create_Task_Application.CollaborationModule.exceptions.*;
 import com.batch5.Create_Task_Application.NotificationModule.exceptions.*;
 import com.batch5.Create_Task_Application.ProjectModule.dto.ApiResponse;

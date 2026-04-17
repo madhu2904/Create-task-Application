@@ -5,10 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
 public class AttachmentResponseDTO {
 
@@ -17,4 +13,45 @@ public class AttachmentResponseDTO {
     private String filePath;
     private Integer taskId;
 
+    public AttachmentResponseDTO(Integer attachmentId, String fileName, String filePath, Integer taskId) {
+        this.attachmentId = attachmentId;
+        this.fileName = fileName;
+        this.filePath = filePath;
+        this.taskId = taskId;
+    }
+
+    public AttachmentResponseDTO() {
+    }
+
+    public Integer getAttachmentId() {
+        return attachmentId;
+    }
+
+    public void setAttachmentId(Integer attachmentId) {
+        this.attachmentId = attachmentId;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public Integer getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(Integer taskId) {
+        this.taskId = taskId;
+    }
 }
