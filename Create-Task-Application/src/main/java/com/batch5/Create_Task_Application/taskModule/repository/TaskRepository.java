@@ -6,14 +6,18 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TaskRepository extends JpaRepository<Task,Integer> {
-    List<Task> findByProject_ProjectId(Long projectId);
+    List<Task> findByProject_ProjectId(Integer projectId);
 
-    List<Task> findByUser_UserId(Long userId);
+    List<Task> findByUser_UserId(Integer userId);
 
     Optional<Task> findByTaskId(Integer taskId);
 
     List<Task> findAll();
 
     //void deleteById(Integer taskId);
+
+    List<Task> findByStatus(String status);
+
+    List<Task> findByPriority(String priority);
 
 }
