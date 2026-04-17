@@ -10,12 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "category")
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 public class Category {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
@@ -29,4 +24,38 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     @JsonIgnore
     private Set<Task> tasks;
+
+    public Category(Integer categoryId, String categoryName, Set<Task> tasks) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.tasks = tasks;
+    }
+
+    public Category() {
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
+
 }

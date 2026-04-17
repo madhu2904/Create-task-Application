@@ -21,8 +21,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler
-{
+public class GlobalExceptionHandler {
     //  Not Found Exceptions of all modules
     @ExceptionHandler({
             UserNotFoundException.class,
