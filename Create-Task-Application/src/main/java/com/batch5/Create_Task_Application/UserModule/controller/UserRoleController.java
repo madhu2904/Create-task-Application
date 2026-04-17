@@ -1,8 +1,12 @@
 package com.batch5.Create_Task_Application.UserModule.controller;
 
+import com.batch5.Create_Task_Application.UserModule.dto.ApiResponse;
+import com.batch5.Create_Task_Application.UserModule.dto.UserRoleResponseDTO;
 import com.batch5.Create_Task_Application.UserModule.entity.UserRole;
 import com.batch5.Create_Task_Application.UserModule.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,28 +18,37 @@ public class UserRoleController {
     @Autowired
     private UserRoleService roleService;
 
-    //  CREATE ROLE
     @PostMapping
-    public UserRole createRole(@RequestBody UserRole role) {
-        return roleService.createRole(role);
+    public ResponseEntity<ApiResponse<UserRoleResponseDTO>> createRole(@RequestBody UserRole role) {
+        UserRole saved = roleService.createRole(role);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new ApiResponse<>(201, "Role created successfully", mapToRoleDTO(saved)));
     }
 
-    //  GET ALL ROLES
     @GetMapping
-    public List<UserRole> getAllRoles() {
-        return roleService.getAllRoles();
+    public ResponseEntity<ApiResponse<List<UserRoleResponseDTO>>> getAllRoles() {
+        List<UserRoleResponseDTO> roles = roleService.getAllRoles()
+                .stream()
+                .map(this::mapToRoleDTO)
+                .toList();
+        return ResponseEntity.ok(new ApiResponse<>(200, "Roles fetched successfully", roles));
     }
 
-    //  GET ROLE BY ID
     @GetMapping("/{roleId}")
-    public UserRole getRoleById(@PathVariable Integer roleId) {
-        return roleService.getRoleById(roleId);
+    public ResponseEntity<ApiResponse<UserRoleResponseDTO>> getRoleById(@PathVariable Integer roleId) {
+        UserRole role = roleService.getRoleById(roleId);
+        return ResponseEntity.ok(new ApiResponse<>(200, "Role fetched successfully", mapToRoleDTO(role)));
     }
 
-    //  DELETE ROLE
     @DeleteMapping("/{roleId}")
-    public String deleteRole(@PathVariable Integer roleId) {
+    public ResponseEntity<ApiResponse<String>> deleteRole(@PathVariable Integer roleId) {
         roleService.deleteRole(roleId);
-        return "Role deleted successfully";
+        return ResponseEntity.ok(new ApiResponse<>(200, "Role deleted successfully", null));
+    }
+
+    // ─── Mapper ───
+
+    private UserRoleResponseDTO mapToRoleDTO(UserRole role) {
+        return new UserRoleResponseDTO(role.getUserRoleId(), role.getRoleName());
     }
 }

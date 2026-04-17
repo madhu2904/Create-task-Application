@@ -6,7 +6,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- ✅ CORRECT SPRING BOOT VERSION -->
+	<!--  CORRECT SPRING BOOT VERSION -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -30,7 +30,7 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-		<!-- ✅ CORRECT WEB -->
+		<!--  CORRECT WEB -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -66,7 +66,7 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- ✅ ONLY VALID TEST DEPENDENCY -->
+		<!--  ONLY VALID TEST DEPENDENCY -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
