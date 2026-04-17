@@ -3,29 +3,26 @@ package com.batch5.Create_Task_Application.CommonModule;
 import java.time.LocalDateTime;
 
 public class ErrorResponse {
+
+    private int status;
     private String message;
     private LocalDateTime timestamp;
 
-    public ErrorResponse(String message, LocalDateTime timestamp) {
+    public ErrorResponse(int status, String message) {
+        this.status = status;
         this.message = message;
-        this.timestamp = timestamp;
+        this.timestamp = LocalDateTime.now();
+    }
+
+    public int getStatus() {
+        return status;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
-
-
 }

@@ -3,7 +3,7 @@ package com.batch5.Create_Task_Application.NotificationModule.controller;
 import com.batch5.Create_Task_Application.NotificationModule.dto.GetNotificationsResponseDto;
 import com.batch5.Create_Task_Application.NotificationModule.dto.NotificationRequestDto;
 import com.batch5.Create_Task_Application.NotificationModule.dto.NotificationResponseDto;
-import com.batch5.Create_Task_Application.NotificationModule.entity.Notification;
+import com.batch5.Create_Task_Application.NotificationModule.dto.ResponseStructureDto;
 import com.batch5.Create_Task_Application.NotificationModule.service.NotificationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -23,42 +24,91 @@ public class NotificationController {
     @PostMapping
     public ResponseEntity addNotification(@Valid @RequestBody NotificationRequestDto dto) {
         NotificationResponseDto response = notificationService.addNotification(dto);
+        ResponseStructureDto<NotificationResponseDto> responseStructure=new ResponseStructureDto(
+                HttpStatus.CREATED.value(),
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+                "Notification Added Successfully",
+                response,
+                LocalDateTime.now()
+
+        );
+        return new ResponseEntity<>(responseStructure, HttpStatus.CREATED);
     }
 
     @GetMapping("/{notificationId}")
     public ResponseEntity getNotification(@PathVariable int notificationId)
     {
         NotificationResponseDto response =notificationService.getNotificationById(notificationId);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        ResponseStructureDto<NotificationResponseDto> responseStructure=new ResponseStructureDto(
+                HttpStatus.OK.value(),
+                "Retrived the Notification Successfully",
+                response,
+                LocalDateTime.now()
+
+        );
+        return new ResponseEntity<>(responseStructure, HttpStatus.OK);
+
     }
 
     @GetMapping("/users/{userId}/notifications")
-    public ResponseEntity getNotification(@PathVariable long userId)
+    public  ResponseEntity getNotification(@PathVariable long userId)
     {
         List<GetNotificationsResponseDto> response=notificationService.getNotificationsByUserId(userId);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        ResponseStructureDto<List<GetNotificationsResponseDto>> responseStructure=new ResponseStructureDto(
+                HttpStatus.OK.value(),
+                "Retrived notifications of the user successfully",
+                response,
+                LocalDateTime.now()
+
+        );
+        return new ResponseEntity<>(responseStructure, HttpStatus.OK);
+
     }
 
     @DeleteMapping("/{notificationId}")
-    public ResponseEntity deleteNotification(@PathVariable int notificationId)
-    {
+    public ResponseEntity<ResponseStructureDto<String>> deleteNotification(@PathVariable int notificationId) {
+
         notificationService.deleteNotificationById(notificationId);
-        return ResponseEntity.status(HttpStatus.OK).body("Notification Deleted Successgully");
+
+        ResponseStructureDto<String> responseStructure =
+                new ResponseStructureDto<>(
+                        HttpStatus.OK.value(),
+                        "Notification deleted successfully",
+                        null,
+                        LocalDateTime.now()
+                );
+
+        return new ResponseEntity<>(responseStructure, HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}/notifications/unread")
     public ResponseEntity getUnreadNotifications(@PathVariable long userId)
     {
+
         List<GetNotificationsResponseDto> response=notificationService.getUnreadNotificationsByUserId(userId);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        ResponseStructureDto<List<GetNotificationsResponseDto>> responseStructure=new ResponseStructureDto(
+                HttpStatus.OK.value(),
+                "Retrived notifications of the user successfully",
+                response,
+                LocalDateTime.now()
+
+        );
+        return new ResponseEntity<>(responseStructure, HttpStatus.OK);
+
     }
 
     @PutMapping("/{notificationId}/read")
     public ResponseEntity markNotificationAsRead(@PathVariable int notificationId)
     {
         notificationService.markNotificationAsRead(notificationId);
-        return ResponseEntity.status(HttpStatus.OK).body("Marked Notification As read");
+        ResponseStructureDto<String> responseStructure =
+                new ResponseStructureDto<>(
+                        HttpStatus.OK.value(),
+                        "Marked Notification As read Successfully",
+                        null,
+                        LocalDateTime.now()
+                );
+
+        return new ResponseEntity<>(responseStructure, HttpStatus.OK);
     }
 }

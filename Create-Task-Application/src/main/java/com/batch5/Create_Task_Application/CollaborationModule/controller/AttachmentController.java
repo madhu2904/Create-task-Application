@@ -1,12 +1,10 @@
 package com.batch5.Create_Task_Application.CollaborationModule.controller;
 
-import com.batch5.Create_Task_Application.CollaborationModule.dto.AttachmentRequestDTO;
-import com.batch5.Create_Task_Application.CollaborationModule.dto.AttachmentResponseDTO;
+import com.batch5.Create_Task_Application.CollaborationModule.dto.*;
 import com.batch5.Create_Task_Application.CollaborationModule.service.AttachmentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,23 +16,50 @@ public class AttachmentController {
     @Autowired
     private AttachmentService attachmentService;
 
+    // To Create an Attachment
     @PostMapping("/tasks/{taskId}/attachments")
-    public ResponseEntity<AttachmentResponseDTO> uploadAttachment(@PathVariable Integer taskId,
+    public ResponseEntity<CollaborationDTO<AttachmentResponseDTO>> uploadAttachment(
+            @PathVariable Integer taskId,
             @Valid @RequestBody AttachmentRequestDTO dto) {
-        AttachmentResponseDTO uploadedAttachment = attachmentService.uploadAttachment(taskId, dto);
-        return new ResponseEntity<>(uploadedAttachment,HttpStatus.CREATED);
+
+        AttachmentResponseDTO attachmentResponseDTO =
+                attachmentService.uploadAttachment(taskId, dto);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new CollaborationDTO<>(
+                        HttpStatus.CREATED.value(),
+                        "Attachment uploaded successfully",
+                        attachmentResponseDTO
+                ));
     }
 
+    // To Read an Attachment
     @GetMapping("/tasks/{taskId}/attachments")
-    public ResponseEntity<List<AttachmentResponseDTO>> getTaskAttachments(@PathVariable Integer taskId) {
-        List<AttachmentResponseDTO> attachments = attachmentService.getTaskAttachments(taskId);
-        return ResponseEntity.ok(attachments);
+    public ResponseEntity<CollaborationDTO<List<AttachmentResponseDTO>>> getTaskAttachments(
+            @PathVariable Integer taskId) {
+
+        List<AttachmentResponseDTO> attachmentResponseDTOList =
+                attachmentService.getTaskAttachments(taskId);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new CollaborationDTO<>(
+                        HttpStatus.OK.value(),
+                        "Attachments fetched successfully",
+                        attachmentResponseDTOList
+                ));
     }
 
+    // To Delete an Attachment
     @DeleteMapping("/attachments/{attachmentId}")
-    public ResponseEntity<Void> deleteAttachment(@PathVariable Integer attachmentId) {
+    public ResponseEntity<CollaborationDTO<Void>> deleteAttachment(
+            @PathVariable Integer attachmentId) {
         attachmentService.deleteAttachment(attachmentId);
-        return ResponseEntity.noContent().build();
-    }
 
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new CollaborationDTO<>(
+                        HttpStatus.OK.value(),
+                        "Attachment deleted successfully",
+                        null
+                ));
+    }
 }
