@@ -1,10 +1,7 @@
 package com.batch5.Create_Task_Application.ProjectModule.dto;
 
-import lombok.Data;
-
 import java.time.LocalDate;
 
-@Data
 public class ProjectResponseDto {
 
     private Integer projectId;
@@ -13,5 +10,74 @@ public class ProjectResponseDto {
     private LocalDate startDate;
     private LocalDate endDate;
     private Long userId;
-    private String ownerName;  // resolved from User.fullName
+    private String userName;
+
+    public ProjectResponseDto() {
+    }
+
+    public ProjectResponseDto(Integer projectId, String projectName, String description, LocalDate startDate, LocalDate endDate, Long userId, String userName) {
+        this.projectId = projectId;
+        this.projectName = projectName;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.userId = userId;
+        this.userName = userName;
+    }
+
+    public Integer getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 }
