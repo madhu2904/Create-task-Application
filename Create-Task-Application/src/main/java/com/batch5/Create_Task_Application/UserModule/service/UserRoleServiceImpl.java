@@ -18,7 +18,6 @@ public class UserRoleServiceImpl implements UserRoleService {
     //  CREATE ROLE
     @Override
     public UserRole createRole(UserRole role) {
-
         //  Validation
         if (role.getRoleName() == null || role.getRoleName().isBlank()) {
             throw new InvalidUserDataException("Role name cannot be empty");

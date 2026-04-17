@@ -6,6 +6,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
+	<!--  CORRECT SPRING BOOT VERSION -->
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -30,6 +31,7 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
+		<!--  CORRECT WEB -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -70,6 +72,7 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!--  ONLY VALID TEST DEPENDENCY -->
 		<!-- H2 In-Memory DB for Testing -->
 		<dependency>
 			<groupId>com.h2database</groupId>
