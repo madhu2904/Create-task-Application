@@ -1,7 +1,7 @@
-package com.batch5.Create_Task_Application.CollaborationModule.controller;
+package com.batch5.Create_Task_Application.collaborationModule.controller;
 
-import com.batch5.Create_Task_Application.CollaborationModule.dto.*;
-import com.batch5.Create_Task_Application.CollaborationModule.service.AttachmentService;
+import com.batch5.Create_Task_Application.collaborationModule.dto.*;
+import com.batch5.Create_Task_Application.collaborationModule.service.AttachmentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;

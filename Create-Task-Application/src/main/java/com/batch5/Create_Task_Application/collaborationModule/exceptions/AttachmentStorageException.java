@@ -1,4 +1,4 @@
-package com.batch5.Create_Task_Application.CollaborationModule.exceptions;
+package com.batch5.Create_Task_Application.collaborationModule.exceptions;
 
 public class AttachmentStorageException extends RuntimeException {
     public AttachmentStorageException(String message) {

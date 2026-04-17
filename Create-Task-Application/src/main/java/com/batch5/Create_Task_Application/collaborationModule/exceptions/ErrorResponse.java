@@ -1,4 +1,4 @@
-package com.batch5.Create_Task_Application.CollaborationModule.exceptions;
+package com.batch5.Create_Task_Application.collaborationModule.exceptions;
 
 import java.time.LocalDateTime;
 import org.springframework.http.HttpStatus;

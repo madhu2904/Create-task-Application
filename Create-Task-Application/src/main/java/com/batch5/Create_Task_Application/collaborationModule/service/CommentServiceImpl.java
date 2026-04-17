@@ -1,20 +1,20 @@
-package com.batch5.Create_Task_Application.CollaborationModule.service;
+package com.batch5.Create_Task_Application.collaborationModule.service;
 
-import com.batch5.Create_Task_Application.CollaborationModule.dto.CommentRequestDTO;
-import com.batch5.Create_Task_Application.CollaborationModule.dto.CommentResponseDTO;
-import com.batch5.Create_Task_Application.CollaborationModule.entity.Comment;
-import com.batch5.Create_Task_Application.CollaborationModule.repository.CommentRepository;
-import com.batch5.Create_Task_Application.TaskModule.entity.Task;
-import com.batch5.Create_Task_Application.TaskModule.exceptions.TaskNotFoundException;
-import com.batch5.Create_Task_Application.TaskModule.repository.TaskRepository;
-import com.batch5.Create_Task_Application.UserModule.entity.User;
-import com.batch5.Create_Task_Application.UserModule.exceptions.UserNotFoundException;
-import com.batch5.Create_Task_Application.UserModule.repository.UserRepository;
+import com.batch5.Create_Task_Application.collaborationModule.dto.CommentRequestDTO;
+import com.batch5.Create_Task_Application.collaborationModule.dto.CommentResponseDTO;
+import com.batch5.Create_Task_Application.collaborationModule.entity.Comment;
+import com.batch5.Create_Task_Application.collaborationModule.repository.CommentRepository;
+import com.batch5.Create_Task_Application.taskModule.entity.Task;
+import com.batch5.Create_Task_Application.taskModule.exceptions.TaskNotFoundException;
+import com.batch5.Create_Task_Application.taskModule.repository.TaskRepository;
+import com.batch5.Create_Task_Application.userModule.entity.User;
+import com.batch5.Create_Task_Application.userModule.exceptions.UserNotFoundException;
+import com.batch5.Create_Task_Application.userModule.repository.UserRepository;
 import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.batch5.Create_Task_Application.CollaborationModule.exceptions.*;
+import com.batch5.Create_Task_Application.collaborationModule.exceptions.*;
 
 import java.time.LocalDateTime;
 import java.util.List;

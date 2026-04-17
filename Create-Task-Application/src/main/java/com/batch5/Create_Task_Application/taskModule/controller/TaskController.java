@@ -1,0 +1,42 @@
+package com.batch5.Create_Task_Application.taskModule.controller;
+
+import com.batch5.Create_Task_Application.taskModule.dto.TaskDTO;
+import com.batch5.Create_Task_Application.taskModule.entity.Task;
+import com.batch5.Create_Task_Application.taskModule.service.TaskServiceImple;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/tasks")
+
+public class TaskController {
+    @Autowired
+    TaskServiceImple taskService;
+
+    @PostMapping
+    public Task createTask(@RequestBody Task task){
+        return taskService.saveTask(task);
+    }
+
+    @GetMapping("/{taskId}")
+    public Task displayTask(@PathVariable Integer taskId){
+        return taskService.getTask(taskId);
+    }
+
+    @GetMapping()
+    public List<Task> getAll(){
+        return taskService.getAllTask();
+    }
+
+    @DeleteMapping("/{taskId}")
+    public void deleteTasks(@PathVariable Integer taskId){
+        taskService.deleteTask(taskId);
+        System.out.println("The task is deleted");
+    }
+    @PutMapping("/{taskId}")
+    public Task updateTasks(@PathVariable Integer taskId,@RequestBody TaskDTO dto){
+        return taskService.updateTask(taskId, dto);
+    }
+}

@@ -1,4 +1,4 @@
-package com.batch5.Create_Task_Application.CollaborationModule.exceptions;
+package com.batch5.Create_Task_Application.collaborationModule.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {

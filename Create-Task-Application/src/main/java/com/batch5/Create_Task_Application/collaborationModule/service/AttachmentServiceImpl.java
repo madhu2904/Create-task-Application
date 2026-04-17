@@ -1,16 +1,16 @@
-package com.batch5.Create_Task_Application.CollaborationModule.service;
+package com.batch5.Create_Task_Application.collaborationModule.service;
 
-import com.batch5.Create_Task_Application.CollaborationModule.dto.AttachmentRequestDTO;
-import com.batch5.Create_Task_Application.CollaborationModule.dto.AttachmentResponseDTO;
-import com.batch5.Create_Task_Application.CollaborationModule.entity.Attachment;
-import com.batch5.Create_Task_Application.CollaborationModule.repository.AttachmentRepository;
-import com.batch5.Create_Task_Application.TaskModule.entity.Task;
-import com.batch5.Create_Task_Application.TaskModule.exceptions.TaskNotFoundException;
-import com.batch5.Create_Task_Application.TaskModule.repository.TaskRepository;
+import com.batch5.Create_Task_Application.collaborationModule.dto.AttachmentRequestDTO;
+import com.batch5.Create_Task_Application.collaborationModule.dto.AttachmentResponseDTO;
+import com.batch5.Create_Task_Application.collaborationModule.entity.Attachment;
+import com.batch5.Create_Task_Application.collaborationModule.repository.AttachmentRepository;
+import com.batch5.Create_Task_Application.taskModule.entity.Task;
+import com.batch5.Create_Task_Application.taskModule.exceptions.TaskNotFoundException;
+import com.batch5.Create_Task_Application.taskModule.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.batch5.Create_Task_Application.CollaborationModule.exceptions.AttachmentNotFoundException;
+import com.batch5.Create_Task_Application.collaborationModule.exceptions.AttachmentNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;

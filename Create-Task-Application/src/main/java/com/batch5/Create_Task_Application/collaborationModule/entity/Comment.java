@@ -1,15 +1,14 @@
-package com.batch5.Create_Task_Application.CollaborationModule.entity;
+package com.batch5.Create_Task_Application.collaborationModule.entity;
 
 
-import com.batch5.Create_Task_Application.TaskModule.entity.Task;
-import com.batch5.Create_Task_Application.UserModule.entity.User;
+import com.batch5.Create_Task_Application.taskModule.entity.Task;
+import com.batch5.Create_Task_Application.userModule.entity.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "comment")

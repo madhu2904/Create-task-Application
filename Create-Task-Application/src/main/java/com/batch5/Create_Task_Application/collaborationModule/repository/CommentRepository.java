@@ -1,6 +1,6 @@
-package com.batch5.Create_Task_Application.CollaborationModule.repository;
+package com.batch5.Create_Task_Application.collaborationModule.repository;
 
-import com.batch5.Create_Task_Application.CollaborationModule.entity.Comment;
+import com.batch5.Create_Task_Application.collaborationModule.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

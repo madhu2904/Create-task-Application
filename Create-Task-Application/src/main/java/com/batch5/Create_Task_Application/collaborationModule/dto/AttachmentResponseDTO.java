@@ -1,10 +1,7 @@
-package com.batch5.Create_Task_Application.CollaborationModule.dto;
+package com.batch5.Create_Task_Application.collaborationModule.dto;
 
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 @Builder
 public class AttachmentResponseDTO {
 

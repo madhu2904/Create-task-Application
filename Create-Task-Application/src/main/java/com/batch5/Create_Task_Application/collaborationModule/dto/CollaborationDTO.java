@@ -1,7 +1,6 @@
-package com.batch5.Create_Task_Application.CollaborationModule.dto;
+package com.batch5.Create_Task_Application.collaborationModule.dto;
 
 import java.time.LocalDateTime;
-import org.springframework.http.HttpStatus;
 
 public class CollaborationDTO<T> {
 
