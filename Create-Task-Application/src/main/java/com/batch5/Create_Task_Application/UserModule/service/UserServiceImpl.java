@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
         // Duplicate User Check
         if (userRepository.existsByUsername(user.getUsername())) {
-            throw new UserAlreadyExistsException("Username already exists: " + user.getUsername());
+            throw new UserAlreadyExistsException(user.getUsername());
         }
 
         return userRepository.save(user);
