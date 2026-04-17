@@ -5,11 +5,15 @@ import com.batch5.Create_Task_Application.CollaborationModule.dto.CommentRespons
 import com.batch5.Create_Task_Application.CollaborationModule.entity.Comment;
 import com.batch5.Create_Task_Application.CollaborationModule.repository.CommentRepository;
 import com.batch5.Create_Task_Application.TaskModule.entity.Task;
+import com.batch5.Create_Task_Application.TaskModule.exceptions.TaskNotFoundException;
 import com.batch5.Create_Task_Application.TaskModule.repository.TaskRepository;
 import com.batch5.Create_Task_Application.UserModule.entity.User;
+import com.batch5.Create_Task_Application.UserModule.exceptions.UserNotFoundException;
 import com.batch5.Create_Task_Application.UserModule.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.batch5.Create_Task_Application.CollaborationModule.exceptions.CommentNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,10 +34,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentResponseDTO addComment(Integer taskId, CommentRequestDTO dto) {
         Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new RuntimeException("Task not found with id: " + taskId));
+                .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + taskId));
 
         User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + dto.getUserId()));
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + dto.getUserId()));
 
         Comment comment = Comment.builder()
                 .text(dto.getText())
@@ -49,14 +53,14 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentResponseDTO> getTaskComments(Integer taskId) {
-        List<Comment> comments = commentRepository.findByTask_TaskIdOrderByCreatedAtDesc(taskId);
+        List<Comment> comments = commentRepository.findCommentsByTaskIdOrderByDate(taskId);
         return comments.stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     @Override
     public void deleteComment(Integer commentId) {
         if (!commentRepository.existsById(commentId)) {
-            throw new RuntimeException("Comment not found with id: " + commentId);
+            throw new CommentNotFoundException("Comment not found with id: " + commentId);
         }
         commentRepository.deleteById(commentId);
     }

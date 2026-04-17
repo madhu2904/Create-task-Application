@@ -2,6 +2,7 @@ package com.batch5.Create_Task_Application.ProjectModule.entity;
 
 import com.batch5.Create_Task_Application.TaskModule.entity.Task;
 import com.batch5.Create_Task_Application.UserModule.entity.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -47,5 +48,6 @@ public class Project {
 
     //one project -> many task
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Task> tasks;
 }

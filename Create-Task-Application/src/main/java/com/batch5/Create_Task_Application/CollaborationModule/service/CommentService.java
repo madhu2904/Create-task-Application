@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface CommentService {
     CommentResponseDTO addComment(Integer taskId, CommentRequestDTO dto);
+
     List<CommentResponseDTO> getTaskComments(Integer taskId);
+
     void deleteComment(Integer commentId);
 }

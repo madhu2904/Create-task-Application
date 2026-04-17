@@ -5,9 +5,12 @@ import com.batch5.Create_Task_Application.CollaborationModule.dto.AttachmentResp
 import com.batch5.Create_Task_Application.CollaborationModule.entity.Attachment;
 import com.batch5.Create_Task_Application.CollaborationModule.repository.AttachmentRepository;
 import com.batch5.Create_Task_Application.TaskModule.entity.Task;
+import com.batch5.Create_Task_Application.TaskModule.exceptions.TaskNotFoundException;
 import com.batch5.Create_Task_Application.TaskModule.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.batch5.Create_Task_Application.CollaborationModule.exceptions.AttachmentNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +27,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     @Override
     public AttachmentResponseDTO uploadAttachment(Integer taskId, AttachmentRequestDTO dto) {
         Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new RuntimeException("Task not found with id: " + taskId));
+                .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + taskId));
 
         Attachment attachment = Attachment.builder()
                 .fileName(dto.getFileName())
@@ -46,7 +49,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     @Override
     public void deleteAttachment(Integer attachmentId) {
         if (!attachmentRepository.existsById(attachmentId)) {
-            throw new RuntimeException("Attachment not found with id: " + attachmentId);
+            throw new AttachmentNotFoundException("Attachment not found with id: " + attachmentId);
         }
         attachmentRepository.deleteById(attachmentId);
     }
