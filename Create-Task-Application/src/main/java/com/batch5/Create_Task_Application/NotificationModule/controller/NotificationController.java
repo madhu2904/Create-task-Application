@@ -4,7 +4,6 @@ import com.batch5.Create_Task_Application.NotificationModule.dto.GetNotification
 import com.batch5.Create_Task_Application.NotificationModule.dto.NotificationRequestDto;
 import com.batch5.Create_Task_Application.NotificationModule.dto.NotificationResponseDto;
 import com.batch5.Create_Task_Application.NotificationModule.dto.ResponseStructureDto;
-import com.batch5.Create_Task_Application.NotificationModule.entity.Notification;
 import com.batch5.Create_Task_Application.NotificationModule.service.NotificationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class NotificationController {
     private NotificationService notificationService;
 
     @PostMapping
-    public ResponseStructureDto addNotification(@Valid @RequestBody NotificationRequestDto dto) {
+    public ResponseEntity addNotification(@Valid @RequestBody NotificationRequestDto dto) {
         NotificationResponseDto response = notificationService.addNotification(dto);
         ResponseStructureDto<NotificationResponseDto> responseStructure=new ResponseStructureDto(
                 HttpStatus.CREATED.value(),
@@ -33,11 +32,11 @@ public class NotificationController {
                 LocalDateTime.now()
 
         );
-        return responseStructure;
+        return new ResponseEntity<>(responseStructure, HttpStatus.CREATED);
     }
 
     @GetMapping("/{notificationId}")
-    public ResponseStructureDto getNotification(@PathVariable int notificationId)
+    public ResponseEntity getNotification(@PathVariable int notificationId)
     {
         NotificationResponseDto response =notificationService.getNotificationById(notificationId);
         ResponseStructureDto<NotificationResponseDto> responseStructure=new ResponseStructureDto(
@@ -47,11 +46,12 @@ public class NotificationController {
                 LocalDateTime.now()
 
         );
-        return responseStructure;
+        return new ResponseEntity<>(responseStructure, HttpStatus.OK);
+
     }
 
     @GetMapping("/users/{userId}/notifications")
-    public ResponseStructureDto getNotification(@PathVariable long userId)
+    public  ResponseEntity getNotification(@PathVariable long userId)
     {
         List<GetNotificationsResponseDto> response=notificationService.getNotificationsByUserId(userId);
         ResponseStructureDto<List<GetNotificationsResponseDto>> responseStructure=new ResponseStructureDto(
@@ -61,7 +61,8 @@ public class NotificationController {
                 LocalDateTime.now()
 
         );
-        return responseStructure;
+        return new ResponseEntity<>(responseStructure, HttpStatus.OK);
+
     }
 
     @DeleteMapping("/{notificationId}")
@@ -69,7 +70,7 @@ public class NotificationController {
 
         notificationService.deleteNotificationById(notificationId);
 
-        ResponseStructureDto<String> response =
+        ResponseStructureDto<String> responseStructure =
                 new ResponseStructureDto<>(
                         HttpStatus.OK.value(),
                         "Notification deleted successfully",
@@ -77,11 +78,11 @@ public class NotificationController {
                         LocalDateTime.now()
                 );
 
-        return ResponseEntity.ok(response);
+        return new ResponseEntity<>(responseStructure, HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}/notifications/unread")
-    public ResponseStructureDto getUnreadNotifications(@PathVariable long userId)
+    public ResponseEntity getUnreadNotifications(@PathVariable long userId)
     {
 
         List<GetNotificationsResponseDto> response=notificationService.getUnreadNotificationsByUserId(userId);
@@ -92,15 +93,15 @@ public class NotificationController {
                 LocalDateTime.now()
 
         );
-        return responseStructure;
+        return new ResponseEntity<>(responseStructure, HttpStatus.OK);
 
     }
 
     @PutMapping("/{notificationId}/read")
-    public ResponseStructureDto markNotificationAsRead(@PathVariable int notificationId)
+    public ResponseEntity markNotificationAsRead(@PathVariable int notificationId)
     {
         notificationService.markNotificationAsRead(notificationId);
-        ResponseStructureDto<String> response =
+        ResponseStructureDto<String> responseStructure =
                 new ResponseStructureDto<>(
                         HttpStatus.OK.value(),
                         "Marked Notification As read Successfully",
@@ -108,6 +109,6 @@ public class NotificationController {
                         LocalDateTime.now()
                 );
 
-        return response;
+        return new ResponseEntity<>(responseStructure, HttpStatus.OK);
     }
 }
