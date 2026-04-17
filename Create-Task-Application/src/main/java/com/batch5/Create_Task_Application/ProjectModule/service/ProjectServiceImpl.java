@@ -60,7 +60,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<ProjectResponseDto> getProjectsByUser(Integer userId) {
+    public List<ProjectResponseDto> getProjectsByUser(Long userId) {
 
         userRepository.findById(userId.longValue())
                 .orElseThrow(() -> new UserNotFoundException(userId.longValue()));

@@ -47,7 +47,7 @@ public class ProjectController {
     // GET /api/projects/user/{userId}
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<ProjectResponseDto>> getProjectsByUser(
-            @PathVariable Integer userId) {
+            @PathVariable Long userId) {
 
         List<ProjectResponseDto> response = projectService.getProjectsByUser(userId);
         return ResponseEntity.ok(response);

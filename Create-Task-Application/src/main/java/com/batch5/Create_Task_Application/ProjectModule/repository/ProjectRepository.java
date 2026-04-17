@@ -11,7 +11,7 @@ import java.util.List;
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
     // get all projects of a specific user
-    List<Project> findByUserUserId(Integer userId);
+    List<Project> findByUserUserId(Long userId);
 
     // search projects by name
     List<Project> findByProjectNameContainingIgnoreCase(String keyword);
