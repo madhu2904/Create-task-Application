@@ -1,4 +1,4 @@
-package com.batch5.Create_Task_Application.UserModule.dto;
+package com.batch5.Create_Task_Application.userModule.dto;
 
 import java.time.LocalDateTime;
 
