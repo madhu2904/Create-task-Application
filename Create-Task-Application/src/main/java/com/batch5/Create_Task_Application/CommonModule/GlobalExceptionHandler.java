@@ -15,13 +15,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    //Not Found (404)
+    // 404 - Not Found
     @ExceptionHandler({
             UserNotFoundException.class,
             TaskNotFoundException.class,
@@ -34,21 +33,11 @@ public class GlobalExceptionHandler {
             ProjectNotFoundException.class,
             ProjectSearchException.class
     })
-    public ResponseEntity<ErrorResponse> handleNotFound(RuntimeException ex) {
+    public ResponseEntity<ApiResponse<Object>> handleNotFound(RuntimeException ex) {
         return build(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ErrorResponse> handleJsonParseError(HttpMessageNotReadableException ex) {
-
-        return build(
-                HttpStatus.BAD_REQUEST,
-                "Malformed JSON request. Please check your input."
-        );
-    }
-
-
-    // Bad Request (400)
+    // 400 - Bad Request
     @ExceptionHandler({
             InvalidUserDataException.class,
             InvalidTaskException.class,
@@ -57,25 +46,30 @@ public class GlobalExceptionHandler {
             IllegalArgumentException.class,
             AttachmentStorageException.class
     })
-    public ResponseEntity<ErrorResponse> handleBadRequest(RuntimeException ex) {
+    public ResponseEntity<ApiResponse<Object>> handleBadRequest(RuntimeException ex) {
         return build(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
-    // Conflict (409)
+    // 400 - Malformed JSON
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiResponse<Object>> handleJsonParseError(HttpMessageNotReadableException ex) {
+        return build(HttpStatus.BAD_REQUEST, "Malformed JSON request. Please check your input.");
+    }
+
+    // 409 - Conflict
     @ExceptionHandler({
             UserAlreadyExistsException.class,
             DataConflictException.class,
             CategoryAlreadyAssignedException.class,
             DataIntegrityViolationException.class
     })
-    public ResponseEntity<ErrorResponse> handleConflict(Exception ex) {
+    public ResponseEntity<ApiResponse<Object>> handleConflict(Exception ex) {
         return build(HttpStatus.CONFLICT, ex.getMessage());
     }
 
-
-    // Validation (400)
+    // 400 - Validation
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ApiResponse<Object>> handleValidation(MethodArgumentNotValidException ex) {
 
         String errors = ex.getBindingResult().getFieldErrors()
                 .stream()
@@ -85,31 +79,25 @@ public class GlobalExceptionHandler {
         return build(HttpStatus.BAD_REQUEST, errors);
     }
 
-    // Type Mismatch (400)
+    // 400 - Type Mismatch
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<ErrorResponse> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
-
+    public ResponseEntity<ApiResponse<Object>> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
         String message = "Invalid value '" + ex.getValue() +
                 "' for parameter '" + ex.getName() + "'";
-
         return build(HttpStatus.BAD_REQUEST, message);
     }
 
-    // Global Error (500)
-
+    // 500 - Internal Server Error
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGlobal(Exception ex) {
+    public ResponseEntity<ApiResponse<Object>> handleGlobal(Exception ex) {
         return build(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
-    // Builder Method
-    private ResponseEntity<ErrorResponse> build(HttpStatus status, String message) {
-
-        ErrorResponse error = new ErrorResponse(
-                status.value(),
-                message
+    // Common builder
+    private ResponseEntity<ApiResponse<Object>> build(HttpStatus status, String message) {
+        return new ResponseEntity<>(
+                new ApiResponse<>(status.value(), message, null),
+                status
         );
-
-        return new ResponseEntity<>(error, status);
     }
 }

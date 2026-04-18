@@ -1,6 +1,6 @@
 package com.batch5.Create_Task_Application.ProjectModule.controller;
 
-import com.batch5.Create_Task_Application.ProjectModule.dto.ApiResponse;
+import com.batch5.Create_Task_Application.CommonModule.ApiResponse;
 import com.batch5.Create_Task_Application.ProjectModule.dto.ProjectRequestDto;
 import com.batch5.Create_Task_Application.ProjectModule.dto.ProjectResponseDto;
 import com.batch5.Create_Task_Application.ProjectModule.service.ProjectService;
