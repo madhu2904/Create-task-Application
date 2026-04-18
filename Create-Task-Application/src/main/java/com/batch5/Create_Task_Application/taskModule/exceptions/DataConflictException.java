@@ -1,6 +1,8 @@
 package com.batch5.Create_Task_Application.taskModule.exceptions;
 
-public class DataConflictException extends RuntimeException{
+import com.batch5.Create_Task_Application.commonModule.exceptions.ConflictException;
+
+public class DataConflictException extends ConflictException {
     public DataConflictException(String msg){
         super(msg);
     }
