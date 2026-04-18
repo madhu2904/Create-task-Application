@@ -2,6 +2,7 @@ package com.batch5.Create_Task_Application.taskModule.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import com.batch5.Create_Task_Application.taskModule.entity.Task;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
