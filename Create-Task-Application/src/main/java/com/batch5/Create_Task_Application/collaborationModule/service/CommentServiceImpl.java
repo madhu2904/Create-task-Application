@@ -74,7 +74,7 @@ public class CommentServiceImpl implements CommentService {
             throw new TaskNotFoundException("Task not found with id: " + taskId);
         }
 
-        List<Comment> comments = commentRepository.findCommentsByTaskIdOrderByDate(taskId);
+        List<Comment> comments = commentRepository.findCommentsByTaskId_OrderByDate(taskId);
 
         return comments.stream()
                 .map(this::mapToDTO)

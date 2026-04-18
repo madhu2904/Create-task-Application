@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="21406554-0ae8-41df-9233-30896e4a0660" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/test/java/com/batch5/Create_Task_Application/collaborationModule/AttachmentRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/test/java/com/batch5/Create_Task_Application/collaborationModule/AttachmentServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/test/java/com/batch5/Create_Task_Application/collaborationModule/CommentRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/test/java/com/batch5/Create_Task_Application/collaborationModule/CommentServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/controller/AttachmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/controller/AttachmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/controller/CommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/dto/CollaborationDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/repository/AttachmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/repository/AttachmentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/repository/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/repository/CommentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/service/CommentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/service/CommentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/taskModule/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/taskModule/entity/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/AttachmentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/AttachmentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/CommentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/CommentController.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Exception" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="3CTV3JKZJbEjvZBVXTk4154pldf" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;JUnit.ProjectRepositoryTest (1).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProjectRepositoryTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProjectRepositoryTest.shouldDeleteProject.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.CreateTaskApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev__navya&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JAVA&quot;
+    ]
+  }
+}</component>
+  <component name="RunManager" selected="JUnit.ProjectRepositoryTest">
+    <configuration name="ProjectRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Create-Task-Application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.batch5.Create_Task_Application.projectModule.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="PACKAGE_NAME" value="com.batch5.Create_Task_Application.projectModule" />
+      <option name="MAIN_CLASS_NAME" value="com.batch5.Create_Task_Application.projectModule.ProjectRepositoryTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProjectRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Create-Task-Application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.batch5.Create_Task_Application.ProjectModule.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.batch5.Create_Task_Application.ProjectModule" />
+      <option name="MAIN_CLASS_NAME" value="com.batch5.Create_Task_Application.ProjectModule.ProjectRepositoryTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProjectRepositoryTest.shouldDeleteProject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Create-Task-Application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.batch5.Create_Task_Application.projectModule.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="PACKAGE_NAME" value="com.batch5.Create_Task_Application.projectModule" />
+      <option name="MAIN_CLASS_NAME" value="com.batch5.Create_Task_Application.projectModule.ProjectRepositoryTest" />
+      <option name="METHOD_NAME" value="shouldDeleteProject" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ProjectRepositoryTest" />
+        <item itemvalue="JUnit.ProjectRepositoryTest.shouldDeleteProject" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="21406554-0ae8-41df-9233-30896e4a0660" name="Changes" comment="" />
+      <created>1776409354103</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1776409354103</updated>
+    </task>
+    <servers />
+  </component>
+</project>

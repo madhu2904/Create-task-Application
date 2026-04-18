@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface AttachmentRepository extends JpaRepository<Attachment, Integer> {
 
-    // Alternative: find by Task ID directly
+    //  find by Task ID directly
     List<Attachment> findByTask_TaskId(Integer taskId);
 
 }
