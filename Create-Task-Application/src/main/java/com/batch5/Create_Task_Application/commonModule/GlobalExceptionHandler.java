@@ -1,10 +1,8 @@
 package com.batch5.Create_Task_Application.commonModule;
 
-import com.batch5.Create_Task_Application.collaborationModule.exceptions.*;
-import com.batch5.Create_Task_Application.notificationModule.exceptions.*;
-import com.batch5.Create_Task_Application.projectModule.exceptions.*;
-import com.batch5.Create_Task_Application.taskModule.exceptions.*;
-import com.batch5.Create_Task_Application.userModule.exceptions.*;
+import com.batch5.Create_Task_Application.commonModule.exceptions.BadRequestException;
+import com.batch5.Create_Task_Application.commonModule.exceptions.ConflictException;
+import com.batch5.Create_Task_Application.commonModule.exceptions.NotFoundException;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -21,31 +19,13 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     // 404 - Not Found
-    @ExceptionHandler({
-            UserNotFoundException.class,
-            TaskNotFoundException.class,
-            NotificationNotFoundException.class,
-            ResourceNotFoundException.class,
-            AttachmentNotFoundException.class,
-            CommentNotFoundException.class,
-            CategoryNotFoundException.class,
-            NoDataFoundException.class,
-            ProjectNotFoundException.class,
-            ProjectSearchException.class
-    })
+    @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ApiResponse<Object>> handleNotFound(RuntimeException ex) {
         return build(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
     // 400 - Bad Request
-    @ExceptionHandler({
-            InvalidUserDataException.class,
-            InvalidTaskException.class,
-            InvalidCategoryException.class,
-            CategoryNotMappedException.class,
-            IllegalArgumentException.class,
-            AttachmentStorageException.class
-    })
+    @ExceptionHandler({BadRequestException.class, IllegalArgumentException.class})
     public ResponseEntity<ApiResponse<Object>> handleBadRequest(RuntimeException ex) {
         return build(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
@@ -57,12 +37,7 @@ public class GlobalExceptionHandler {
     }
 
     // 409 - Conflict
-    @ExceptionHandler({
-            UserAlreadyExistsException.class,
-            DataConflictException.class,
-            CategoryAlreadyAssignedException.class,
-            DataIntegrityViolationException.class
-    })
+    @ExceptionHandler({ConflictException.class,DataIntegrityViolationException.class})
     public ResponseEntity<ApiResponse<Object>> handleConflict(Exception ex) {
         return build(HttpStatus.CONFLICT, ex.getMessage());
     }
