@@ -1,6 +1,8 @@
 package com.batch5.Create_Task_Application.userModule.exceptions;
 
-public class RoleNotFoundException extends AppException {
+import com.batch5.Create_Task_Application.commonModule.exceptions.NotFoundException;
+
+public class RoleNotFoundException extends NotFoundException {
     public RoleNotFoundException(Integer id) {
         super("Role not found with ID: " + id, 404);
     }
