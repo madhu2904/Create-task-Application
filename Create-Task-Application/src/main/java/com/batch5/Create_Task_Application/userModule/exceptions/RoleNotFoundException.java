@@ -4,9 +4,9 @@ import com.batch5.Create_Task_Application.commonModule.exceptions.NotFoundExcept
 
 public class RoleNotFoundException extends NotFoundException {
     public RoleNotFoundException(Integer id) {
-        super("Role not found with ID: " + id, 404);
+        super("Role not found with ID: " + id);
     }
     public RoleNotFoundException(String roleName) {
-        super("Role not found with name: " + roleName, 404);
+        super("Role not found with name: " + roleName);
     }
 }
