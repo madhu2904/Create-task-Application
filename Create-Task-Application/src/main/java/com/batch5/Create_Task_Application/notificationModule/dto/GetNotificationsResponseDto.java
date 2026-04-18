@@ -9,7 +9,6 @@ public class GetNotificationsResponseDto {
     private LocalDateTime dateTime;
     private boolean isRead;
 
-
     public GetNotificationsResponseDto(int notificationId, String text, LocalDateTime dateTime) {
         this.notificationId = notificationId;
         this.text = text;
@@ -23,7 +22,6 @@ public class GetNotificationsResponseDto {
         this.dateTime = dateTime;
         this.isRead = isRead;
     }
-
 
 
     public int getNotificationId() {
