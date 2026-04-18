@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import com.batch5.Create_Task_Application.userModule.entity.User;
+import lombok.Builder;
 
 import java.util.List;
 
 @Entity
 @Table(name = "user_role")
+@Builder
 public class UserRole {
 
     @Id
