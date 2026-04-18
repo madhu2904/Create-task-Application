@@ -1,7 +1,9 @@
 package com.batch5.Create_Task_Application.userModule.exceptions;
 
-public class UserAlreadyExistsException extends AppException {
+import com.batch5.Create_Task_Application.commonModule.exceptions.ConflictException;
+
+public class UserAlreadyExistsException extends ConflictException {
     public UserAlreadyExistsException(String username) {
-        super("User already exists with username: " + username, 409);
+        super("User already exists with username: " + username);
     }
 }
