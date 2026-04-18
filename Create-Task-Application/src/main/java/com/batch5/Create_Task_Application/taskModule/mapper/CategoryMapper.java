@@ -1,4 +1,4 @@
-package com.batch5.Create_Task_Application.taskModule.Mapper;
+package com.batch5.Create_Task_Application.taskModule.mapper;
 
 import com.batch5.Create_Task_Application.taskModule.dto.CategoryResponseDTO;
 import com.batch5.Create_Task_Application.taskModule.entity.Category;

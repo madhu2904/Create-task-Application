@@ -21,7 +21,7 @@ public interface TaskService {
 
     List<TaskResponseDTO> getTaskByProjectId(Integer projectId);
 
-    List<TaskResponseDTO> getTaskByUserId(Integer userId);
+    List<TaskResponseDTO> getTaskByUserId(Long userId);
 
     List<TaskResponseDTO> getTaskByStatus(String status);
 
