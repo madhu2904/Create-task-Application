@@ -1,6 +1,6 @@
 package com.batch5.Create_Task_Application.userModule.controller;
 
-import com.batch5.Create_Task_Application.userModule.dto.ApiResponse;
+import com.batch5.Create_Task_Application.commonModule.ApiResponse;
 import com.batch5.Create_Task_Application.userModule.dto.UserRoleResponseDTO;
 import com.batch5.Create_Task_Application.userModule.entity.UserRole;
 import com.batch5.Create_Task_Application.userModule.service.UserRoleService;
