@@ -9,6 +9,12 @@ import java.time.LocalDateTime;
 
 public class TaskResponseDTO {
     private Integer taskId;
+    private String description;
+    private String priority;
+    private String status;
+    private LocalDateTime dueDate;
+    private Integer projectId;
+    private Integer userId;
 
     public TaskResponseDTO() {
     }
@@ -89,11 +95,4 @@ public class TaskResponseDTO {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
-
-    private String description;
-    private String priority;
-    private String status;
-    private LocalDateTime dueDate;
-    private Integer projectId;
-    private Integer userId;
 }

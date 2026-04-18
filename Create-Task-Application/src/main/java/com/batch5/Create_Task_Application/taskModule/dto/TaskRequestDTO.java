@@ -6,12 +6,17 @@ import java.time.LocalDateTime;
 
 
 public class TaskRequestDTO {
+    private String taskName;
+    private String description;
+    private String priority;
+    private String status;
+    private LocalDateTime dueDate;
+    private Integer projectId;
+    private Long userId;
+
     public TaskRequestDTO() {
     }
-
-    private String taskName;
-
-    public TaskRequestDTO(String taskName, String description, String priority, String status, LocalDateTime dueDate, Integer projectId, Integer userId) {
+    public TaskRequestDTO(String taskName, String description, String priority, String status, LocalDateTime dueDate, Integer projectId, Long userId) {
         this.taskName = taskName;
         this.description = description;
         this.priority = priority;
@@ -69,18 +74,11 @@ public class TaskRequestDTO {
         this.projectId = projectId;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
-
-    private String description;
-    private String priority;
-    private String status;
-    private LocalDateTime dueDate;
-    private Integer projectId;
-    private Integer userId;
 }
