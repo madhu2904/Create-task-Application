@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21406554-0ae8-41df-9233-30896e4a0660" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/test/java/com/batch5/Create_Task_Application/collaborationModule/AttachmentRepositoryTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/test/java/com/batch5/Create_Task_Application/collaborationModule/AttachmentServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/test/java/com/batch5/Create_Task_Application/collaborationModule/CommentRepositoryTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Create-Task-Application/src/test/java/com/batch5/Create_Task_Application/collaborationModule/CommentServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/controller/AttachmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/controller/AttachmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/controller/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/dto/CollaborationDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/repository/AttachmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/repository/AttachmentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/repository/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/repository/CommentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/service/CommentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/service/CommentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/taskModule/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/taskModule/entity/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/AttachmentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/AttachmentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/CommentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/CommentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
