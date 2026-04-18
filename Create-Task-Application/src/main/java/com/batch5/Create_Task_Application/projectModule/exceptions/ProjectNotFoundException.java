@@ -1,6 +1,8 @@
 package com.batch5.Create_Task_Application.projectModule.exceptions;
 
-public class ProjectNotFoundException extends RuntimeException {
+import com.batch5.Create_Task_Application.commonModule.exceptions.NotFoundException;
+
+public class ProjectNotFoundException extends NotFoundException {
 
     public ProjectNotFoundException(Integer projectId) {
         super("Project not found with id: " + projectId);
