@@ -14,12 +14,12 @@ public class TaskResponseDTO {
     private String status;
     private LocalDateTime dueDate;
     private Integer projectId;
-    private Integer userId;
+    private Long userId;
 
     public TaskResponseDTO() {
     }
 
-    public TaskResponseDTO(Integer taskId, String taskName, String description, String priority, String status, LocalDateTime dueDate, Integer projectId, Integer userId) {
+    public TaskResponseDTO(Integer taskId, String taskName, String description, String priority, String status, LocalDateTime dueDate, Integer projectId, Long userId) {
         this.taskId = taskId;
         this.taskName = taskName;
         this.description = description;
@@ -88,11 +88,11 @@ public class TaskResponseDTO {
         this.projectId = projectId;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 }
