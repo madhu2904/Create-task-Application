@@ -3,6 +3,7 @@ import com.batch5.Create_Task_Application.taskModule.entity.Task;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 
 @Entity
@@ -21,6 +22,7 @@ public class Attachment {
 
     @NotBlank(message = "File path cannot be empty")
     @Column(name = "FilePath", nullable = false)
+    @Pattern(regexp = ".*\\.(jpg|png|pdf)$", message = "Invalid file format")
     private String filePath;
 
     // Foreign Key Mapping (Many Attachments -> One Task)
