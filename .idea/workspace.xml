@@ -5,22 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21406554-0ae8-41df-9233-30896e4a0660" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CreateTaskApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/CreateTaskApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/entity/Attachment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/collaborationModule/entity/Attachment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/test/java/com/batch5/Create_Task_Application/collaborationModule/AttachmentRepositoryTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/test/java/com/batch5/Create_Task_Application/collaborationModule/AttachmentServiceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/test/java/com/batch5/Create_Task_Application/collaborationModule/CommentRepositoryTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/test/java/com/batch5/Create_Task_Application/collaborationModule/CommentServiceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/AttachmentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/AttachmentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/CommentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/controller/CommentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/dto/CommentRequestDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/dto/CommentRequestDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/entity/Attachment$AttachmentBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/entity/Attachment.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/entity/Attachment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/service/AttachmentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/service/AttachmentService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/service/AttachmentServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/service/CommentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/service/CommentService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CollaborationModule/service/CommentServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/target/classes/com/batch5/Create_Task_Application/CreateTaskApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
