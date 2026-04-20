@@ -1,7 +1,6 @@
-package com.batch5.Create_Task_Application.projectModule;
+package com.batch5.Create_Task_Application.projectModule.repository;
 
 import com.batch5.Create_Task_Application.projectModule.entity.Project;
-import com.batch5.Create_Task_Application.projectModule.repository.ProjectRepository;
 import com.batch5.Create_Task_Application.userModule.entity.User;
 import com.batch5.Create_Task_Application.userModule.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
