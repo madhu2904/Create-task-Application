@@ -27,7 +27,7 @@ public class CategoryController {
                 savedCategory
         );
 
-        return new ResponseEntity<>(response,HttpStatus.OK);
+        return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
 
     @GetMapping

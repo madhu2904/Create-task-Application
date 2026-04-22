@@ -14,6 +14,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
+                //cors
+                .cors(Customizer.withDefaults())
                 //  disable CSRF
                 .csrf(AbstractHttpConfigurer::disable)
 
