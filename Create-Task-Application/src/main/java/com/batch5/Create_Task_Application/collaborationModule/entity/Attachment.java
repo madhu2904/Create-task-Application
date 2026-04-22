@@ -22,7 +22,7 @@ public class Attachment {
 
     @NotBlank(message = "File path cannot be empty")
     @Column(name = "FilePath", nullable = false)
-    @Pattern(regexp = ".*\\.(jpg|png|pdf)$", message = "Invalid file format")
+    @Pattern(regexp = ".*\\.(jpg|png|pdf|doc|txt|xlsx|docx)$", message = "Invalid file format")
     private String filePath;
 
     // Foreign Key Mapping (Many Attachments -> One Task)
