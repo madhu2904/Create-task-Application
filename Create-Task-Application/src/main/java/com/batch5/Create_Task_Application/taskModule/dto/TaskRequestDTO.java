@@ -1,8 +1,7 @@
 package com.batch5.Create_Task_Application.taskModule.dto;
 
-import lombok.*;
-
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 public class TaskRequestDTO {
@@ -14,9 +13,19 @@ public class TaskRequestDTO {
     private Integer projectId;
     private Long userId;
 
+    public List<Integer> getCategoryIds() {
+        return categoryIds;
+    }
+
+    public void setCategoryIds(List<Integer> categoryIds) {
+        this.categoryIds = categoryIds;
+    }
+
+    private List<Integer> categoryIds;
+
     public TaskRequestDTO() {
     }
-    public TaskRequestDTO(String taskName, String description, String priority, String status, LocalDateTime dueDate, Integer projectId, Long userId) {
+    public TaskRequestDTO(String taskName, String description, String priority, String status, LocalDateTime dueDate, Integer projectId, Long userId,List<Integer> categoryIds) {
         this.taskName = taskName;
         this.description = description;
         this.priority = priority;
@@ -24,6 +33,7 @@ public class TaskRequestDTO {
         this.dueDate = dueDate;
         this.projectId = projectId;
         this.userId = userId;
+        this.categoryIds=categoryIds;
     }
 
     public String getTaskName() {

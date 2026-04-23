@@ -1,0 +1,63 @@
+<div class="min-h-screen bg-slate-50 px-6 py-10 text-slate-900 lg:px-10">
+  <div class="mx-auto max-w-6xl">
+    <a routerLink="/" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 hover:text-blue-800">
+      <span>&larr;</span>
+      <span>Back to modules</span>
+    </a>
+
+    @if (module; as selectedModule) {
+      <div class="mt-6 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+        <section class="rounded-[2rem] border border-blue-100 bg-gradient-to-br from-blue-700 via-blue-600 to-sky-500 p-8 text-white shadow-[0_20px_80px_-40px_rgba(37,99,235,0.55)]">
+          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-blue-100">{{ selectedModule.personName }}</p>
+          <h1 class="mt-4 text-4xl font-bold tracking-tight">{{ selectedModule.title }}</h1>
+          <p class="mt-4 max-w-xl text-base leading-7 text-blue-50">{{ selectedModule.description }}</p>
+        </section>
+
+        <section class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
+          <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Module Login</h2>
+          <p class="mt-2 text-sm leading-6 text-slate-600">Enter the Spring Security username and password for this module.</p>
+
+          <form class="mt-8 space-y-5" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div>
+              <label class="mb-2 block text-sm font-semibold text-slate-700" for="username">Username</label>
+              <input
+                id="username"
+                type="text"
+                formControlName="username"
+                class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                placeholder="Enter username"
+              />
+            </div>
+
+            <div>
+              <label class="mb-2 block text-sm font-semibold text-slate-700" for="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                formControlName="password"
+                class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                placeholder="Enter password"
+              />
+            </div>
+
+            @if (errorMessage) {
+              <div class="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                {{ errorMessage }}
+              </div>
+            }
+
+            <button
+              type="submit"
+              [disabled]="loginForm.invalid || isSubmitting"
+              class="w-full rounded-2xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
+            >
+              {{ isSubmitting ? 'Checking credentials...' : 'Login and View Endpoints' }}
+            </button>
+          </form>
+        </section>
+      </div>
+    } @else {
+      <div class="mt-8 rounded-3xl border border-red-200 bg-white p-8 text-red-700 shadow-sm">Invalid module selected.</div>
+    }
+  </div>
+</div>
