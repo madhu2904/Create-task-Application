@@ -69,7 +69,11 @@ public class TaskServiceImple implements TaskService {
         task.setDueDate(dto.getDueDate());
         task.setUser(user);
         task.setProject(project);
+        Set<Category> categories = new HashSet<>(
+                categoryRepository.findAllById(dto.getCategoryIds())
+        );
 
+        task.setCategories(categories);
         return taskRepository.save(task);
     }
 

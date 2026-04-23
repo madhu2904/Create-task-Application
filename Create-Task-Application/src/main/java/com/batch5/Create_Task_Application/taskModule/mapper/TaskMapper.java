@@ -20,6 +20,9 @@ public class TaskMapper {
         if(task.getProject() != null){
             dto.setProjectId(task.getProject().getProjectId());
         }
+        if(task.getUser() != null){
+            dto.setUserId(task.getUser().getUserId());
+        }
         return dto;
     }
 

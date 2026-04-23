@@ -26,11 +26,11 @@ public class TaskController {
         Task savedTask = taskService.saveTask(task);
         TaskResponseDTO response = TaskMapper.toDTO(savedTask);
         ApiResponse<TaskResponseDTO> r = new ApiResponse<>(
-                200,
+                201,
                 "Task saved successfully",
                 response
         );
-        return new ResponseEntity<>(r, HttpStatus.OK);
+        return new ResponseEntity<>(r, HttpStatus.CREATED);
     }
 
     @GetMapping("/{taskId}")
