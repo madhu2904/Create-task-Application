@@ -1,7 +1,7 @@
-package com.batch5.Create_Task_Application.CollaborationModule.service;
+package com.batch5.Create_Task_Application.collaborationModule.service;
 
-import com.batch5.Create_Task_Application.CollaborationModule.dto.AttachmentRequestDTO;
-import com.batch5.Create_Task_Application.CollaborationModule.dto.AttachmentResponseDTO;
+import com.batch5.Create_Task_Application.collaborationModule.dto.AttachmentRequestDTO;
+import com.batch5.Create_Task_Application.collaborationModule.dto.AttachmentResponseDTO;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.batch5.Create_Task_Application.CollaborationModule.dto;
+package com.batch5.Create_Task_Application.collaborationModule.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

@@ -1,11 +1,11 @@
-package com.batch5.Create_Task_Application.CollaborationModule.exceptions;
+package com.batch5.Create_Task_Application.collaborationModule.exceptions;
 
-public class AttachmentNotFoundException extends RuntimeException {
+import com.batch5.Create_Task_Application.commonModule.exceptions.NotFoundException;
+
+public class AttachmentNotFoundException extends NotFoundException {
     public AttachmentNotFoundException(String message) {
         super(message);
     }
 
-    public AttachmentNotFoundException(String message, Throwable cause) {
-        super(message, cause);
-    }
+
 }

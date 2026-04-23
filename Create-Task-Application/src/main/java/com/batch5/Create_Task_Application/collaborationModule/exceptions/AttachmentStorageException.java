@@ -1,11 +1,10 @@
-package com.batch5.Create_Task_Application.CollaborationModule.exceptions;
+package com.batch5.Create_Task_Application.collaborationModule.exceptions;
 
-public class AttachmentStorageException extends RuntimeException {
+import com.batch5.Create_Task_Application.commonModule.exceptions.BadRequestException;
+
+public class AttachmentStorageException extends BadRequestException {
     public AttachmentStorageException(String message) {
         super(message);
     }
 
-    public AttachmentStorageException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

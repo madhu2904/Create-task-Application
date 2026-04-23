@@ -1,7 +1,8 @@
-package com.batch5.Create_Task_Application.CollaborationModule.controller;
+package com.batch5.Create_Task_Application.collaborationModule.controller;
 
-import com.batch5.Create_Task_Application.CollaborationModule.dto.*;
-import com.batch5.Create_Task_Application.CollaborationModule.service.AttachmentService;
+import com.batch5.Create_Task_Application.collaborationModule.dto.*;
+import com.batch5.Create_Task_Application.commonModule.ApiResponse;
+import com.batch5.Create_Task_Application.collaborationModule.service.AttachmentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -18,7 +19,7 @@ public class AttachmentController {
 
     // To Create an Attachment
     @PostMapping("/tasks/{taskId}/attachments")
-    public ResponseEntity<CollaborationDTO<AttachmentResponseDTO>> uploadAttachment(
+    public ResponseEntity<ApiResponse<AttachmentResponseDTO>> uploadAttachment(
             @PathVariable Integer taskId,
             @Valid @RequestBody AttachmentRequestDTO dto) {
 
@@ -26,7 +27,7 @@ public class AttachmentController {
                 attachmentService.uploadAttachment(taskId, dto);
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new CollaborationDTO<>(
+                .body(new ApiResponse<>(
                         HttpStatus.CREATED.value(),
                         "Attachment uploaded successfully",
                         attachmentResponseDTO
@@ -35,14 +36,14 @@ public class AttachmentController {
 
     // To Read an Attachment
     @GetMapping("/tasks/{taskId}/attachments")
-    public ResponseEntity<CollaborationDTO<List<AttachmentResponseDTO>>> getTaskAttachments(
+    public ResponseEntity<ApiResponse<List<AttachmentResponseDTO>>> getTaskAttachments(
             @PathVariable Integer taskId) {
 
         List<AttachmentResponseDTO> attachmentResponseDTOList =
                 attachmentService.getTaskAttachments(taskId);
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body(new CollaborationDTO<>(
+                .body(new ApiResponse<>(
                         HttpStatus.OK.value(),
                         "Attachments fetched successfully",
                         attachmentResponseDTOList
@@ -51,12 +52,12 @@ public class AttachmentController {
 
     // To Delete an Attachment
     @DeleteMapping("/attachments/{attachmentId}")
-    public ResponseEntity<CollaborationDTO<Void>> deleteAttachment(
+    public ResponseEntity<ApiResponse<Void>> deleteAttachment(
             @PathVariable Integer attachmentId) {
         attachmentService.deleteAttachment(attachmentId);
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body(new CollaborationDTO<>(
+                .body(new ApiResponse<>(
                         HttpStatus.OK.value(),
                         "Attachment deleted successfully",
                         null

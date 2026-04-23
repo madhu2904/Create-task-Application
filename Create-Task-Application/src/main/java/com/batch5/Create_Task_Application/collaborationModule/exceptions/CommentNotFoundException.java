@@ -1,12 +1,12 @@
-package com.batch5.Create_Task_Application.CollaborationModule.exceptions;
+package com.batch5.Create_Task_Application.collaborationModule.exceptions;
 
-public class CommentNotFoundException extends RuntimeException {
+import com.batch5.Create_Task_Application.commonModule.exceptions.NotFoundException;
+import org.hibernate.annotations.NotFound;
+
+public class CommentNotFoundException extends NotFoundException {
     public CommentNotFoundException(String message) {
         super(message);
     }
 
-    public CommentNotFoundException(String message, Throwable cause) {
 
-        super(message, cause);
-    }
 }

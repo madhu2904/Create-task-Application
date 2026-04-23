@@ -1,12 +1,10 @@
-package com.batch5.Create_Task_Application.CollaborationModule.entity;
-import com.batch5.Create_Task_Application.TaskModule.entity.Task;
+package com.batch5.Create_Task_Application.collaborationModule.entity;
+import com.batch5.Create_Task_Application.taskModule.entity.Task;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
-
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "attachment")
@@ -24,6 +22,10 @@ public class Attachment {
 
     @NotBlank(message = "File path cannot be empty")
     @Column(name = "FilePath", nullable = false)
+    @Pattern(
+            regexp = "(?i).*?(\\.(jpg|png|pdf|txt|doc|docx|xlsx))?$",
+            message = "Invalid file format"
+    )
     private String filePath;
 
     // Foreign Key Mapping (Many Attachments -> One Task)
