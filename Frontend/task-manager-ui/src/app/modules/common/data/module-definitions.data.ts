@@ -11,7 +11,7 @@ export const modules: ModuleDefinition[] = [
     title: 'User Module',
     personName: 'Ilakiyaa',
     subtitle: 'Users and roles',
-    description: 'Covers user CRUD operations and user-role mapping endpoints.',
+    description: 'The User Module manages endpoints related to users and their assigned roles.',
     expectedAuthority: 'ROLE_USER_MODULE_DEV',
     validationPath: '/api/v1/users',
     endpoints: userEndpoints,
