@@ -9,9 +9,9 @@ export const taskEndpoints: EndpointDefinition[] = [
     path: '/api/v1/tasks',
     bodyFields: [
       { key: 'taskName', label: 'Task Name', type: 'text', required: true, placeholder: 'Build dashboard UI' },
-      { key: 'description', label: 'Description', type: 'textarea', placeholder: 'Task details' },
-      { key: 'priority', label: 'Priority', type: 'text', required: true, placeholder: 'HIGH' },
-      { key: 'status', label: 'Status', type: 'text', required: true, placeholder: 'OPEN' },
+      { key: 'description', label: 'Description', type: 'textarea', placeholder: 'Task Description must be more than 5 characters' },
+      { key: 'priority', label: 'Priority', type: 'text', required: true, placeholder: 'HIGH, LOW, MEDIUM' },
+      { key: 'status', label: 'Status', type: 'text', required: true, placeholder: 'TODO, IN_PROGRESS, DONE' },
       { key: 'dueDate', label: 'Due Date', type: 'datetime-local', required: true },
       { key: 'projectId', label: 'Project Id', type: 'number', required: true, placeholder: '1' },
       { key: 'userId', label: 'User Id', type: 'number', required: true, placeholder: '1' },

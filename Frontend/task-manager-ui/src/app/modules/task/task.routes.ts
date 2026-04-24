@@ -4,8 +4,7 @@ import { moduleAuthGuard } from '../common/guards/module-auth.guard';
 import { TaskDashboardComponent } from './pages/task-dashboard/task-dashboard.component';
 import { TaskEndpointComponent } from './pages/task-endpoint/task-endpoint.component';
 
-
-export const routes: Routes = [
+export const taskRoutes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
