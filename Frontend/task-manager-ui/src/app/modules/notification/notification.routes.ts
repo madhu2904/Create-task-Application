@@ -1,19 +1,27 @@
 import { Routes } from '@angular/router';
-import { NotificationList } from './components/notification-list/notification-list';
-import { NotificationDetail} from './components/notification-detail/notification-detail';
-import { NotificationCreate } from './components/notification-create/notification-create';
-import { NotificationUser} from './components/notification-user/notification-user';
-import { NotificationUnread } from './components/notification-unread/notification-unread';
-import { NotificationRead} from './components/notification-read/notification-read';
 
-export const NOTIFICATION_ROUTES: Routes = [
+import { moduleAuthGuard } from '../common/guards/module-auth.guard';
+import { NotificationDashboardComponent } from './pages/notification-dashboard/notification-dashboard.component';
+import { NotificationEndpointComponent } from './pages/notification-endpoint/notification-endpoint.component';
 
-  { path: '', redirectTo: 'list', pathMatch: 'full' },
-
-  { path: 'list', component: NotificationList },
-  { path: 'detail/:id', component: NotificationDetail },
-  { path: 'create', component: NotificationCreate },
-  { path: 'user/:userId', component: NotificationUser },
-  { path: 'unread/:userId', component: NotificationUnread},
-  { path: 'read/:id', component: NotificationRead }
+export const notificationRoutes: Routes = [
+  {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
+  },
+  {
+    path: 'dashboard',
+    component: NotificationDashboardComponent,
+    canActivate: [moduleAuthGuard],
+    data: { moduleKey: 'notification' },
+    title: 'Notification Dashboard',
+  },
+  {
+    path: ':endpointKey',
+    component: NotificationEndpointComponent,
+    canActivate: [moduleAuthGuard],
+    data: { moduleKey: 'notification' },
+    title: 'Notification Endpoint',
+  },
 ];
