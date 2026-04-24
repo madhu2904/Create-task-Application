@@ -20,7 +20,7 @@
         <div class="flex flex-col gap-2">
           @for (endpoint of module.endpoints; track endpoint.key) {
             <a
-              [routerLink]="['/user', getEndpointRoute(endpoint.key)]"
+              [routerLink]="['/notification', getEndpointRoute(endpoint.key)]"
               class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 transition hover:border-blue-300 hover:bg-blue-50"
             >
               <div class="flex items-center justify-between gap-2">

@@ -3,7 +3,7 @@
     <section class="flex min-h-screen flex-col lg:flex-row">
       <aside class="w-full border-b border-blue-100 bg-white lg:min-h-screen lg:w-80 lg:border-b-0 lg:border-r">
         <div class="border-b border-blue-100 bg-blue-600 px-5 py-5 text-white">
-          <a [routerLink]="['/user/dashboard']" class="text-sm font-semibold text-blue-100 transition hover:text-white">
+          <a [routerLink]="['/notification/dashboard']" class="text-sm font-semibold text-blue-100 transition hover:text-white">
             &larr; Endpoints
           </a>
           <p class="mt-4 text-xs font-semibold uppercase tracking-[0.22em] text-blue-100">{{ module.title }}</p>
@@ -16,7 +16,7 @@
           <div class="flex flex-col gap-2">
             @for (item of module.endpoints; track item.key) {
               <a
-                [routerLink]="['/user', getEndpointRoute(item.key)]"
+                [routerLink]="['/notification', getEndpointRoute(item.key)]"
                 class="rounded-xl border px-3 py-3 transition"
                 [class.border-blue-200]="item.key === endpoint.key"
                 [class.bg-blue-50]="item.key === endpoint.key"
@@ -120,176 +120,6 @@
                       }
                     </div>
                   }
-                </div>
-              </div>
-            }
-
-            @if (isCreateUser && roles.length) {
-              <div class="rounded-xl border border-slate-200 p-4">
-                <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Roles</h3>
-                <div class="relative mt-3">
-                  <button
-                    type="button"
-                    class="flex w-full items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-semibold text-slate-700 transition hover:border-blue-300"
-                    (click)="toggleRoleMenu('create')"
-                  >
-                    <span class="truncate">{{ getRoleMenuLabel('create') }}</span>
-                    <span class="text-xs text-slate-400">{{ openRoleMenu === 'create' ? 'Hide' : 'Choose' }}</span>
-                  </button>
-
-                  @if (openRoleMenu === 'create') {
-                    <div class="absolute z-20 mt-2 max-h-64 w-full overflow-y-auto rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
-                      @for (role of roles; track getRoleId(role)) {
-                        <button
-                          type="button"
-                          class="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-slate-700 transition hover:bg-blue-50"
-                          (click)="toggleRoleSelection('create', getRoleId(role))"
-                        >
-                          <span>{{ getRoleName(role) }}</span>
-                          @if (isRoleSelected('create', getRoleId(role))) {
-                            <span class="text-xs font-semibold text-blue-600">Selected</span>
-                          }
-                        </button>
-                      }
-                    </div>
-                  }
-                </div>
-
-                @if (selectedRoleIds.length) {
-                  <div class="mt-3 flex flex-wrap gap-2">
-                    @for (roleId of selectedRoleIds; track roleId) {
-                      <button
-                        type="button"
-                        class="rounded-full bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 transition hover:bg-blue-100"
-                        (click)="removeSelectedRole('create', roleId)"
-                      >
-                        {{ getRoleNameById(roleId, roles) }} ×
-                      </button>
-                    }
-                  </div>
-                }
-              </div>
-            }
-
-            @if (isUpdateUser && roles.length) {
-              <div class="rounded-xl border border-slate-200 p-4">
-                <div class="flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Role Management</h3>
-                    <p class="mt-2 text-sm text-slate-500">Load current roles, then choose which ones to add or remove during the update.</p>
-                  </div>
-                  <button
-                    type="button"
-                    class="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-300 hover:text-blue-700"
-                    (click)="loadUserRolesForEdit()"
-                  >
-                    Load Current Roles
-                  </button>
-                </div>
-
-                <div class="mt-4">
-                  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Current Roles</p>
-                  @if (existingUserRoles.length) {
-                    <div class="mt-3 flex flex-wrap gap-2">
-                      @for (role of existingUserRoles; track getRoleId(role)) {
-                        <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-700">{{ getRoleName(role) }}</span>
-                      }
-                    </div>
-                  } @else {
-                    <p class="mt-2 text-sm text-slate-400">No current roles loaded.</p>
-                  }
-                </div>
-
-                <div class="mt-5 grid gap-4 lg:grid-cols-2">
-                  <div>
-                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Assign Roles</p>
-                    <div class="relative mt-3">
-                      <button
-                        type="button"
-                        class="flex w-full items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-semibold text-slate-700 transition hover:border-blue-300"
-                        (click)="toggleRoleMenu('update-add')"
-                      >
-                        <span class="truncate">{{ getRoleMenuLabel('update-add') }}</span>
-                        <span class="text-xs text-slate-400">{{ openRoleMenu === 'update-add' ? 'Hide' : 'Choose' }}</span>
-                      </button>
-
-                      @if (openRoleMenu === 'update-add') {
-                        <div class="absolute z-20 mt-2 max-h-64 w-full overflow-y-auto rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
-                          @for (role of roles; track getRoleId(role)) {
-                            <button
-                              type="button"
-                              class="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-slate-700 transition hover:bg-blue-50"
-                              (click)="toggleRoleSelection('update-add', getRoleId(role))"
-                            >
-                              <span>{{ getRoleName(role) }}</span>
-                              @if (isRoleSelected('update-add', getRoleId(role))) {
-                                <span class="text-xs font-semibold text-blue-600">Selected</span>
-                              }
-                            </button>
-                          }
-                        </div>
-                      }
-                    </div>
-
-                    @if (rolesToAddIds.length) {
-                      <div class="mt-3 flex flex-wrap gap-2">
-                        @for (roleId of rolesToAddIds; track roleId) {
-                          <button
-                            type="button"
-                            class="rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700 transition hover:bg-emerald-100"
-                            (click)="removeSelectedRole('update-add', roleId)"
-                          >
-                            {{ getRoleNameById(roleId, roles) }} ×
-                          </button>
-                        }
-                      </div>
-                    }
-                  </div>
-
-                  <div>
-                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Remove Roles</p>
-                    <div class="relative mt-3">
-                      <button
-                        type="button"
-                        class="flex w-full items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-semibold text-slate-700 transition hover:border-blue-300"
-                        (click)="toggleRoleMenu('update-remove')"
-                      >
-                        <span class="truncate">{{ getRoleMenuLabel('update-remove') }}</span>
-                        <span class="text-xs text-slate-400">{{ openRoleMenu === 'update-remove' ? 'Hide' : 'Choose' }}</span>
-                      </button>
-
-                      @if (openRoleMenu === 'update-remove') {
-                        <div class="absolute z-20 mt-2 max-h-64 w-full overflow-y-auto rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
-                          @for (role of existingUserRoles; track getRoleId(role)) {
-                            <button
-                              type="button"
-                              class="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-slate-700 transition hover:bg-blue-50"
-                              (click)="toggleRoleSelection('update-remove', getRoleId(role))"
-                            >
-                              <span>{{ getRoleName(role) }}</span>
-                              @if (isRoleSelected('update-remove', getRoleId(role))) {
-                                <span class="text-xs font-semibold text-blue-600">Selected</span>
-                              }
-                            </button>
-                          }
-                        </div>
-                      }
-                    </div>
-
-                    @if (rolesToRemoveIds.length) {
-                      <div class="mt-3 flex flex-wrap gap-2">
-                        @for (roleId of rolesToRemoveIds; track roleId) {
-                          <button
-                            type="button"
-                            class="rounded-full bg-rose-50 px-3 py-1.5 text-xs font-semibold text-rose-700 transition hover:bg-rose-100"
-                            (click)="removeSelectedRole('update-remove', roleId)"
-                          >
-                            {{ getRoleNameById(roleId, existingUserRoles) }} ×
-                          </button>
-                        }
-                      </div>
-                    }
-                  </div>
                 </div>
               </div>
             }
