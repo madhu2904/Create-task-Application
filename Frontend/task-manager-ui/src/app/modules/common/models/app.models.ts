@@ -28,7 +28,6 @@ export interface ModuleDefinition {
   username?: string;
   passwordHint?: string;
   expectedAuthority: string;
-  validationPath: string;
   endpoints: EndpointDefinition[];
 }
 
@@ -43,7 +42,7 @@ export interface AuthVerificationResponse {
   username: string;
   authorities: string[];
 }
-
+//used to define the module devs roles 
 export interface Role {
   userRoleId?: number;
   roleId?: number;

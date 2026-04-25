@@ -2,6 +2,10 @@ package com.batch5.Create_Task_Application.taskModule.mapper;
 
 import com.batch5.Create_Task_Application.taskModule.dto.TaskResponseDTO;
 import com.batch5.Create_Task_Application.taskModule.entity.Task;
+import com.batch5.Create_Task_Application.taskModule.dto.CategoryResponseDTO;
+import com.batch5.Create_Task_Application.taskModule.mapper.CategoryMapper;
+
+import java.util.stream.Collectors;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +26,14 @@ public class TaskMapper {
         }
         if(task.getUser() != null){
             dto.setUserId(task.getUser().getUserId());
+        }
+        if (task.getCategories() != null && !task.getCategories().isEmpty()) {
+            dto.setCategories(
+                    task.getCategories()
+                            .stream()
+                            .map(CategoryMapper::toDTO)
+                            .collect(Collectors.toList())
+            );
         }
         return dto;
     }

@@ -8,7 +8,8 @@ export const moduleAuthGuard: CanActivateFn = (route) => {
   const router = inject(Router);
   const moduleKey = route.data['moduleKey'] as string | undefined;
 
-  if (moduleKey && authService.isAuthenticatedForModule(moduleKey)) {
+  if (moduleKey && authService.isAuthenticatedForModule(moduleKey)) 
+  {
     return true;
   }
 
