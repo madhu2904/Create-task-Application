@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class TaskResponseDTO {
     private Integer taskId;
@@ -16,8 +17,31 @@ public class TaskResponseDTO {
     private Integer projectId;
     private Long userId;
 
+
+
+    private List<CategoryResponseDTO> categories;
+
+    public List<CategoryResponseDTO> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<CategoryResponseDTO> categories) {
+        this.categories = categories;
+    }
     public TaskResponseDTO() {
     }
+    public TaskResponseDTO(Integer taskId, String priority, String description, String status, LocalDateTime dueDate, Integer projectId, Long userId, List<CategoryResponseDTO> categories, String taskName) {
+        this.taskId = taskId;
+        this.priority = priority;
+        this.description = description;
+        this.status = status;
+        this.dueDate = dueDate;
+        this.projectId = projectId;
+        this.userId = userId;
+        this.categories = categories;
+        this.taskName = taskName;
+    }
+
 
     public TaskResponseDTO(Integer taskId, String taskName, String description, String priority, String status, LocalDateTime dueDate, Integer projectId, Long userId) {
         this.taskId = taskId;

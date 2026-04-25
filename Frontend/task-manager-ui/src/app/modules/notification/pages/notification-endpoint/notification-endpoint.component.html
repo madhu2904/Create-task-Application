@@ -1,0 +1,255 @@
+<div class="min-h-screen bg-slate-50 text-slate-900">
+  @if (endpoint) {
+    <section class="flex min-h-screen flex-col lg:flex-row">
+      <aside class="w-full border-b border-blue-100 bg-white lg:min-h-screen lg:w-80 lg:border-b-0 lg:border-r">
+        <div class="border-b border-blue-100 bg-blue-600 px-5 py-5 text-white">
+          <a [routerLink]="['/notification/dashboard']" class="text-sm font-semibold text-blue-100 transition hover:text-white">
+            &larr; Endpoints
+          </a>
+          <p class="mt-4 text-xs font-semibold uppercase tracking-[0.22em] text-blue-100">{{ module.title }}</p>
+          <h1 class="mt-2 text-2xl font-bold tracking-tight">{{ endpoint.title }}</h1>
+          <p class="mt-2 text-sm text-blue-50">{{ endpoint.description }}</p>
+        </div>
+
+        <div class="p-4">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Endpoints</p>
+          <div class="flex flex-col gap-2">
+            @for (item of module.endpoints; track item.key) {
+              <a
+                [routerLink]="['/notification', getEndpointRoute(item.key)]"
+                class="rounded-xl border px-3 py-3 transition"
+                [class.border-blue-200]="item.key === endpoint.key"
+                [class.bg-blue-50]="item.key === endpoint.key"
+                [class.text-blue-800]="item.key === endpoint.key"
+                [class.border-slate-200]="item.key !== endpoint.key"
+                [class.bg-slate-50]="item.key !== endpoint.key"
+                [class.text-slate-900]="item.key !== endpoint.key"
+              >
+                <div class="flex items-center justify-between gap-2">
+                  <span
+                    class="rounded-full px-2 py-1 text-[11px] font-semibold"
+                    [class.bg-blue-100]="item.method === 'GET'"
+                    [class.text-blue-700]="item.method === 'GET'"
+                    [class.bg-emerald-100]="item.method === 'POST'"
+                    [class.text-emerald-700]="item.method === 'POST'"
+                    [class.bg-amber-100]="item.method === 'PUT'"
+                    [class.text-amber-700]="item.method === 'PUT'"
+                    [class.bg-rose-100]="item.method === 'DELETE'"
+                    [class.text-rose-700]="item.method === 'DELETE'"
+                  >
+                    {{ item.method }}
+                  </span>
+                </div>
+                <p class="mt-3 text-sm font-semibold">{{ item.title }}</p>
+                <p class="mt-1 line-clamp-2 text-xs text-slate-500">{{ item.path }}</p>
+              </a>
+            }
+          </div>
+        </div>
+      </aside>
+
+      <main class="flex-1 p-5 lg:p-6">
+        <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-blue-600">{{ module.title }}</p>
+              <h2 class="mt-2 text-2xl font-bold tracking-tight text-slate-900">{{ endpoint.title }}</h2>
+            </div>
+            <span
+              class="rounded-full px-3 py-1 text-xs font-semibold"
+              [class.bg-blue-100]="endpoint.method === 'GET'"
+              [class.text-blue-700]="endpoint.method === 'GET'"
+              [class.bg-emerald-100]="endpoint.method === 'POST'"
+              [class.text-emerald-700]="endpoint.method === 'POST'"
+              [class.bg-amber-100]="endpoint.method === 'PUT'"
+              [class.text-amber-700]="endpoint.method === 'PUT'"
+              [class.bg-rose-100]="endpoint.method === 'DELETE'"
+              [class.text-rose-700]="endpoint.method === 'DELETE'"
+            >
+              {{ endpoint.method }}
+            </span>
+          </div>
+
+          <p class="mt-3 text-sm leading-6 text-slate-600">{{ endpoint.description }}</p>
+          <div class="mt-4 rounded-xl bg-slate-900 px-3 py-3 font-mono text-xs text-blue-100">{{ endpoint.path }}</div>
+
+          <form class="mt-5 flex flex-col gap-5" [formGroup]="executionForm" (ngSubmit)="runEndpoint()">
+            @if (pathFields.length) {
+              <div class="rounded-xl border border-slate-200 p-4">
+                <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Path Parameters</h3>
+                <div class="mt-3 flex flex-wrap gap-3">
+                  @for (field of pathFields; track field.key) {
+                    <div class="min-w-[220px] flex-1">
+                      <label class="mb-2 block text-sm font-semibold text-slate-700" [for]="field.key">{{ field.label }}</label>
+                      @if (field.type === 'textarea') {
+                        <textarea [id]="field.key" [formControlName]="field.key" rows="4" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100" [placeholder]="field.placeholder ?? ''"></textarea>
+                      } @else {
+                        <input [id]="field.key" [type]="field.type" [formControlName]="field.key" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100" [placeholder]="field.placeholder ?? ''" />
+                      }
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+
+            @if (queryFields.length) {
+              <div class="rounded-xl border border-slate-200 p-4">
+                <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Query Parameters</h3>
+                <div class="mt-3 flex flex-wrap gap-3">
+                  @for (field of queryFields; track field.key) {
+                    <div class="min-w-[220px] flex-1">
+                      <label class="mb-2 block text-sm font-semibold text-slate-700" [for]="field.key">{{ field.label }}</label>
+                      <input [id]="field.key" [type]="field.type" [formControlName]="field.key" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100" [placeholder]="field.placeholder ?? ''" />
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+
+            @if (bodyFields.length) {
+              <div class="rounded-xl border border-slate-200 p-4">
+                <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Request Body</h3>
+                <div class="mt-3 flex flex-wrap gap-3">
+                  @for (field of bodyFields; track field.key) {
+                    <div class="min-w-[220px] flex-1" [class.w-full]="field.type === 'textarea'">
+                      <label class="mb-2 block text-sm font-semibold text-slate-700" [for]="field.key">{{ field.label }}</label>
+                      @if (field.type === 'textarea') {
+                        <textarea [id]="field.key" [formControlName]="field.key" rows="4" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100" [placeholder]="field.placeholder ?? ''"></textarea>
+                      } @else {
+                        <input [id]="field.key" [type]="field.type" [formControlName]="field.key" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100" [placeholder]="field.placeholder ?? ''" />
+                      }
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+
+            <div class="flex flex-wrap items-center gap-3">
+              <button type="submit" [disabled]="executionForm.invalid || isSubmitting" class="rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300">
+                {{ isSubmitting ? 'Calling endpoint...' : 'Execute Endpoint' }}
+              </button>
+
+              @if (responseData) {
+                <button type="button" (click)="clearResponse()" class="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-600 transition hover:border-slate-300 hover:text-slate-900">
+                  Clear Response
+                </button>
+              }
+            </div>
+
+            @if (errorMessage) {
+              <div class="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{{ errorMessage }}</div>
+            }
+
+            <section class="flex flex-col gap-3">
+              <div class="rounded-xl border border-blue-100 bg-blue-50/50 p-4">
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Response</p>
+              </div>
+
+              <div class="rounded-[1.25rem] border border-blue-100 bg-gradient-to-br from-blue-50 to-white p-4">
+                @if (responseData) {
+                  @if (summaryCard; as card) {
+                    <article class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+                      <div class="flex items-start justify-between gap-3">
+                        <div>
+                          <h3 class="text-lg font-bold tracking-tight text-slate-900">{{ card.title }}</h3>
+                          @if (card.subtitle) {
+                            <p class="mt-2 text-sm text-slate-500">{{ card.subtitle }}</p>
+                          }
+                        </div>
+                        @if (card.badge) {
+                          <span class="rounded-lg bg-blue-100 px-2.5 py-1.5 text-[11px] font-semibold text-blue-700">{{ card.badge }}</span>
+                        }
+                      </div>
+
+                      <div class="mt-4 grid gap-3 md:grid-cols-2">
+                        @for (row of card.rows; track row.label + $index) {
+                          <div class="rounded-lg border border-slate-200 bg-slate-50 px-3 py-3">
+                            <p class="text-xs text-slate-500">{{ row.label }}</p>
+                            <p class="mt-2 text-sm font-semibold text-slate-900">{{ row.value }}</p>
+                          </div>
+                        }
+                      </div>
+                    </article>
+                  }
+
+                  <div class="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                    @for (card of paginatedDataCards; track card.title + $index) {
+                      <article class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+                        <div class="flex items-start justify-between gap-3">
+                          <div>
+                            <h3 class="text-base font-bold tracking-tight text-slate-900">{{ card.title }}</h3>
+                            @if (card.subtitle) {
+                              <p class="mt-1 text-xs text-slate-500">{{ card.subtitle }}</p>
+                            }
+                          </div>
+                          @if (card.badge) {
+                            <span class="rounded-lg bg-blue-100 px-2.5 py-1.5 text-[11px] font-semibold text-blue-700">{{ card.badge }}</span>
+                          }
+                        </div>
+
+                        @if (card.highlight) {
+                          <div class="mt-4 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5">
+                            <div class="flex items-center justify-between gap-4">
+                              <span class="text-xs text-slate-500">{{ card.highlight.label }}</span>
+                              <span class="text-sm font-bold text-slate-900">{{ card.highlight.value }}</span>
+                            </div>
+                          </div>
+                        }
+
+                        <div class="mt-4 space-y-2.5">
+                          @for (row of card.rows; track row.label + $index) {
+                            @if (row.bullets?.length) {
+                              <div class="flex items-start justify-between gap-4 text-sm">
+                                <span class="text-xs text-slate-500">{{ row.label }}</span>
+                                <div class="max-w-[60%] text-right">
+                                  @for (bullet of row.bullets; track bullet) {
+                                    <div class="text-sm font-semibold text-slate-700">&bull; {{ bullet }}</div>
+                                  }
+                                </div>
+                              </div>
+                            } @else {
+                              <div class="flex items-start justify-between gap-4 text-sm">
+                                <span class="text-xs text-slate-500">{{ row.label }}</span>
+                                <span class="max-w-[60%] text-right text-sm font-semibold text-slate-700">{{ row.value }}</span>
+                              </div>
+                            }
+                          }
+                        </div>
+                      </article>
+                    }
+                  </div>
+
+                  @if (dataCards.length > 6) {
+                    <div class="mt-4 flex items-center justify-end gap-3">
+                      <button
+                        type="button"
+                        class="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 transition hover:border-slate-300 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-50"
+                        [disabled]="currentPage === 1"
+                        (click)="goToPreviousPage()"
+                      >
+                        Prev
+                      </button>
+                      <span class="text-sm text-slate-500">Page {{ currentPage }} of {{ totalPages }}</span>
+                      <button
+                        type="button"
+                        class="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 transition hover:border-slate-300 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-50"
+                        [disabled]="currentPage === totalPages"
+                        (click)="goToNextPage()"
+                      >
+                        Next
+                      </button>
+                    </div>
+                  }
+                } @else {
+                  <div class="flex min-h-[12rem] items-center justify-center rounded-xl border border-dashed border-blue-200 bg-white text-center text-sm text-slate-400">
+                    Run the endpoint to see the result.
+                  </div>
+                }
+              </div>
+            </section>
+          </form>
+        </section>
+      </main>
+    </section>
+  }
+</div>
