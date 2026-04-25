@@ -2,22 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { ModuleDefinition } from '../../common/models/app.models';
 import { notificationEndpoints } from '../data/notification-endpoints.data';
+import { getModule, modules } from '../../common/data/module-definitions.data';
 
 @Injectable({ providedIn: 'root' })
-export class NotificationModuleService {
+export class NotificationModuleService 
+{
   getDefinition(): ModuleDefinition {
-    return {
-      key: 'notification',
-      title: 'Notification Module',
-      personName: 'Notification Team',
-      subtitle: 'User notifications',
-      description: 'Covers notification lookup endpoints.',
-      username: 'notification_dev',
-      passwordHint: '1234',
-      expectedAuthority: 'ROLE_NOTIFICATION_MODULE_DEV',
-      validationPath: '/api/v1/notifications/1',
-      endpoints: notificationEndpoints,
-    };
+    return getModule('notification')! ;
   }
 
   getEndpointByRoute(routeKey: string) {
