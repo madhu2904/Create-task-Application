@@ -27,13 +27,13 @@ import static org.mockito.Mockito.*;
 class ProjectServiceImplTest {
 
     @Mock
-    private ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;    //proxy object
 
     @Mock
-    private UserRepository userRepository;
+    private UserRepository userRepository;          //proxy object
 
     @InjectMocks
-    private ProjectServiceImpl projectService;
+    private ProjectServiceImpl projectService;      //real object and injects all proxy object into it
 
     private User mockUser;
     private Project mockProject;
@@ -65,9 +65,7 @@ class ProjectServiceImplTest {
         requestDto.setUserId(1L);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // Test 1 (VALID): createProject — happy path
-    // ─────────────────────────────────────────────────────────────────────────
+    // Test 1 (VALID): createProject
     @Test
     void createProject_ShouldReturnResponseDto_WhenValidRequest() {
         when(userRepository.findById(1L)).thenReturn(Optional.of(mockUser));
@@ -81,9 +79,7 @@ class ProjectServiceImplTest {
         verify(projectRepository, times(1)).save(any(Project.class));
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
     // Test 2 (INVALID): createProject — user not found → throws UserNotFoundException
-    // ─────────────────────────────────────────────────────────────────────────
     @Test
     void createProject_ShouldThrowUserNotFoundException_WhenUserDoesNotExist() {
         when(userRepository.findById(1L)).thenReturn(Optional.empty());
@@ -94,9 +90,7 @@ class ProjectServiceImplTest {
         verify(projectRepository, never()).save(any());
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
     // Test 3 (VALID): getProjectById — project exists → returns dto
-    // ─────────────────────────────────────────────────────────────────────────
     @Test
     void getProjectById_ShouldReturnResponseDto_WhenProjectExists() {
         when(projectRepository.findById(1)).thenReturn(Optional.of(mockProject));
@@ -108,9 +102,7 @@ class ProjectServiceImplTest {
         assertThat(result.getProjectName()).isEqualTo("Task Manager App");
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
     // Test 4 (INVALID): getProjectById — project missing → throws ProjectNotFoundException
-    // ─────────────────────────────────────────────────────────────────────────
     @Test
     void getProjectById_ShouldThrowProjectNotFoundException_WhenProjectDoesNotExist() {
         when(projectRepository.findById(99)).thenReturn(Optional.empty());
@@ -119,9 +111,7 @@ class ProjectServiceImplTest {
                 .isInstanceOf(ProjectNotFoundException.class);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
     // Test 5 (VALID): getAllProjects — returns mapped list
-    // ─────────────────────────────────────────────────────────────────────────
     @Test
     void getAllProjects_ShouldReturnListOfProjects() {
         when(projectRepository.findAll()).thenReturn(List.of(mockProject));
@@ -132,9 +122,7 @@ class ProjectServiceImplTest {
         assertThat(results.get(0).getProjectName()).isEqualTo("Task Manager App");
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
     // Test 6 (VALID): updateProject — valid ids → fields updated
-    // ─────────────────────────────────────────────────────────────────────────
     @Test
     void updateProject_ShouldUpdateAndReturnResponseDto_WhenValidIds() {
         requestDto.setProjectName("Updated App");
@@ -153,9 +141,7 @@ class ProjectServiceImplTest {
         verify(projectRepository).save(any(Project.class));
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
     // Test 7 (VALID): deleteProject — project exists → deleted successfully
-    // ─────────────────────────────────────────────────────────────────────────
     @Test
     void deleteProject_ShouldDeleteProject_WhenProjectExists() {
         when(projectRepository.findById(1)).thenReturn(Optional.of(mockProject));
@@ -167,9 +153,7 @@ class ProjectServiceImplTest {
         verify(projectRepository).delete(mockProject);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
     // Test 8 (INVALID): deleteProject — project missing → throws ProjectNotFoundException
-    // ─────────────────────────────────────────────────────────────────────────
     @Test
     void deleteProject_ShouldThrowProjectNotFoundException_WhenProjectDoesNotExist() {
         when(projectRepository.findById(99)).thenReturn(Optional.empty());
@@ -180,9 +164,7 @@ class ProjectServiceImplTest {
         verify(projectRepository, never()).delete(any());
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
     // Test 9 (INVALID): searchProjectsByName — empty keyword → throws IllegalArgumentException
-    // ─────────────────────────────────────────────────────────────────────────
     @Test
     void searchProjectsByName_ShouldThrowIllegalArgumentException_WhenKeywordIsBlank() {
         assertThatThrownBy(() -> projectService.searchProjectsByName("  "))
