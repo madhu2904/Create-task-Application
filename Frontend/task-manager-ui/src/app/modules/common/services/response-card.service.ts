@@ -1,167 +1,109 @@
 import { Injectable } from '@angular/core';
-
 import { EndpointDefinition, ResponseCardRow, ResponseDisplayCard } from '../models/app.models';
 
 @Injectable({ providedIn: 'root' })
 export class ResponseCardService {
-  buildResponseCards(endpoint: EndpointDefinition | null, response: unknown): ResponseDisplayCard[] {
-    return [this.buildSummaryCard(endpoint, response), ...this.buildDataCards(this.getResponseField(response, 'data'))];
-  }
 
-  getStatus(response: unknown): string {
-    return String(this.getResponseField(response, 'status') ?? '-');
-  }
+  buildResponseCards(endpoint: EndpointDefinition | null, response: any): ResponseDisplayCard[] {
 
-  getMessage(response: unknown): string {
-    return String(this.getResponseField(response, 'message') ?? 'Request completed');
-  }
-
-  getTimestamp(response: unknown): string | null {
-    const value = this.getResponseField(response, 'timestamp');
-    return typeof value === 'string' ? value : null;
-  }
-
-  private buildSummaryCard(endpoint: EndpointDefinition | null, response: unknown): ResponseDisplayCard {
-    const rows: ResponseCardRow[] = [];
-    rows.push({ label: 'Status', value: this.getStatus(response) });
-
-    const timestamp = this.getTimestamp(response);
-
-    if (timestamp) {
-      rows.push({ label: 'Timestamp', value: timestamp });
-    }
-
-    return {
+    //this is top summary card
+    const summary: ResponseDisplayCard = 
+    {
       kind: 'summary',
-      title: endpoint?.title ?? 'Response',
-      subtitle: this.getMessage(response),
-      badge: endpoint?.method ?? 'API',
-      rows,
+      title: endpoint?.title || 'Response',
+      //this is the message from our api response
+      subtitle: response?.message || 'Done',
+      badge: endpoint?.method || 'API',
+      rows: 
+      [
+        //if response and it's values are present it is included here
+        { label: 'Status', value: String(response?.status ?? '-') },
+        { label: 'Timestamp', value: String(response?.timestamp??'-') } 
+      ]
     };
+
+    //below is dataCards
+    const dataCards= this.buildDataCards(response?.data);
+
+    return [summary, ...dataCards];
   }
 
-  private buildDataCards(data: unknown): ResponseDisplayCard[] {
-    if (this.isNullish(data)) {
-      return [{ kind: 'data', title: 'Returned Data', rows: [{ label: 'Value', value: 'No data returned' }] }];
+  private buildDataCards(data: any): ResponseDisplayCard[] {
+    //we first check if no data is returned empty means then no value is shown
+    if (!data) {
+      return [{
+        kind: 'data',
+        title: 'Returned Data',
+        rows: [{ label: 'Value', value: 'No data' }]
+      }];
     }
-
+    //if data is an array of objects then it is built
     if (Array.isArray(data)) {
-      if (data.length === 0) {
-        return [{ kind: 'data', title: 'Returned Data', rows: [{ label: 'Value', value: 'Empty list' }] }];
-      }
-
-      return data.map((item) => this.buildObjectCard(item, 'Returned Data'));
+      return data.map(item => this.buildCard(item));
     }
-
-    return [this.buildObjectCard(data, 'Returned Data')];
+    //data is single object then this is used..why enclosed in [] is in UI we will use map to loop through data
+    return [this.buildCard(data)];
   }
 
-  private buildObjectCard(data: unknown, title: string): ResponseDisplayCard {
-    if (!this.isObject(data)) {
-      return { kind: 'data', title, rows: [{ label: 'Value', value: this.formatValue(data) }] };
-    }
+  private buildCard(obj: any): ResponseDisplayCard {
 
-    const entries = this.toEntries(this.addUsefulTaskFields(data));
-    const visibleEntries = entries.filter((entry) => !this.shouldHideValue(entry.value));
-    const highlightCandidate = visibleEntries.find((entry) => this.isStrongValue(entry.key, entry.value));
-    const rows = entries
-      .filter((entry) => entry !== highlightCandidate && !this.shouldHideValue(entry.value))
-      .map((entry) => ({
-        label: this.formatLabel(entry.key),
-        value: this.isBulletList(entry.value) ? undefined : this.formatValue(entry.value),
-        bullets: this.isBulletList(entry.value) ? this.toBulletList(entry.value) : undefined,
-      }));
+  const rows: ResponseCardRow[] = [];
+  let highlight: { label: string; value: string } | undefined;
 
-    return {
-      kind: 'data',
-      title,
-      highlight: highlightCandidate
-        ? { label: this.formatLabel(highlightCandidate.key), value: this.formatValue(highlightCandidate.value) }
-        : undefined,
-      rows: rows.length ? rows : [{ label: 'Value', value: 'No additional fields' }],
-    };
-  }
+  for (let key in obj) {
+    const value = obj[key];
 
-  private getResponseField(response: unknown, field: string): unknown {
-    if (!this.isObject(response)) {
-      return null;
-    }
-
-    return response[field];
-  }
-
-  private isObject(value: unknown): value is Record<string, unknown> {
-    return typeof value === 'object' && value !== null && !Array.isArray(value);
-  }
-
-  private isNullish(value: unknown): value is null | undefined {
-    return value === null || value === undefined;
-  }
-
-  private toEntries(value: Record<string, unknown>): Array<{ key: string; value: unknown }> {
-    return Object.entries(value).map(([key, entryValue]) => ({ key, value: entryValue }));
-  }
-
-  private addUsefulTaskFields(data: Record<string, unknown>): Record<string, unknown> {
-    const user = data['user'];
-    const project = data['project'];
-
-    const enrichedData = {
-      ...data,
-      userId: data['userId'] ?? (this.isObject(user) ? user['userId'] ?? user['id'] : undefined),
-      userName: data['userName'] ?? (this.isObject(user) ? user['fullName'] ?? user['name'] ?? user['username'] : undefined),
-      projectId: data['projectId'] ?? (this.isObject(project) ? project['projectId'] ?? project['id'] : undefined),
-      projectName: data['projectName'] ?? (this.isObject(project) ? project['projectName'] ?? project['name'] : undefined),
-      categories:
-        data['categories'] ??
-        (Array.isArray(data['categoryResponses']) ? data['categoryResponses'] : this.isObject(data['category']) ? [data['category']] : undefined),
-      roles: data['roles'] ?? (Array.isArray(data['authorities']) ? data['authorities'] : undefined),
-    };
-
-    return enrichedData;
-  }
-
-  private formatLabel(key: string): string {
-    return key.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[_-]/g, ' ');
-  }
-
-  private formatValue(value: unknown): string {
-    if (this.isNullish(value)) {
-      return '-';
-    }
-
-    if (['string', 'number', 'boolean'].includes(typeof value)) {
-      return String(value);
+    // highlight only id
+    if (!highlight && key.toLowerCase().includes('id')) {
+      highlight = {
+        label: this.formatLabel(key),
+        value: String(value)
+      };
+      continue;
     }
 
     if (Array.isArray(value)) {
-      return value.map((item) => this.formatValue(item)).join(', ');
+      rows.push({
+        label: this.formatLabel(key),
+        bullets: this.toBulletList(value)
+      });
+    } else {
+      rows.push({
+        label: this.formatLabel(key),
+        value: String(value)
+      });
     }
-
-    return JSON.stringify(value);
   }
 
-  private isStrongValue(key: string, value: unknown): boolean {
-    return ['string', 'number', 'boolean'].includes(typeof value) && /(id|status|total|count|amount|price|value)$/i.test(key);
+  return {
+    kind: 'data',
+    title: 'Returned Data',
+    highlight,
+    rows
+  };
+}
+  //  label formatting
+  private formatLabel(key: string): string {
+    return key
+    ///g means match this pattern for all occurences not just 1st one
+    //$1 and $2 means group 1 of chars and grp 2
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .replace(/\./g, ' ')
+      .replace(/[_-]/g, ' ');
   }
 
-  private shouldHideValue(value: unknown): boolean {
-    return value === null || value === undefined || (Array.isArray(value) && value.length === 0);
-  }
+  //  bullet list (handles objects also)
+  private toBulletList(arr: any[]): string[] {
+    return arr.map(item => {
 
-  private isBulletList(value: unknown): value is unknown[] {
-    return Array.isArray(value);
-  }
-
-  private toBulletList(value: unknown[]): string[] {
-    return value.map((item) => {
-      if (this.isObject(item)) {
-        return this.toEntries(item)
-          .map((entry) => `${this.formatLabel(entry.key)}: ${this.formatValue(entry.value)}`)
+      if (typeof item === 'object' && item !== null) 
+        {
+        return Object.entries(item)
+          .map(([k, v]) => `${this.formatLabel(k)}: ${v}`)
           .join(', ');
       }
 
-      return this.formatValue(item);
+      return String(item);
     });
   }
 }

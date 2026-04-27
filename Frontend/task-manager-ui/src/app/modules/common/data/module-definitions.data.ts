@@ -13,7 +13,6 @@ export const modules: ModuleDefinition[] = [
     subtitle: 'Users and roles',
     description: 'The User Module manages endpoints related to users and their assigned roles.',
     expectedAuthority: 'ROLE_USER_MODULE_DEV',
-    validationPath: '/api/v1/users',
     endpoints: userEndpoints,
   },
   {
@@ -23,7 +22,6 @@ export const modules: ModuleDefinition[] = [
     subtitle: 'Projects',
     description: 'Manages projects by allowing users to create, update, and track project details with user based ownership',
     expectedAuthority: 'ROLE_PROJECT_MODULE_DEV',
-    validationPath: '/api/v1/projects',
     endpoints: projectEndpoints,
   },
   {
@@ -33,7 +31,6 @@ export const modules: ModuleDefinition[] = [
     subtitle: 'Comments and attachments',
     description: 'Facilitates task level comments and attachment endpoints',
     expectedAuthority: 'ROLE_COMMENT_ATTACHMENT_MODULE_DEV',
-    validationPath: '/api/v1/tasks/1/comments',
     endpoints: collaborationEndpoints,
   },
   {
@@ -43,7 +40,6 @@ export const modules: ModuleDefinition[] = [
     subtitle: 'Tasks and categories',
     description: 'The Task Level Module handles task and category creation, retrieval, modification, and deletion.',
     expectedAuthority: 'ROLE_TASK_MODULE_DEV',
-    validationPath: '/api/v1/tasks',
     endpoints: taskEndpoints,
   },
   {
@@ -53,11 +49,10 @@ export const modules: ModuleDefinition[] = [
     subtitle: 'User notifications',
     description: 'Manages notifications by generating and delivering alerts for task updates, deadlines, and user activities with user-specific access control.',
     expectedAuthority: 'ROLE_NOTIFICATION_MODULE_DEV',
-    validationPath: '/api/v1/notifications/1',
     endpoints: notificationEndpoints,
   },
 ];
 
-export function getModule(moduleKey: string): ModuleDefinition | undefined {
+export function getModule(moduleKey: string): ModuleDefinition|undefined  {
   return modules.find((module) => module.key === moduleKey);
 }

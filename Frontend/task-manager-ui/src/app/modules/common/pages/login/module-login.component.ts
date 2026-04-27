@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
@@ -26,6 +26,8 @@ export class ModuleLoginComponent {
     username: ['', Validators.required],
     password: ['', Validators.required],
   });
+    private readonly changeDetector = inject(ChangeDetectorRef);
+
 
   onSubmit(): void {
     if (!this.module || this.loginForm.invalid) {
@@ -44,14 +46,17 @@ export class ModuleLoginComponent {
       },
       error: (error) => {
         this.isSubmitting = false;
-
+       
         if (error instanceof HttpErrorResponse && (error.status === 401 || error.status === 403)) {
           this.errorMessage = 'Invalid username or password.';
-        } else if (error instanceof Error) {
+        } 
+        else if (error instanceof Error) 
+        {
           this.errorMessage = error.message;
         } else {
-          this.errorMessage = 'Login failed. Please check the backend and try again.';
+          this.errorMessage = 'Login failed.';
         }
+           this.changeDetector.detectChanges();
       },
     });
   }

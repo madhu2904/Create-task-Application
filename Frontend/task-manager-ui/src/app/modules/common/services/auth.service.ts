@@ -35,7 +35,7 @@ export class AuthService {
           moduleKey,
           username: response.username || username,
           authHeader,
-        };
+        };//session
       }),
       tap((session) => {
         this.currentSession = session;

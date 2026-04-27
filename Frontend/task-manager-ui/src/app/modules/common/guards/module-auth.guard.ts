@@ -8,9 +8,10 @@ export const moduleAuthGuard: CanActivateFn = (route) => {
   const router = inject(Router);
   const moduleKey = route.data['moduleKey'] as string | undefined;
 
-  if (moduleKey && authService.isAuthenticatedForModule(moduleKey)) {
+  if (moduleKey && authService.isAuthenticatedForModule(moduleKey)) 
+  {
     return true;
   }
-
+//createUrlTree..used to give navigation work to router itself
   return router.createUrlTree(['/modules', moduleKey ?? '', 'login']);
 };
