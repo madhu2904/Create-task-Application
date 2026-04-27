@@ -24,7 +24,10 @@ export class NotificationEndpointComponent implements OnInit, OnDestroy {
   private readonly changeDetector = inject(ChangeDetectorRef);
   private routeSubscription?: Subscription;
 
+
   readonly module: ModuleDefinition = this.notificationModuleService.getDefinition();
+
+  // untyped form is used since we don't know the datatypes now..it is dynamic based on endpoint selection
   readonly executionForm: UntypedFormGroup = this.formBuilder.group({});
 
   endpoint?: EndpointDefinition;
@@ -85,7 +88,7 @@ export class NotificationEndpointComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.routeSubscription?.unsubscribe();
   }
-
+//for example if create-user is passed ..create will be given as response according to our code in service
   getEndpointRoute(endpointKey: string): string {
     return this.notificationModuleService.getEndpointRoute(endpointKey);
   }
@@ -122,8 +125,9 @@ export class NotificationEndpointComponent implements OnInit, OnDestroy {
     this.errorMessage = '';
     this.currentPage = 1;
   }
-
-  private rebuildForm(endpoint: EndpointDefinition): void {
+// used to rebuild the form when the control changes . i.e when a different end pint is clicked all current form fields cleared new one's populated
+  private rebuildForm(endpoint: EndpointDefinition): void 
+  {
     for (const key of Object.keys(this.executionForm.controls)) {
       this.executionForm.removeControl(key);
     }
@@ -132,7 +136,7 @@ export class NotificationEndpointComponent implements OnInit, OnDestroy {
       this.executionForm.addControl(field.key, this.formBuilder.control('', field.required ? Validators.required : []));
     }
   }
-
+// heler method for rebildForm
   private allFields(endpoint: EndpointDefinition): InputFieldDefinition[] {
     return [...(endpoint.pathParams ?? []), ...(endpoint.queryParams ?? []), ...(endpoint.bodyFields ?? [])];
   }

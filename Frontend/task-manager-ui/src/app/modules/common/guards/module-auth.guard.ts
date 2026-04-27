@@ -12,6 +12,6 @@ export const moduleAuthGuard: CanActivateFn = (route) => {
   {
     return true;
   }
-
+//createUrlTree..used to give navigation work to router itself
   return router.createUrlTree(['/modules', moduleKey ?? '', 'login']);
 };
