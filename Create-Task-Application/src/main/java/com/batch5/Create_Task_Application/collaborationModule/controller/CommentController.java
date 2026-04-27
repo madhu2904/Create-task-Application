@@ -17,7 +17,7 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    // ===================== CREATE =====================
+    // To create a comment
     @PostMapping("/tasks/{taskId}/comments")
     public ResponseEntity<ApiResponse<CommentResponseDTO>> addComment(
             @PathVariable Integer taskId,
@@ -29,7 +29,7 @@ public class CommentController {
                 .body(new ApiResponse<>( HttpStatus.CREATED.value(), "Comment added successfully", created));
     }
 
-    // ===================== READ =====================
+    // To fetch all the comments based on taskId
     @GetMapping("/tasks/{taskId}/comments")
     public ResponseEntity<ApiResponse<List<CommentResponseDTO>>> getTaskComments(
             @PathVariable Integer taskId) {
@@ -41,7 +41,7 @@ public class CommentController {
                 .body(new ApiResponse<>(HttpStatus.OK.value(), "Comments fetched successfully", comments));
     }
 
-    //
+    // To delete a comment
     @DeleteMapping("/comments/{commentId}")
     public ResponseEntity<ApiResponse<Void>> deleteComment(
             @PathVariable Integer commentId) {

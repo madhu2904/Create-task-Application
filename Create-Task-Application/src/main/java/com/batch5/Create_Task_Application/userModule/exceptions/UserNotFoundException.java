@@ -4,9 +4,9 @@ import com.batch5.Create_Task_Application.commonModule.exceptions.NotFoundExcept
 
 public class UserNotFoundException extends NotFoundException {
     public UserNotFoundException(Long id) {
-        super("User not found with ID: " + id);
+        super("User not found with Id: " + id);
     }
-    public UserNotFoundException(String username) {
-        super("User not found with username: " + username);
+    public UserNotFoundException(String msg) {
+        super(msg);
     }
 }

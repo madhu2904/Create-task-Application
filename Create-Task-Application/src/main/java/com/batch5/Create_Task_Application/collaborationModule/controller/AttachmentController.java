@@ -34,7 +34,7 @@ public class AttachmentController {
                 ));
     }
 
-    // To Read an Attachment
+    // To find all the Attachments by taskId
     @GetMapping("/tasks/{taskId}/attachments")
     public ResponseEntity<ApiResponse<List<AttachmentResponseDTO>>> getTaskAttachments(
             @PathVariable Integer taskId) {
