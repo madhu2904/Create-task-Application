@@ -2,6 +2,7 @@ package com.batch5.Create_Task_Application.notificationModule.repository;
 
 import com.batch5.Create_Task_Application.notificationModule.entity.Notification;
 import com.batch5.Create_Task_Application.userModule.entity.User;
+import com.batch5.Create_Task_Application.userModule.exceptions.UserNotFoundException;
 import com.batch5.Create_Task_Application.userModule.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ class NotificationRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-    // ✅ FIXED: Proper User creation (ALL required fields)
+    //  User creation (ALL required fields)
     private User createUser() {
         User user = new User();
         user.setUsername("testuser");
@@ -44,6 +45,7 @@ class NotificationRepositoryTest {
 
 
     //  POSITIVE TEST CASES
+    //a notification must be saved in repo
     @Test
     @DisplayName("Save Notification")
     void shouldSaveNotification() {
@@ -55,6 +57,7 @@ class NotificationRepositoryTest {
         assertEquals("Test Message", n.getText());
     }
 
+    //finding notifications by user id
     @Test
     @DisplayName("Find by User")
     void shouldFindByUser() {
@@ -65,7 +68,7 @@ class NotificationRepositoryTest {
 
         assertFalse(list.isEmpty());
     }
-
+//get unread notifications
     @Test
     @DisplayName("Find unread notifications")
     void shouldFindUnreadNotifications() {
@@ -108,13 +111,13 @@ class NotificationRepositoryTest {
 
         Notification notification = new Notification();
         notification.setText("Test Message");
-        notification.setUser(null); // ❌ invalid
+        notification.setUser(null); //  invalid
 
         assertThrows(Exception.class, () -> {
             notificationRepository.saveAndFlush(notification);
         });
     }
-
+    //notification creation should fail when text is null
     @Test
     @DisplayName("Should fail when text is null")
     void shouldFailWhenTextIsNull() {
@@ -123,12 +126,14 @@ class NotificationRepositoryTest {
 
         Notification notification = new Notification();
         notification.setUser(user);
-        notification.setText(null); // ❌ invalid
+        notification.setText(null);
 
         assertThrows(Exception.class, () -> {
             notificationRepository.saveAndFlush(notification);
         });
     }
+
+    //empty list will be returned in this case since findBy returns empty list if a data is not found
 
     @Test
     @DisplayName("Should return empty for invalid userId in unread query")

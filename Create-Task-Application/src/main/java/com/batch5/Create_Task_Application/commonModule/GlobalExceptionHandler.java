@@ -62,6 +62,10 @@ public class GlobalExceptionHandler {
         return build(HttpStatus.BAD_REQUEST, message);
     }
 
+    @ExceptionHandler(org.springframework.web.servlet.NoHandlerFoundException.class)
+    public ResponseEntity<ApiResponse<Object>> handleNoHandler(org.springframework.web.servlet.NoHandlerFoundException ex) {
+        return build(HttpStatus.BAD_REQUEST, "Value is missing in the URL");
+    }
     // 500 - Internal Server Error
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Object>> handleGlobal(Exception ex) {

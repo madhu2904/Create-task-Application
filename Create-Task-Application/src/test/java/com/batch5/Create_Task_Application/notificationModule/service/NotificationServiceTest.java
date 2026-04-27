@@ -35,7 +35,7 @@ class NotificationServiceTest {
     //  Create User
     private User getUser() {
         User user = new User();
-        user.setUserId(1L); // must exist in your entity
+        user.setUserId(1L);
         return user;
     }
 
@@ -52,7 +52,7 @@ class NotificationServiceTest {
 
 
     // POSITIVE TEST CASES
-
+//ability to add notification
     @Test
     void shouldAddNotification() {
         User user = getUser();
@@ -97,7 +97,8 @@ class NotificationServiceTest {
     }
 
     @Test
-    void shouldDeleteNotification() {
+    void shouldDeleteNotification()
+    {
         when(notificationRepository.existsById(1)).thenReturn(true);
         doNothing().when(notificationRepository).deleteById(1);
 

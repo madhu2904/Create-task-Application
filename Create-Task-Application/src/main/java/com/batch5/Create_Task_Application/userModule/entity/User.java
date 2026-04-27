@@ -2,7 +2,9 @@ package com.batch5.Create_Task_Application.userModule.entity;
 
 import com.batch5.Create_Task_Application.userModule.entity.UserRole;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 
 import java.util.List;
@@ -25,6 +27,11 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Email(
+            regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
+            flags = Pattern.Flag.CASE_INSENSITIVE,
+            message = "Please provide a valid email address"
+    )
     @NotBlank(message = "Email is required")
     private String email;
 
