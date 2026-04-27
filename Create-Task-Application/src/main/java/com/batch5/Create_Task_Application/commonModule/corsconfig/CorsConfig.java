@@ -17,10 +17,12 @@ public class CorsConfig {
         configuration.setAllowedOrigins(List.of("http://localhost:4200"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
-        configuration.setExposedHeaders(List.of("Authorization"));
+//        configuration.setExposedHeaders(List.of("Authorization"));
+        //false because app is not using cookies or session
         configuration.setAllowCredentials(false);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        //apply the cors to all the the urls
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
