@@ -131,7 +131,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserRole> getRolesOfUser(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException(userId));
+                .orElseThrow(() -> new UserNotFoundException("User Not Found With Id :"+userId));
         return user.getRoles();
     }
 

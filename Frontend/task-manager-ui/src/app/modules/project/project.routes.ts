@@ -5,6 +5,7 @@ import { ProjectDashboardComponent } from './pages/project-dashboard/project-das
 import { ProjectEndpointComponent } from './pages/project-endpoint/project-endpoint.component';
 
 export const projectRoutes: Routes = [
+  //by default it will load first dashboard page
   {
     path: '',
     redirectTo: 'dashboard',
@@ -13,10 +14,12 @@ export const projectRoutes: Routes = [
   {
     path: 'dashboard',
     component: ProjectDashboardComponent,
-    canActivate: [moduleAuthGuard],
+    canActivate: [moduleAuthGuard],   //when user goes project/dashboard auth guard checks
     data: { moduleKey: 'project' },
     title: 'Project Dashboard',
   },
+  //if any endpoints are clicked endpoint component is loaded
+  //dynamic routing all endpoints go to same component
   {
     path: ':endpointKey',
     component: ProjectEndpointComponent,

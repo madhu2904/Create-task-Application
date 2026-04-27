@@ -1,6 +1,7 @@
 package com.batch5.Create_Task_Application.collaborationModule.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 public class AttachmentRequestDTO {
 
@@ -8,6 +9,10 @@ public class AttachmentRequestDTO {
     private String fileName;
 
     @NotBlank(message = "File path cannot be empty")
+    @Pattern(
+            regexp = "(?i).*?(\\.(jpg|png|pdf|txt|doc|docx|xlsx))?$",
+            message = "Invalid file format"
+    )
     private String filePath;
 
     public String getFileName() {
