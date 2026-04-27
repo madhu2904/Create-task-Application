@@ -2,6 +2,7 @@ package com.batch5.Create_Task_Application.userModule.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 public class UserRequestDTO {
 
@@ -11,7 +12,11 @@ public class UserRequestDTO {
     @NotBlank(message = "Password is required")
     private String password;
 
-    @Email(message = "Invalid email format")
+    @Email(
+            regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
+            flags = Pattern.Flag.CASE_INSENSITIVE,
+            message = "Please provide a valid email address"
+    )
     @NotBlank(message = "Email is required")
     private String email;
 

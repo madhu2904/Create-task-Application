@@ -19,8 +19,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // ─── User CRUD ───
 
+    //Create User
     @PostMapping
     public ResponseEntity<ApiResponse<UserResponseDTO>> createUser(@Valid @RequestBody User user) {
         User saved = userService.createUser(user);
@@ -28,6 +28,7 @@ public class UserController {
                 .body(new ApiResponse<>(201, "User created successfully", mapToUserDTO(saved)));
     }
 
+    //Get All Users
     @GetMapping
     public ResponseEntity<ApiResponse<List<UserResponseDTO>>> getAllUsers() {
         List<UserResponseDTO> users = userService.getAllUsers()
@@ -37,12 +38,14 @@ public class UserController {
         return ResponseEntity.ok(new ApiResponse<>(200, "Users fetched successfully", users));
     }
 
+    //Get User By Id
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<UserResponseDTO>> getUser(@PathVariable Long id) {
         User user = userService.getUserById(id);
         return ResponseEntity.ok(new ApiResponse<>(200, "User fetched successfully", mapToUserDTO(user)));
     }
 
+    //Update User By id
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<UserResponseDTO>> updateUser(@PathVariable Long id, @Valid @RequestBody User user) {
         User updated = userService.updateUser(id, user);
