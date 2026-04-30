@@ -160,8 +160,12 @@ export class UserEndpointComponent implements OnInit, OnDestroy {
     this.toggleRoleSelection(menu, roleId);
   }
 
+
+  ////LOADING USER DETAILS
   async loadUserRolesForEdit(): Promise<void> {
+   
     const userId = this.getUserIdFromForm();
+    
 
     if (!userId) {
       this.errorMessage = 'Enter a valid User Id to load current roles.';
@@ -170,8 +174,19 @@ export class UserEndpointComponent implements OnInit, OnDestroy {
 
     this.errorMessage = '';
 
+
     try {
-      this.existingUserRoles = await this.apiService.getUserRoles(userId);
+      let response:any = await this.apiService.getUserById(userId);
+      let user=response.data;
+      console.log(user);
+      this.executionForm.patchValue({
+      username: user.username,
+      email: user.email,
+      password:user.password,
+      fullName:user.fullName
+    
+      });
+      this.existingUserRoles=user.roles||[];
       this.rolesToRemoveIds = this.rolesToRemoveIds.filter((roleId) => this.existingUserRoles.some((role) => this.getRoleId(role) === roleId));
     } catch (error) {
       this.errorMessage = this.apiService.toErrorMessage(error);
@@ -179,6 +194,10 @@ export class UserEndpointComponent implements OnInit, OnDestroy {
       this.changeDetector.detectChanges();
     }
   }
+
+
+  ////LOADING USER DETAILS
+
 
   goToPreviousPage(): void {
     this.currentPage = Math.max(1, this.currentPage - 1);
@@ -188,7 +207,10 @@ export class UserEndpointComponent implements OnInit, OnDestroy {
     this.currentPage = Math.min(this.totalPages, this.currentPage + 1);
   }
 
-  async runEndpoint(): Promise<void> {
+  async runEndpoint(): Promise<void> 
+  {
+    this.responseData=null
+    this.currentPage=1;
     if (!this.endpoint || this.executionForm.invalid) {
       return;
     }
