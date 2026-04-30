@@ -8,10 +8,10 @@ export const userEndpoints: EndpointDefinition[] = [
     method: 'POST',
     path: '/api/v1/users',
     bodyFields: [
-      { key: 'username', label: 'Username', type: 'text', required: false, placeholder: 'john_doe' },
-      { key: 'password', label: 'Password', type: 'text', required: false, placeholder: 'password' },
-      { key: 'email', label: 'Email', type: 'email', required: false, placeholder: 'john@example.com' },
-      { key: 'fullName', label: 'Full Name', type: 'text', required: false, placeholder: 'John Doe' },
+      { key: 'username', label: 'Username', type: 'text', required: true, placeholder: 'john_doe' },
+      { key: 'password', label: 'Password', type: 'text', required: true, placeholder: 'password' },
+      { key: 'email', label: 'Email', type: 'email', required: true, placeholder: 'john@example.com' },
+      { key: 'fullName', label: 'Full Name', type: 'text', required: true, placeholder: 'John Doe' },
     ],
   },
   {
@@ -27,7 +27,7 @@ export const userEndpoints: EndpointDefinition[] = [
     description: 'Fetch one user by id.',
     method: 'GET',
     path: '/api/v1/users/{userId}',
-    pathParams: [{ key: 'userId', label: 'User Id', type: 'text', required: false, placeholder: '1' }],
+    pathParams: [{ key: 'userId', label: 'User Id', type: 'text', required: true, placeholder: '1' }],
   },
   {
     key: 'update-user',
@@ -35,12 +35,12 @@ export const userEndpoints: EndpointDefinition[] = [
     description: 'Update an existing user.',
     method: 'PUT',
     path: '/api/v1/users/{userId}',
-    pathParams: [{ key: 'userId', label: 'User Id', type: 'text', required: false, placeholder: '1' }],
+    pathParams: [{ key: 'userId', label: 'User Id', type: 'text', required: true, placeholder: '1' }],
     bodyFields: [
-      { key: 'username', label: 'Username', type: 'text', required: false, placeholder: 'john_doe' },
-      { key: 'password', label: 'Password', type: 'text', required: false, placeholder: 'password' },
-      { key: 'email', label: 'Email', type: 'email', required: false, placeholder: 'john@example.com' },
-      { key: 'fullName', label: 'Full Name', type: 'text', required: false, placeholder: 'John Doe' },
+      { key: 'username', label: 'Username', type: 'text', required: true, placeholder: 'john_doe' },
+      { key: 'password', label: 'Password', type: 'text', required: true, placeholder: 'password' },
+      { key: 'email', label: 'Email', type: 'email', required: true, placeholder: 'john@example.com' },
+      { key: 'fullName', label: 'Full Name', type: 'text', required:true, placeholder: 'John Doe' },
     ],
   },
   {
@@ -49,7 +49,7 @@ export const userEndpoints: EndpointDefinition[] = [
     description: 'Remove a user by id.',
     method: 'DELETE',
     path: '/api/v1/users/{userId}',
-    pathParams: [{ key: 'userId', label: 'User Id', type: 'text', required: false, placeholder: '1' }],
+    pathParams: [{ key: 'userId', label: 'User Id', type: 'text', required: true, placeholder: '1' }],
   },
   {
     key: 'assign-role',
@@ -58,8 +58,8 @@ export const userEndpoints: EndpointDefinition[] = [
     method: 'POST',
     path: '/api/v1/users/{userId}/roles/{roleId}',
     pathParams: [
-      { key: 'userId', label: 'User Id', type: 'text', required: false, placeholder: '1' },
-      { key: 'roleId', label: 'Role Id', type: 'text', required: false, placeholder: '1' },
+      { key: 'userId', label: 'User Id', type: 'text', required: true, placeholder: '1' },
+      { key: 'roleId', label: 'Role Id', type: 'text', required: true, placeholder: '1' },
     ],
   },
   {
@@ -69,8 +69,8 @@ export const userEndpoints: EndpointDefinition[] = [
     method: 'DELETE',
     path: '/api/v1/users/{userId}/roles/{roleId}',
     pathParams: [
-      { key: 'userId', label: 'User Id', type: 'text', required: false, placeholder: '1' },
-      { key: 'roleId', label: 'Role Id', type: 'text', required: false, placeholder: '1' },
+      { key: 'userId', label: 'User Id', type: 'text', required: true, placeholder: '1' },
+      { key: 'roleId', label: 'Role Id', type: 'text', required: true, placeholder: '1' },
     ],
   },
   {
@@ -79,7 +79,7 @@ export const userEndpoints: EndpointDefinition[] = [
     description: 'Fetch all roles assigned to a user.',
     method: 'GET',
     path: '/api/v1/users/{userId}/roles',
-    pathParams: [{ key: 'userId', label: 'User Id', type: 'text', required: false, placeholder: '1' }],
+    pathParams: [{ key: 'userId', label: 'User Id', type: 'text', required: true, placeholder: '1' }],
   },
   {
     key: 'create-role',
@@ -87,7 +87,7 @@ export const userEndpoints: EndpointDefinition[] = [
     description: 'Create a new role.',
     method: 'POST',
     path: '/api/v1/roles',
-    bodyFields: [{ key: 'roleName', label: 'Role Name', type: 'text', required: false, placeholder: 'ADMIN' }],
+    bodyFields: [{ key: 'roleName', label: 'Role Name', type: 'text', required: true, placeholder: 'ADMIN' }],
   },
   {
     key: 'get-all-roles',
@@ -102,7 +102,7 @@ export const userEndpoints: EndpointDefinition[] = [
     description: 'Fetch one role by id.',
     method: 'GET',
     path: '/api/v1/roles/{roleId}',
-    pathParams: [{ key: 'roleId', label: 'Role Id', type: 'text', required: false, placeholder: '1' }],
+    pathParams: [{ key: 'roleId', label: 'Role Id', type: 'text', required: true, placeholder: '1' }],
   },
   {
     key: 'delete-role',
@@ -110,6 +110,6 @@ export const userEndpoints: EndpointDefinition[] = [
     description: 'Delete a role by id.',
     method: 'DELETE',
     path: '/api/v1/roles/{roleId}',
-    pathParams: [{ key: 'roleId', label: 'Role Id', type: 'text', required: false, placeholder: '1' }],
+    pathParams: [{ key: 'roleId', label: 'Role Id', type: 'text', required: true, placeholder: '1' }],
   },
 ];
