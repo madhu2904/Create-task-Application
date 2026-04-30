@@ -200,19 +200,8 @@
 
             @if (isUpdateTask && categories.length) {
               <div class="rounded-xl border border-slate-200 p-4">
-                <div class="flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Category Management</h3>
-                    <p class="mt-2 text-sm text-slate-500">Load current categories, then choose which ones to add or remove during the update.</p>
-                  </div>
-                  <button
-                    type="button"
-                    class="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-300 hover:text-blue-700"
-                    (click)="loadTaskCategoriesForEdit()"
-                  >
-                    Load Current Categories
-                  </button>
-                </div>
+                <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Category Management</h3>
+                <p class="mt-2 text-sm text-slate-500">Current categories load automatically when you enter a Task Id.</p>
 
                 <div class="mt-4">
                   <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Current Categories</p>
