@@ -8,13 +8,13 @@ export const taskEndpoints: EndpointDefinition[] = [
     method: 'POST',
     path: '/api/v1/tasks',
     bodyFields: [
-      { key: 'taskName', label: 'Task Name', type: 'text', required: true, placeholder: 'Build dashboard UI' },
+      { key: 'taskName', label: 'Task Name', type: 'text', required: false, placeholder: 'Build dashboard UI' },
       { key: 'description', label: 'Description', type: 'textarea', placeholder: 'Task Description must be more than 5 characters' },
-      { key: 'priority', label: 'Priority', type: 'text', required: true, placeholder: 'HIGH, LOW, MEDIUM' },
-      { key: 'status', label: 'Status', type: 'text', required: true, placeholder: 'TODO, IN_PROGRESS, DONE' },
-      { key: 'dueDate', label: 'Due Date', type: 'datetime-local', required: true },
-      { key: 'projectId', label: 'Project Id', type: 'number', required: true, placeholder: '1' },
-      { key: 'userId', label: 'User Id', type: 'number', required: true, placeholder: '1' },
+      { key: 'priority', label: 'Priority', type: 'text', required: false, placeholder: 'HIGH, LOW, MEDIUM' },
+      { key: 'status', label: 'Status', type: 'text', required: false, placeholder: 'TODO, IN_PROGRESS, DONE' },
+      { key: 'dueDate', label: 'Due Date', type: 'datetime-local', required: false },
+      { key: 'projectId', label: 'Project Id', type: 'number', required: false, placeholder: '1' },
+      { key: 'userId', label: 'User Id', type: 'text', required: false, placeholder: '1' },
     ],
   },
   {
@@ -23,7 +23,7 @@ export const taskEndpoints: EndpointDefinition[] = [
     description: 'Fetch one task by id.',
     method: 'GET',
     path: '/api/v1/tasks/{taskId}',
-    pathParams: [{ key: 'taskId', label: 'Task Id', type: 'number', required: true, placeholder: '1' }],
+    pathParams: [{ key: 'taskId', label: 'Task Id', type: 'text', required: false, placeholder: '1' }],
   },
   {
     key: 'get-all-tasks',
@@ -38,7 +38,7 @@ export const taskEndpoints: EndpointDefinition[] = [
     description: 'Delete a task by id.',
     method: 'DELETE',
     path: '/api/v1/tasks/{taskId}',
-    pathParams: [{ key: 'taskId', label: 'Task Id', type: 'number', required: true, placeholder: '1' }],
+    pathParams: [{ key: 'taskId', label: 'Task Id', type: 'text', required: false, placeholder: '1' }],
   },
   {
     key: 'update-task',
@@ -46,15 +46,15 @@ export const taskEndpoints: EndpointDefinition[] = [
     description: 'Update a task by id.',
     method: 'PUT',
     path: '/api/v1/tasks/{taskId}',
-    pathParams: [{ key: 'taskId', label: 'Task Id', type: 'number', required: true, placeholder: '1' }],
+    pathParams: [{ key: 'taskId', label: 'Task Id', type: 'text', required: false, placeholder: '1' }],
     bodyFields: [
-      { key: 'taskName', label: 'Task Name', type: 'text', required: true, placeholder: 'Build dashboard UI' },
+      { key: 'taskName', label: 'Task Name', type: 'text', required: false, placeholder: 'Build dashboard UI' },
       { key: 'description', label: 'Description', type: 'textarea', placeholder: 'Task details' },
-      { key: 'priority', label: 'Priority', type: 'text', required: true, placeholder: 'HIGH' },
-      { key: 'status', label: 'Status', type: 'text', required: true, placeholder: 'OPEN' },
-      { key: 'dueDate', label: 'Due Date', type: 'datetime-local', required: true },
-      { key: 'projectId', label: 'Project Id', type: 'number', required: true, placeholder: '1' },
-      { key: 'userId', label: 'User Id', type: 'number', required: true, placeholder: '1' },
+      { key: 'priority', label: 'Priority', type: 'text', required: false, placeholder: 'HIGH' },
+      { key: 'status', label: 'Status', type: 'text', required: false, placeholder: 'OPEN' },
+      { key: 'dueDate', label: 'Due Date', type: 'datetime-local', required: false },
+      { key: 'projectId', label: 'Project Id', type: 'number', required: false, placeholder: '1' },
+      { key: 'userId', label: 'User Id', type: 'number', required: false, placeholder: '1' },
     ],
   },
   {
@@ -63,7 +63,7 @@ export const taskEndpoints: EndpointDefinition[] = [
     description: 'Fetch tasks by project id.',
     method: 'GET',
     path: '/api/v1/tasks/projects/{projectId}',
-    pathParams: [{ key: 'projectId', label: 'Project Id', type: 'number', required: true, placeholder: '1' }],
+    pathParams: [{ key: 'projectId', label: 'Project Id', type: 'text', required: false, placeholder: '1' }],
   },
   {
     key: 'get-tasks-by-user',
@@ -71,7 +71,7 @@ export const taskEndpoints: EndpointDefinition[] = [
     description: 'Fetch tasks by user id.',
     method: 'GET',
     path: '/api/v1/tasks/user/{userId}',
-    pathParams: [{ key: 'userId', label: 'User Id', type: 'number', required: true, placeholder: '1' }],
+    pathParams: [{ key: 'userId', label: 'User Id', type: 'text', required: false, placeholder: '1' }],
   },
   {
     key: 'get-tasks-by-status',
@@ -79,7 +79,7 @@ export const taskEndpoints: EndpointDefinition[] = [
     description: 'Filter tasks by status.',
     method: 'GET',
     path: '/api/v1/tasks/status/{status}',
-    pathParams: [{ key: 'status', label: 'Status', type: 'text', required: true, placeholder: 'OPEN' }],
+    pathParams: [{ key: 'status', label: 'Status', type: 'text', required: false, placeholder: 'OPEN' }],
   },
   {
     key: 'get-tasks-by-priority',
@@ -87,7 +87,7 @@ export const taskEndpoints: EndpointDefinition[] = [
     description: 'Filter tasks by priority.',
     method: 'GET',
     path: '/api/v1/tasks/priority/{priority}',
-    pathParams: [{ key: 'priority', label: 'Priority', type: 'text', required: true, placeholder: 'HIGH' }],
+    pathParams: [{ key: 'priority', label: 'Priority', type: 'text', required: false, placeholder: 'HIGH' }],
   },
   {
     key: 'create-category',
@@ -95,7 +95,7 @@ export const taskEndpoints: EndpointDefinition[] = [
     description: 'Create a new category.',
     method: 'POST',
     path: '/api/v1/categories',
-    bodyFields: [{ key: 'categoryName', label: 'Category Name', type: 'text', required: true, placeholder: 'Frontend' }],
+    bodyFields: [{ key: 'categoryName', label: 'Category Name', type: 'text', required: false, placeholder: 'Frontend' }],
   },
   {
     key: 'get-all-categories',
@@ -110,7 +110,7 @@ export const taskEndpoints: EndpointDefinition[] = [
     description: 'Fetch categories linked to a task.',
     method: 'GET',
     path: '/api/v1/tasks/{taskId}/categories',
-    pathParams: [{ key: 'taskId', label: 'Task Id', type: 'number', required: true, placeholder: '1' }],
+    pathParams: [{ key: 'taskId', label: 'Task Id', type: 'text', required: false, placeholder: '1' }],
   },
   {
     key: 'add-category-to-task',
@@ -119,8 +119,8 @@ export const taskEndpoints: EndpointDefinition[] = [
     method: 'POST',
     path: '/api/v1/tasks/{taskId}/categories/{categoryId}',
     pathParams: [
-      { key: 'taskId', label: 'Task Id', type: 'number', required: true, placeholder: '1' },
-      { key: 'categoryId', label: 'Category Id', type: 'number', required: true, placeholder: '1' },
+      { key: 'taskId', label: 'Task Id', type: 'text', required: false, placeholder: '1' },
+      { key: 'categoryId', label: 'Category Id', type: 'text', required: false, placeholder: '1' },
     ],
   },
   {
@@ -130,8 +130,8 @@ export const taskEndpoints: EndpointDefinition[] = [
     method: 'DELETE',
     path: '/api/v1/tasks/{taskId}/categories/{categoryId}',
     pathParams: [
-      { key: 'taskId', label: 'Task Id', type: 'number', required: true, placeholder: '1' },
-      { key: 'categoryId', label: 'Category Id', type: 'number', required: true, placeholder: '1' },
+      { key: 'taskId', label: 'Task Id', type: 'text', required: false, placeholder: '1' },
+      { key: 'categoryId', label: 'Category Id', type: 'text', required: false, placeholder: '1' },
     ],
   },
 ];
