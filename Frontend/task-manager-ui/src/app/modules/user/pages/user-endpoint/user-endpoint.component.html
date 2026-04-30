@@ -88,6 +88,13 @@
                       }
                     </div>
                   }
+                   <button
+                    type="button"
+                    class="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-300 hover:text-blue-700"
+                    (click)="loadUserRolesForEdit()"
+                  >
+                    Load User Details
+                  </button>
                 </div>
               </div>
             }
@@ -106,16 +113,21 @@
               </div>
             }
 
-            @if (bodyFields.length) {
+            @if (bodyFields.length) 
+            {
               <div class="rounded-xl border border-slate-200 p-4">
                 <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Request Body</h3>
                 <div class="mt-3 flex flex-wrap gap-3">
-                  @for (field of bodyFields; track field.key) {
+                  @for (field of bodyFields; track field.key) 
+                  {
                     <div class="min-w-[220px] flex-1" [class.w-full]="field.type === 'textarea'">
                       <label class="mb-2 block text-sm font-semibold text-slate-700" [for]="field.key">{{ field.label }}</label>
-                      @if (field.type === 'textarea') {
+                      @if (field.type === 'textarea') 
+                      {
                         <textarea [id]="field.key" [formControlName]="field.key" rows="4" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100" [placeholder]="field.placeholder ?? ''"></textarea>
-                      } @else {
+                      } 
+                      @else 
+                      {
                         <input [id]="field.key" [type]="field.type" [formControlName]="field.key" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100" [placeholder]="field.placeholder ?? ''" />
                       }
                     </div>
@@ -178,13 +190,7 @@
                     <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Role Management</h3>
                     <p class="mt-2 text-sm text-slate-500">Load current roles, then choose which ones to add or remove during the update.</p>
                   </div>
-                  <button
-                    type="button"
-                    class="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-300 hover:text-blue-700"
-                    (click)="loadUserRolesForEdit()"
-                  >
-                    Load Current Roles
-                  </button>
+                 
                 </div>
 
                 <div class="mt-4">

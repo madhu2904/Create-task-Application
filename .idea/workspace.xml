@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd4ce917-8f16-4691-a7cf-cb8a1ec6014f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/test/java/com/batch5/Create_Task_Application/projectModule/repository/ProjectRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/test/java/com/batch5/Create_Task_Application/projectModule/repository/ProjectRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/task-manager-ui/src/app/modules/collaboration/data/collaboration-endpoints.data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/task-manager-ui/src/app/modules/collaboration/data/collaboration-endpoints.data.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/task-manager-ui/src/app/modules/notification/data/notification-endpoints.data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/task-manager-ui/src/app/modules/notification/data/notification-endpoints.data.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/task-manager-ui/src/app/modules/project/data/project-endpoints.data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/task-manager-ui/src/app/modules/project/data/project-endpoints.data.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/task-manager-ui/src/app/modules/task/data/task-endpoints.data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/task-manager-ui/src/app/modules/task/data/task-endpoints.data.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/task-manager-ui/src/app/modules/user/data/user-endpoints.data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/task-manager-ui/src/app/modules/user/data/user-endpoints.data.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/userModule/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/userModule/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/userModule/dto/UserResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Create-Task-Application/src/main/java/com/batch5/Create_Task_Application/userModule/dto/UserResponseDTO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
