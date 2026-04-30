@@ -101,7 +101,10 @@ export class NotificationEndpointComponent implements OnInit, OnDestroy {
     this.currentPage = Math.min(this.totalPages, this.currentPage + 1);
   }
 
-  async runEndpoint(): Promise<void> {
+  async runEndpoint(): Promise<void> 
+  {
+    this.responseData=null
+    this.currentPage=1;
     if (!this.endpoint || this.executionForm.invalid) {
       return;
     }

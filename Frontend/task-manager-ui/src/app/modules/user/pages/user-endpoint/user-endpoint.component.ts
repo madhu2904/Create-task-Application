@@ -163,9 +163,9 @@ export class UserEndpointComponent implements OnInit, OnDestroy {
 
   ////LOADING USER DETAILS
   async loadUserRolesForEdit(): Promise<void> {
-      console.log("BUTTON CLICKED"); 
+   
     const userId = this.getUserIdFromForm();
-    console.log(userId);
+    
 
     if (!userId) {
       this.errorMessage = 'Enter a valid User Id to load current roles.';

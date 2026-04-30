@@ -65,7 +65,47 @@ export class ProjectEndpointComponent implements OnInit, OnDestroy {
   get totalPages(): number {
     return Math.max(1, Math.ceil(this.dataCards.length / this.cardsPerPage));
   }
+  private getProjectIdFromForm(): number | null 
+  {
+  const value = this.executionForm.get('projectId')?.value;
+  const id = Number(value);
+  return Number.isFinite(id) && id > 0 ? id : null;
+  }
+ async loadProjectDetails(): Promise<void> {
+  const projectId = this.getProjectIdFromForm();
 
+  if (!projectId) {
+    this.errorMessage = 'Enter a valid Project Id';
+    return;
+  }
+
+  this.errorMessage = '';
+
+  try {
+    const getProjectEndpoint = this.projectModuleService.getEndpointByRoute('get-project-by-id');
+
+    
+    const response = await this.apiService.executeEndpoint(getProjectEndpoint!, {
+      projectId: projectId.toString()
+    });
+
+    const project = (response as any)?.data ?? response;
+
+    this.executionForm.patchValue({
+      projectName: project.projectName,
+      description: project.description,
+      startDate:project.startDate,
+      endDate:project.endDate,
+      userId:project.userId
+    });
+
+  } catch (error) {
+    this.errorMessage = this.apiService.toErrorMessage(error);
+  } finally {
+    this.changeDetector.detectChanges();
+  }
+}
+  
   ngOnInit(): void {
     this.routeSubscription = this.route.paramMap.subscribe((params) => {
       const endpoint = this.projectModuleService.getEndpointByRoute(params.get('endpointKey') ?? '');
@@ -99,6 +139,9 @@ export class ProjectEndpointComponent implements OnInit, OnDestroy {
   }
 
   async runEndpoint(): Promise<void> {
+
+    this.responseData=null
+    this.currentPage=1;
     if (!this.endpoint || this.executionForm.invalid) {
       return;
     }
