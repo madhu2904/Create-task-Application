@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Subscription, catchError, debounceTime, distinctUntilChanged, filter, from, map, of, switchMap } from 'rxjs';
+import { Subscription, catchError, debounceTime, distinctUntilChanged, filter, from, map, of, switchMap, tap } from 'rxjs';
 
 import { Category, EndpointDefinition, InputFieldDefinition, ModuleDefinition, ResponseDisplayCard } from '../../../common/models/app.models';
 import { ApiService } from '../../../common/services/api.service';
@@ -162,28 +162,6 @@ export class TaskEndpointComponent implements OnInit, OnDestroy {
 
   removeSelectedCategory(menu: 'create' | 'update-add' | 'update-remove', categoryId: number): void {
     this.toggleCategorySelection(menu, categoryId);
-  }
-
-  async loadTaskCategoriesForEdit(): Promise<void> {
-    const taskId = this.getTaskIdFromForm();
-
-    if (!taskId) {
-      this.errorMessage = 'Enter a valid Task Id to load current categories.';
-      return;
-    }
-
-    this.errorMessage = '';
-
-    try {
-      this.existingTaskCategories = await this.apiService.getTaskCategories(taskId);
-      this.categoriesToRemoveIds = this.categoriesToRemoveIds.filter((categoryId) =>
-        this.existingTaskCategories.some((category) => this.getCategoryId(category) === categoryId),
-      );
-    } catch (error) {
-      this.errorMessage = this.apiService.toErrorMessage(error);
-    } finally {
-      this.changeDetector.detectChanges();
-    }
   }
 
   goToPreviousPage(): void {
@@ -389,20 +367,50 @@ export class TaskEndpointComponent implements OnInit, OnDestroy {
     this.updateTaskPrefillSubscription = taskIdControl.valueChanges
       .pipe(
         map((value) => String(value ?? '').trim()),
-        debounceTime(350),
         distinctUntilChanged(),
+        tap((rawValue) => {
+          this.responseData = null;
+          this.currentPage = 1;
+          this.clearUpdateTaskBodyFields();
+          this.existingTaskCategories = [];
+          this.categoriesToAddIds = [];
+          this.categoriesToRemoveIds = [];
+
+          const taskId = Number(rawValue);
+          if (!Number.isFinite(taskId) || taskId <= 0) {
+            // Invalid/empty id: keep UI cleared, but do not auto-trigger any request or show an error.
+            this.errorMessage = '';
+            this.changeDetector.detectChanges();
+            return;
+          }
+
+          this.errorMessage = '';
+          this.changeDetector.detectChanges();
+        }),
+        debounceTime(350),
         map((value) => Number(value)),
         filter((taskId) => Number.isFinite(taskId) && taskId > 0),
-        switchMap((taskId) =>
-          from(this.apiService.getTaskById(taskId)).pipe(
-            map((response) => ({ taskId, response })),
+        switchMap((taskId) => {
+          return from(this.apiService.getTaskById(taskId)).pipe(
+            switchMap((response) =>
+              from(this.apiService.getTaskCategories(taskId)).pipe(
+                catchError(() => of([] as Category[])),
+                map((categories) => ({ taskId, response, categories })),
+              ),
+            ),
             catchError((error) => {
+              this.responseData = null;
+              this.currentPage = 1;
+              this.clearUpdateTaskBodyFields();
+              this.existingTaskCategories = [];
+              this.categoriesToAddIds = [];
+              this.categoriesToRemoveIds = [];
               this.errorMessage = this.apiService.toErrorMessage(error);
               this.changeDetector.detectChanges();
               return of(null);
             }),
-          ),
-        ),
+          );
+        }),
       )
       .subscribe((result) => {
         if (!result) {
@@ -433,9 +441,25 @@ export class TaskEndpointComponent implements OnInit, OnDestroy {
         }
 
         this.executionForm.patchValue(patch, { emitEvent: false });
+
+        this.existingTaskCategories = result.categories ?? [];
+        this.categoriesToRemoveIds = this.categoriesToRemoveIds.filter((categoryId) =>
+          this.existingTaskCategories.some((category) => this.getCategoryId(category) === categoryId),
+        );
+
         this.errorMessage = '';
         this.changeDetector.detectChanges();
       });
+  }
+
+  private clearUpdateTaskBodyFields(): void {
+    const patch: Record<string, unknown> = {};
+
+    for (const field of this.bodyFields) {
+      patch[field.key] = '';
+    }
+
+    this.executionForm.patchValue(patch, { emitEvent: false });
   }
 
   private extractTaskPayload(response: unknown): Record<string, unknown> | null {
