@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, catchError, debounceTime, distinctUntilChanged, filter, from, map, of, switchMap, tap } from 'rxjs';
 
 import { Category, EndpointDefinition, InputFieldDefinition, ModuleDefinition, ResponseDisplayCard } from '../../../common/models/app.models';
 import { ApiService } from '../../../common/services/api.service';
@@ -23,6 +23,7 @@ export class TaskEndpointComponent implements OnInit, OnDestroy {
   private readonly taskModuleService = inject(TaskModuleService);
   private readonly changeDetector = inject(ChangeDetectorRef);
   private routeSubscription?: Subscription;
+  private updateTaskPrefillSubscription?: Subscription;
 
   readonly module: ModuleDefinition = this.taskModuleService.getDefinition();
   readonly executionForm: UntypedFormGroup = this.formBuilder.group({});
@@ -109,6 +110,7 @@ export class TaskEndpointComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.routeSubscription?.unsubscribe();
+    this.updateTaskPrefillSubscription?.unsubscribe();
   }
 
   getEndpointRoute(endpointKey: string): string {
@@ -162,28 +164,6 @@ export class TaskEndpointComponent implements OnInit, OnDestroy {
     this.toggleCategorySelection(menu, categoryId);
   }
 
-  async loadTaskCategoriesForEdit(): Promise<void> {
-    const taskId = this.getTaskIdFromForm();
-
-    if (!taskId) {
-      this.errorMessage = 'Enter a valid Task Id to load current categories.';
-      return;
-    }
-
-    this.errorMessage = '';
-
-    try {
-      this.existingTaskCategories = await this.apiService.getTaskCategories(taskId);
-      this.categoriesToRemoveIds = this.categoriesToRemoveIds.filter((categoryId) =>
-        this.existingTaskCategories.some((category) => this.getCategoryId(category) === categoryId),
-      );
-    } catch (error) {
-      this.errorMessage = this.apiService.toErrorMessage(error);
-    } finally {
-      this.changeDetector.detectChanges();
-    }
-  }
-
   goToPreviousPage(): void {
     this.currentPage = Math.max(1, this.currentPage - 1);
   }
@@ -192,7 +172,10 @@ export class TaskEndpointComponent implements OnInit, OnDestroy {
     this.currentPage = Math.min(this.totalPages, this.currentPage + 1);
   }
 
-  async runEndpoint(): Promise<void> {
+  async runEndpoint(): Promise<void> 
+  {
+    this.responseData=null
+    this.currentPage=1;
     if (!this.endpoint || this.executionForm.invalid) {
       return;
     }
@@ -308,6 +291,9 @@ export class TaskEndpointComponent implements OnInit, OnDestroy {
   }
 
   private rebuildForm(endpoint: EndpointDefinition): void {
+    this.updateTaskPrefillSubscription?.unsubscribe();
+    this.updateTaskPrefillSubscription = undefined;
+
     for (const key of Object.keys(this.executionForm.controls)) {
       this.executionForm.removeControl(key);
     }
@@ -315,6 +301,8 @@ export class TaskEndpointComponent implements OnInit, OnDestroy {
     for (const field of this.allFields(endpoint)) {
       this.executionForm.addControl(field.key, this.formBuilder.control('', field.required ? Validators.required : []));
     }
+
+    this.setupUpdateTaskPrefill();
   }
 
   private allFields(endpoint: EndpointDefinition): InputFieldDefinition[] {
@@ -363,5 +351,163 @@ export class TaskEndpointComponent implements OnInit, OnDestroy {
 
   private isObject(value: unknown): value is Record<string, unknown> {
     return typeof value === 'object' && value !== null && !Array.isArray(value);
+  }
+
+  private setupUpdateTaskPrefill(): void {
+    if (!this.isUpdateTask) {
+      return;
+    }
+
+    const taskIdControl = this.executionForm.get('taskId');
+
+    if (!taskIdControl) {
+      return;
+    }
+
+    this.updateTaskPrefillSubscription = taskIdControl.valueChanges
+      .pipe(
+        map((value) => String(value ?? '').trim()),
+        distinctUntilChanged(),
+        tap((rawValue) => {
+          this.responseData = null;
+          this.currentPage = 1;
+          this.clearUpdateTaskBodyFields();
+          this.existingTaskCategories = [];
+          this.categoriesToAddIds = [];
+          this.categoriesToRemoveIds = [];
+
+          const taskId = Number(rawValue);
+          if (!Number.isFinite(taskId) || taskId <= 0) {
+            // Invalid/empty id: keep UI cleared, but do not auto-trigger any request or show an error.
+            this.errorMessage = '';
+            this.changeDetector.detectChanges();
+            return;
+          }
+
+          this.errorMessage = '';
+          this.changeDetector.detectChanges();
+        }),
+        debounceTime(350),
+        map((value) => Number(value)),
+        filter((taskId) => Number.isFinite(taskId) && taskId > 0),
+        switchMap((taskId) => {
+          return from(this.apiService.getTaskById(taskId)).pipe(
+            switchMap((response) =>
+              from(this.apiService.getTaskCategories(taskId)).pipe(
+                catchError(() => of([] as Category[])),
+                map((categories) => ({ taskId, response, categories })),
+              ),
+            ),
+            catchError((error) => {
+              this.responseData = null;
+              this.currentPage = 1;
+              this.clearUpdateTaskBodyFields();
+              this.existingTaskCategories = [];
+              this.categoriesToAddIds = [];
+              this.categoriesToRemoveIds = [];
+              this.errorMessage = this.apiService.toErrorMessage(error);
+              this.changeDetector.detectChanges();
+              return of(null);
+            }),
+          );
+        }),
+      )
+      .subscribe((result) => {
+        if (!result) {
+          return;
+        }
+
+        const taskPayload = this.extractTaskPayload(result.response);
+
+        if (!taskPayload) {
+          this.errorMessage = 'Task payload not found in response.';
+          this.changeDetector.detectChanges();
+          return;
+        }
+
+        const patch: Record<string, unknown> = {};
+
+        for (const field of this.bodyFields) {
+          if (!(field.key in taskPayload)) {
+            continue;
+          }
+
+          const rawValue = taskPayload[field.key];
+          if (rawValue === undefined || rawValue === null) {
+            continue;
+          }
+
+          patch[field.key] = this.coerceFieldValue(field, rawValue);
+        }
+
+        this.executionForm.patchValue(patch, { emitEvent: false });
+
+        this.existingTaskCategories = result.categories ?? [];
+        this.categoriesToRemoveIds = this.categoriesToRemoveIds.filter((categoryId) =>
+          this.existingTaskCategories.some((category) => this.getCategoryId(category) === categoryId),
+        );
+
+        this.errorMessage = '';
+        this.changeDetector.detectChanges();
+      });
+  }
+
+  private clearUpdateTaskBodyFields(): void {
+    const patch: Record<string, unknown> = {};
+
+    for (const field of this.bodyFields) {
+      patch[field.key] = '';
+    }
+
+    this.executionForm.patchValue(patch, { emitEvent: false });
+  }
+
+  private extractTaskPayload(response: unknown): Record<string, unknown> | null {
+    if (!this.isObject(response)) {
+      return null;
+    }
+
+    const data = this.isObject(response['data']) ? (response['data'] as Record<string, unknown>) : null;
+    return data ?? (response as Record<string, unknown>);
+  }
+
+  private coerceFieldValue(field: InputFieldDefinition, value: unknown): unknown {
+    if (field.type === 'datetime-local') {
+      return this.toDateTimeLocalValue(value) ?? '';
+    }
+
+    if (field.type === 'number') {
+      const numberValue = typeof value === 'number' ? value : Number(value);
+      return Number.isFinite(numberValue) ? numberValue : '';
+    }
+
+    return typeof value === 'string' ? value : String(value);
+  }
+
+  private toDateTimeLocalValue(value: unknown): string | null {
+    if (typeof value !== 'string' || !value.trim()) {
+      return null;
+    }
+
+    const trimmed = value.trim();
+
+    // Already compatible (keep minutes, drop seconds if present).
+    if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?$/.test(trimmed)) {
+      return trimmed.length === 19 ? trimmed.slice(0, 16) : trimmed;
+    }
+
+    const parsed = new Date(trimmed);
+
+    if (Number.isNaN(parsed.getTime())) {
+      return null;
+    }
+
+    const pad = (n: number) => String(n).padStart(2, '0');
+    const yyyy = parsed.getFullYear();
+    const mm = pad(parsed.getMonth() + 1);
+    const dd = pad(parsed.getDate());
+    const hh = pad(parsed.getHours());
+    const min = pad(parsed.getMinutes());
+    return `${yyyy}-${mm}-${dd}T${hh}:${min}`;
   }
 }

@@ -9,10 +9,10 @@ export const projectEndpoints: EndpointDefinition[] = [
     path: '/api/v1/projects',
     bodyFields: [
       { key: 'projectName', label: 'Project Name', type: 'text', required: true, placeholder: 'Task Manager' },
-      { key: 'description', label: 'Description', type: 'textarea', placeholder: 'Project details' },
+      { key: 'description', label: 'Description', type: 'textarea', required: true, placeholder: 'Project details' },
       { key: 'startDate', label: 'Start Date', type: 'date', required: true },
       { key: 'endDate', label: 'End Date', type: 'date', required: true },
-      { key: 'userId', label: 'User Id', type: 'number', required: true, placeholder: '1' },
+      { key: 'userId', label: 'User Id', type: 'text', required: true, placeholder: '1' },
     ],
   },
   {
@@ -28,7 +28,7 @@ export const projectEndpoints: EndpointDefinition[] = [
     description: 'Fetch one project by id.',
     method: 'GET',
     path: '/api/v1/projects/{projectId}',
-    pathParams: [{ key: 'projectId', label: 'Project Id', type: 'number', required: true, placeholder: '1' }],
+    pathParams: [{ key: 'projectId', label: 'Project Id', type: 'text', required: true, placeholder: '1' }],
   },
   {
     key: 'update-project',
@@ -36,13 +36,13 @@ export const projectEndpoints: EndpointDefinition[] = [
     description: 'Update a project by id.',
     method: 'PUT',
     path: '/api/v1/projects/{projectId}',
-    pathParams: [{ key: 'projectId', label: 'Project Id', type: 'number', required: true, placeholder: '1' }],
+    pathParams: [{ key: 'projectId', label: 'Project Id', type: 'text', required: true, placeholder: '1' }],
     bodyFields: [
       { key: 'projectName', label: 'Project Name', type: 'text', required: true, placeholder: 'Task Manager' },
-      { key: 'description', label: 'Description', type: 'textarea', placeholder: 'Project details' },
+      { key: 'description', label: 'Description', type: 'textarea', required: true, placeholder: 'Project details' },
       { key: 'startDate', label: 'Start Date', type: 'date', required: true },
       { key: 'endDate', label: 'End Date', type: 'date', required: true },
-      { key: 'userId', label: 'User Id', type: 'number', required: true, placeholder: '1' },
+      { key: 'userId', label: 'User Id', type: 'text', required: true, placeholder: '1' },
     ],
   },
   {
@@ -51,7 +51,7 @@ export const projectEndpoints: EndpointDefinition[] = [
     description: 'Fetch projects owned by a user.',
     method: 'GET',
     path: '/api/v1/projects/user/{userId}',
-    pathParams: [{ key: 'userId', label: 'User Id', type: 'number', required: true, placeholder: '1' }],
+    pathParams: [{ key: 'userId', label: 'User Id', type: 'text', required: true, placeholder: '1' }],
   },
   {
     key: 'delete-project',
@@ -59,7 +59,7 @@ export const projectEndpoints: EndpointDefinition[] = [
     description: 'Delete a project by id.',
     method: 'DELETE',
     path: '/api/v1/projects/{projectId}',
-    pathParams: [{ key: 'projectId', label: 'Project Id', type: 'number', required: true, placeholder: '1' }],
+    pathParams: [{ key: 'projectId', label: 'Project Id', type: 'text', required: true, placeholder: '1' }],
   },
   {
     key: 'search-projects',

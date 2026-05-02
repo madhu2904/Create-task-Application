@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { ChangeDetectorRef, Injectable, inject } from '@angular/core';
 import { firstValueFrom, timeout } from 'rxjs';
 
 import { Category, EndpointDefinition, InputFieldDefinition, Role } from '../models/app.models';
